@@ -12,8 +12,8 @@ Link App Adaptable  :
 - Setelah membuat direktori, kita harus menginisiasi repositori Git kosong di direktori tersebut dengan perintah <code>git_init</code>
 - Lalu, kita harus mengkonfigurasi username dan email GitHub ke repositori Git tersebut di Terminal (MacOS) dengan cara:
     ```
-    <code>git config user.name "<NAME>"</code>
-    <code>git config user.email "<EMAIL>"</code>
+    git config user.name "<NAME>"
+    git config user.email "<EMAIL>"
     ```
 - Kita juga bisa mengkonfigurasi secara global dengan cara:<br>
     ```
@@ -194,5 +194,16 @@ Link App Adaptable  :
     git push -u origin main
     ```
 - Pastikan struktur direktori lokal dan repository GitHub sudah benar
-
+## Melakukan deployment ke Adaptable terhadap aplikasi yang sudah dibuat
+- Login ke [Adaptable.io](https://adaptable.io/)
+- Tekan tombol <code>New App</code> lalu pilih <code>Connect an Existing Repository</code>
+- Hubungkan [Adaptable.io](https://adaptable.io/) dengan GitHub dan pilih <code>All Repositories</code> pada proses instalasi
+- Pilih proyek <code>kpop_albums</code> sebagai basis aplikasi yang akan di-deploy
+- Pilih branch <code>main</code>
+- Pilih <code>Python App Template</code> sebagai template deployment
+- Pilih <code>PostgreSQL</code> sebagai tipe database yang digunakan
+- Sesuaikan versi Python dengan spek aplikasi (saya memakai versi 10). Trik: gunakan command <code>python3 --version</code> (MacOS)
+- Pada bagian <code>Start Command</code>, masukkan perintah <code>python manage.py migrate && gunicorn shopping_list.wsgi</code>
+- Masukkan nama aplikasi <code>kpop-albums</code> sebagai nama domain situs web aplikasi
+- Centang bagian <code>HTTP Listener on PORT</code> dan klik <code>Deploy App</code> untuk mendeploy app
 ## Membuat aplikasi <code>main</code> dalam proyek tersebut
