@@ -7,26 +7,26 @@ Link App Adaptable  :
 
 # Checklist Tugas
 ## Membuat sebuah proyek Django baru
-1. Inisiasi Direktori Lokal
-    - Sebelum membuat proyek Django, dibuatlah sebuah direktori kosong baru di lokal. Saya menamainya sebagai <code>kpop_albums</code>
-    - Setelah membuat direktori, kita harus menginisiasi repositori Git kosong di direktori tersebut dengan perintah <code>git_init</code>
-    - Lalu, kita harus mengkonfigurasi username dan email GitHub ke repositori Git tersebut di Terminal (MacOS) dengan cara:
+### Inisiasi Direktori Lokal
+- Sebelum membuat proyek Django, dibuatlah sebuah direktori kosong baru di lokal. Saya menamainya sebagai <code>kpop_albums</code>
+- Setelah membuat direktori, kita harus menginisiasi repositori Git kosong di direktori tersebut dengan perintah <code>git_init</code>
+- Lalu, kita harus mengkonfigurasi username dan email GitHub ke repositori Git tersebut di Terminal (MacOS) dengan cara:
     ```
     <code>git config user.name "<NAME>"</code>
     <code>git config user.email "<EMAIL>"</code>
     ```
-    - Kita juga bisa mengkonfigurasi secara global dengan cara:<br>
+- Kita juga bisa mengkonfigurasi secara global dengan cara:<br>
     ```
     git config --global user.name "<NAME>"
     git config --global user.email
     ```
-    - Verifikasi git lokal dengan menginput kode <code>git config --list --local</code>
-2. Membuat repository baru di GitHub
+- Verifikasi git lokal dengan menginput kode <code>git config --list --local</code>
+### Membuat repository baru di GitHub
 
-3. Instalasi + Inisiasi Django pada repository
-    - Menambahkan virtual environment ke dalam directory <code>kpop_albums</code> dengan menjalankan kode <code>python3 -m venv env</code> (di MacOS)
-    - Menjalankan virtual environment dengan cara <code>source env/bin/activate</code> (MacOS)
-    - Menyiapkan Dependencies dengan membuat berkas <code>requirements.txt</code> di directory yang sama, lalu menambahkan kode di bawah ke dalam berkas <code>.txt</code> tersebut:<br>
+### Instalasi + Inisiasi Django pada repository
+- Menambahkan virtual environment ke dalam directory <code>kpop_albums</code> dengan menjalankan kode <code>python3 -m venv env</code> (di MacOS)
+- Menjalankan virtual environment dengan cara <code>source env/bin/activate</code> (MacOS)
+- Menyiapkan Dependencies dengan membuat berkas <code>requirements.txt</code> di directory yang sama, lalu menambahkan kode di bawah ke dalam berkas <code>.txt</code> tersebut:<br>
     ```
     django
     gunicorn
@@ -35,17 +35,17 @@ Link App Adaptable  :
     requests
     urllib3                   
     ```
-    - Install dependencies dengan menjalankan <code>pip install -r requirements.txt</code>
-    - Buat proyek Django dengan nama <code>kpop_albums</code> dengan menjalankan perintah <code>django-admin startproject kpop_albums .</code>
-    - Tambahkan <code>*</code> pada <code>ALLOWED_HOSTS</code> di <code>settings.py</code><br>
+- Install dependencies dengan menjalankan <code>pip install -r requirements.txt</code>
+- Buat proyek Django dengan nama <code>kpop_albums</code> dengan menjalankan perintah <code>django-admin startproject kpop_albums .</code>
+- Tambahkan <code>*</code> pada <code>ALLOWED_HOSTS</code> di <code>settings.py</code><br>
     ```
     ...
     ALLOWED_HOSTS = ["*"]
     ...
     ```
-    - Setelah memastikan file <code>manage.py</code> ada di directory, jalankan instruksi <code>./manage.py runserver</code> (MacOS). Saat menjalankan domain http://localhost:8000 muncul animasi roket
-4. Push ke repository GitHub
-    - Buat file <code>.gitignore</code> (masih di directory <code>kpop_albums</code> yng luar), lalu isi dengan kode berikut <br>
+- Setelah memastikan file <code>manage.py</code> ada di directory, jalankan instruksi <code>./manage.py runserver</code> (MacOS). Saat menjalankan domain http://localhost:8000 muncul animasi roket
+### Push ke repository GitHub
+- Buat file <code>.gitignore</code> (masih di directory <code>kpop_albums</code> yng luar), lalu isi dengan kode berikut <br>
     ```
     # Django
     *.log
@@ -185,7 +185,7 @@ Link App Adaptable  :
     !.vscode/extensions.json 
     .history
     ```
-    - Lakukan add, commit, dan push dari directory <code>kpop_albums</code> ke branch <code>main</code> di repository GitHub <code>kpop_albums</code> (ini akan mem-push README.md, proyek Django, dan .gitignore ke repository)<br>
+- Lakukan add, commit, dan push dari directory <code>kpop_albums</code> ke branch <code>main</code> di repository GitHub <code>kpop_albums</code> (ini akan mem-push README.md, proyek Django, dan .gitignore ke repository)<br>
     ```
     git add .
     git commit -m "Push README + .gitignore + proyek"
@@ -193,6 +193,6 @@ Link App Adaptable  :
     git remote add origin "https://github.com/sdikyarts/kpop-albums.git"
     git push -u origin main
     ```
-    - Pastikan struktur direktori lokal dan repository GitHub sudah benar
+- Pastikan struktur direktori lokal dan repository GitHub sudah benar
 
 ## Membuat aplikasi <code>main</code> dalam proyek tersebut
