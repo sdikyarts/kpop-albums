@@ -5,6 +5,62 @@ Kelas               : PBP A<br>
 Nama App            : K-Pop Albums<br>
 Link App Adaptable  :
 
+<p>
+<details>
+<summary><h1>Penjelasan App</h1></summary>
+
+<p>
+<details>
+<summary><h2>Latar Belakang</h2></summary>
+
+- Tema besar aplikasi untuk tugas PBP adalah aplikasi pengelolaan (inventori). 
+- Tema yang saya pilih adalah <b>inventori album K-Pop</b> 
+- Banyaknya jumlah grup yang debut dan album yang dirilis sehingga memungkinkan untuk dilakukan pengorganisasian album berdasarkan artis yang merilis album tersebut
+
+
+</details>
+</p>
+
+<p>
+<details>
+<summary><h2>Context / Contoh Sampel</h2></summary>
+
+Grup yang saya gunakan sebagai contoh untuk membangun proyek ini adalah <b>NCT</b> dan <b>Stray Kids</b>
+
+</details>
+</p>
+
+</details>
+</p>
+
+<p>
+<details>
+<summary><h2>Detail dalam kode</h2></summary>
+
+<p>
+<details>
+<summary><h3>Implementasi <code>models.py</code></h3></summary>
+
+asdfghjkl
+
+</details>
+</p>
+
+<p>
+<details id = "views-py">
+<summary><h3>Implementasi <code>views.py</code></h3></summary>
+
+asdfghjkl
+
+</details>
+</p>
+
+</details>
+</p>
+
+</details>
+</p>
+
 
 <p>
 <details>
@@ -212,28 +268,9 @@ Link App Adaptable  :
 
 <p>
 <details>
-<summary><h2>Melakukan deployment ke Adaptable terhadap aplikasi yang sudah dibuat<h2></summary>
+<summary><h2>Membuat aplikasi <code>main</code> dalam proyek tersebut<h2></summary>
 
 <!-- Markdown content here -->
-- Login ke [Adaptable.io](https://adaptable.io/)
-- Tekan tombol <code>New App</code> lalu pilih <code>Connect an Existing Repository</code>
-- Hubungkan [Adaptable.io](https://adaptable.io/) dengan GitHub dan pilih <code>All Repositories</code> pada proses instalasi
-- Pilih proyek <code>kpop_albums</code> sebagai basis aplikasi yang akan di-deploy
-- Pilih branch <code>main</code>
-- Pilih <code>Python App Template</code> sebagai template deployment
-- Pilih <code>PostgreSQL</code> sebagai tipe database yang digunakan
-- Sesuaikan versi Python dengan spek aplikasi (saya memakai versi 3.10). Trik: gunakan command <code>python3 --version</code> (MacOS)
-- Pada bagian <code>Start Command</code>, masukkan perintah <code>python3 manage.py migrate && gunicorn shopping_list.wsgi</code> (MacOS)
-- Masukkan nama aplikasi <code>kpop-albums</code> sebagai nama domain situs web aplikasi
-- Centang bagian <code>HTTP Listener on PORT</code> dan klik <code>Deploy App</code> untuk mendeploy app
-
-</details>
-</p>
-
-
-
-## Membuat aplikasi <code>main</code> dalam proyek tersebut
-
 ### Konfigurasi model dan implementasi model dasar
 - Aktifkan virtual environment terlebih dahulu
 - Buat aplikasi <code>main</code> di directory <code>kpop_albums</code> (yang luar/utama) dengan cara
@@ -250,12 +287,51 @@ Link App Adaptable  :
         ...
     ]
     ```
-## Membuat dan mengisi berkas <code>main.html</code>
+### Membuat dan mengisi berkas <code>main.html</code>
 - Buat direktori baru <code>templates</code> di dalam direktori <code>main</code>
 - Di dalam direktori baru <code>templates</code>, buat berkas HTML baru berjudul <code>main.html</code>, lalu isi sesuai selera :D
 
-## Membuat model pada aplikasi <code>main</code> dengan nama <code>Item</code>
 
+</details>
+</p>
+
+<p>
+<details>
+<summary><h2>Membuat sebuah <i>routing</i> pada proyek agar dapat menjalankan aplikasi <code>main</code><h2></summary>
+
+<!-- Markdown content here -->
+### Konfigurasi <i>routing</i> app main
+- Buat berkas <code>urls.py</code> di directory aplikasi
+- Isi berkas <code>urls.py</code> nya
+- Karena saya membuat total 4 halaman, maka ada 4 path yang saya buat
+
+### Konfigurasi <i>routing</i> proyek kpop-albums
+- Buat berkas <code>urls.py</code> di directory proyek (terluar)
+- impor fungsi <code>include</code> dari <code>django.urls</code>
+    ```
+    ...
+    from django.urls import path, include
+    ...
+    ```
+- Tambahkan URL berikut untuk mengarahkan tampilan main di dalam variabel <c>urlpatterns</c>
+    ```
+    urlpatterns = [
+        ...
+        path('main/', include('main.urls')),
+        ...
+    ]
+    ```
+- Jalankan projek Django dengan perintah <code>python3 manage.py runserver</c> (MacOS)
+- Buka http://localhost:8000/main/ untuk test
+
+</details>
+</p>
+
+<p>
+<details>
+<summary><h2>Membuat model pada aplikasi <code>main</code> dengan nama <code>Item</code><h2></summary>
+
+<!-- Markdown content here -->
 ### Wajib mengandung atribut-atribut berikut:
 - <code>name</code> sebagai nama *item* dengan tipe <code>CharField</code>
 - <code>amount</code> sebagai jumlah *item* dengan tipe <code>IntegerField</code>
@@ -271,7 +347,57 @@ Link App Adaptable  :
     ```
     python3 manage.py migrate
     ```
+- <code>makemigrations</code> dan <code>migrate</code> dilakukan setiap kali kita memodifikasi <code>models.py</code>
 
+</details>
+</p>
+
+
+<p>
+<details>
+<summary><h2>Membuat sebuah fungsi pada <code>views.py</code> untuk dikemballikan ke dalam sebuah template HTML yang menampilkan nama<h2></summary>
+
+<!-- Markdown content here -->
+### Mengintegrasikan komponen MVT
+- Buka berkas <code>views.py</code>
+- Tambahkan baris impor di bagian paling atas
+    ```
+    from django.shortcuts import render
+    ```
+- Penjelasan lengkap [di bagian ini](#views-py)
+
+
+</details>
+</p>
+
+<p>
+<details>
+<summary><h2>Membuat sebuah <i>routing</i> fungsi pada <code>views.py</code> untuk dikemballikan ke dalam sebuah template HTML yang menampilkan nama<h2></summary>
+
+<!-- Markdown content here -->
+
+</details>
+</p>
+
+<p>
+<details>
+<summary><h2>Melakukan <i>deployment</i> ke Adaptable terhadap aplikasi yang sudah dibuat<h2></summary>
+
+<!-- Markdown content here -->
+- Login ke [Adaptable.io](https://adaptable.io/)
+- Tekan tombol <code>New App</code> lalu pilih <code>Connect an Existing Repository</code>
+- Hubungkan [Adaptable.io](https://adaptable.io/) dengan GitHub dan pilih <code>All Repositories</code> pada proses instalasi
+- Pilih proyek <code>kpop_albums</code> sebagai basis aplikasi yang akan di-deploy
+- Pilih branch <code>main</code>
+- Pilih <code>Python App Template</code> sebagai template deployment
+- Pilih <code>PostgreSQL</code> sebagai tipe database yang digunakan
+- Sesuaikan versi Python dengan spek aplikasi (saya memakai versi 3.10). Trik: gunakan command <code>python3 --version</code> (MacOS)
+- Pada bagian <code>Start Command</code>, masukkan perintah <code>python3 manage.py migrate && gunicorn shopping_list.wsgi</code> (MacOS)
+- Masukkan nama aplikasi <code>kpop-albums</code> sebagai nama domain situs web aplikasi
+- Centang bagian <code>HTTP Listener on PORT</code> dan klik <code>Deploy App</code> untuk mendeploy app
+
+</details>
+</p>
 
 </details>
 </p>

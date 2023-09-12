@@ -21,28 +21,11 @@
     </style>
 </head>
 <body>
-    <!-- Spoiler Button -->
-    <button onclick="toggleSpoiler()">Header</button>
+    <p>Nama: {{ data.nama }}</p>
+    <p>NPM: {{ data.npm }}</p>
+    <p>Kelas: {{ data.kelass }}</p>
+    <p>Nama App: {{ data.nama_app }}</p>
 
-    <!-- Spoiler Content (Initially hidden) -->
-    <div id="spoiler" style="display: none;">
-        <p>Nama                : Yasmine Putri Viryadhani</p>
-        <p>NPM                 : 2206081862</p>
-        <p>Kelas               : PBP A</p>
-        <p>Nama App            : kpop-albums</p>
-    </div>
-
-    <script>
-        // Function to toggle the visibility of the spoiler content
-        function toggleSpoiler() {
-            var spoiler = document.getElementById("spoiler");
-            if (spoiler.style.display === "none" || spoiler.style.display === "") {
-                spoiler.style.display = "block";
-            } else {
-                spoiler.style.display = "none";
-            }
-        }
-    </script>
     <hr>
 
     <h1>kpop-albums</h1>

@@ -9,3 +9,4 @@ urlpatterns = [
     path('album/<str:artist_name>/<str:album_name>/', show_album_detail, name='album_detail'),
     path('directory/', show_full_list, name='full_list'),
 ]
+

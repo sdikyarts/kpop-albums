@@ -143,6 +143,14 @@ contexts = [
 
 # Function untuk main page
 def show_main(request: HttpRequest) -> HttpResponse:
+    # Create a dictionary with the data
+    data = {
+        'nama': 'Yasmine Putri Viryadhani',
+        'npm': '2206081862',
+        'kelas': 'PBP A',
+        'nama_app': 'kpop-albums',
+    }
+
     template_name = 'main.html'
 
     # Sort the artists alphabetically based on their names
@@ -164,7 +172,7 @@ def show_main(request: HttpRequest) -> HttpResponse:
     artist_names = [artist['name'] for artist in sorted_artists]
 
     # Pass the sorted artists list to the template
-    return render(request, template_name, {'random_artist': random_artist, 'random_album': random_album,
+    return render(request, template_name, {'data': data, 'random_artist': random_artist, 'random_album': random_album,
                                            'artist_names': artist_names, 'contexts': sorted_artists})
 
 # Function untuk artists' pages
