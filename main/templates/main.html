@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>kpop-albums</title>
+    <style>
+        ul {
+            margin-left: -20px; /* Adjust the margin as needed */
+        }
+        /* Add CSS rules to reduce the vertical gap */
+        ul h4, ul h5 {
+            margin-top: 5px; /* Adjust the margin to your desired spacing */
+            margin-bottom: 5px; /* Adjust the margin to your desired spacing */
+        }
+        .flex-container {
+            display: flex;
+            flex-direction: column; /* Change to column to place "Album of the Day" at the bottom */
+        }
+        .artist-list, .album-of-the-day {
+            margin-right: 20px; /* Adjust the left indent as needed */
+        }
+    </style>
+</head>
+<body>
+    <!-- Spoiler Button -->
+    <button onclick="toggleSpoiler()">Header</button>
+
+    <!-- Spoiler Content (Initially hidden) -->
+    <div id="spoiler" style="display: none;">
+        <p>Nama                : Yasmine Putri Viryadhani</p>
+        <p>NPM                 : 2206081862</p>
+        <p>Kelas               : PBP A</p>
+        <p>Nama App            : kpop-albums</p>
+    </div>
+
+    <script>
+        // Function to toggle the visibility of the spoiler content
+        function toggleSpoiler() {
+            var spoiler = document.getElementById("spoiler");
+            if (spoiler.style.display === "none" || spoiler.style.display === "") {
+                spoiler.style.display = "block";
+            } else {
+                spoiler.style.display = "none";
+            }
+        }
+    </script>
+    <hr>
+
+    <h1>kpop-albums</h1>
+    <h2>Your archive for your faves' discography</h2>
+    <hr>
+    <div class="flex-container">
+        <h3><a href="{% url 'main:full_list' %}" style = "text-decoration: none; color: inherit;">Artists</a></h3>
+        <div class="artist-list">
+            <ul style="list-style: none; padding: 0; margin: 0;">
+                {% for artist_data in contexts %}
+                <li style="display: inline-block; margin-right: 10px;">
+                    <ul>
+                        <a href="{% url 'main:artist_detail' artist_data.name %}">
+                            <img src="{{ artist_data.artist_logo }}" alt="{{ artist_data.name }}" style="max-width: 100px; max-height: 100px; border: 1px solid #ccc;">
+                        </a>
+                        <h4><a href="{% url 'main:artist_detail' artist_data.name %}">{{ artist_data.name }}</a></h4>
+                    </ul>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    
+
+        <div class="album-of-the-day">
+            <h3>Album of the Day</h3>
+            <ul>
+                <a href="{% url 'main:album_detail' artist_name=random_artist.name album_name=random_album.name %}">
+                    <img src="{{ random_album.album_cover }}" alt="{{ random_album.name }}" style="max-width: 100px; max-height: 100px; border: 1px solid #ccc;">
+                </a>
+                <h4><a href="{% url 'main:album_detail' artist_name=random_artist.name album_name=random_album.name %}">{{ random_album.name }}</a></h4>
+                <h5><a href="{% url 'main:artist_detail' artist_name=random_artist.name %}">{{ random_artist.name }}</a></h5>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ artist_data.name }} - kpop-albums</title>
+</head>
+<body>
+    <h1>{{ artist_data.name }}</h1>
+    <a href="{% url 'main:show_main' %}">Back to Main</a>
+    <hr style="margin-bottom: 30px;"> <!-- Add margin-bottom to the <hr> element -->
+
+    <!-- Image Container -->
+    <div style="position: relative;">
+        <!-- Image (Initially visible) -->
+        <img id="artistImage" src="{{ artist_data.artist_pic }}" alt="{{ artist_data.name }}" style="max-width: 500px; max-height: 500px; border: 1px solid #ccc;">
+        
+        <!-- Show/Hide Image Button -->
+        <button onclick="toggleImage()" style="position: absolute; bottom: 10px; left: 10px;">Show/Hide Image</button>
+    </div>
+
+    <script>
+        // Function to toggle the visibility of the artist image
+        function toggleImage() {
+            var image = document.getElementById("artistImage");
+            if (image.style.display === "none" || image.style.display === "") {
+                image.style.display = "block";
+            } else {
+                image.style.display = "none";
+            }
+        }
+    </script>
+
+    <br>
+    <hr>
+
+    <p><b>Company:</b> {{ artist_data.company }}</p>
+    <p><b>Debut Date:</b> {{ artist_data.debut_date  }}</p>
+
+    {% if artist_data.disband_date %}
+        <p><b>Disband Date:</b> {{ artist_data.disband_date }}</p>
+        
+        <!-- Display former members only for disbanded groups -->
+        <p style="margin-bottom: 5px;"><b>Former Member(s):</b></p>
+        <div style="display: flex;">
+            <ul style="list-style-type: none; flex: 1; padding: 0; margin: 0;">
+                {% for former_member in artist_data.former_members %}
+                    <li style="margin-bottom: 5px; margin-left: 20px;">- {{ former_member }}</li>
+                    {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                        </ul><ul style="list-style-type: none; flex: 1; padding: 0; margin: 0;">
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        <!-- Display both members and former members for normal (not disbanded) groups -->
+        <p style="margin-bottom: 5px;"><b>Members:</b></p>
+        <div style="display: flex;">
+            <ul style="list-style-type: none; flex: 1; padding: 0; margin: 0;">
+                {% for member in artist_data.members %}
+                    <li style="margin-bottom: 5px; margin-left: 20px;">- {{ member }}</li>
+                    {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                        </ul><ul style="list-style-type: none; flex: 1; padding: 0; margin: 0;">
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <!-- Display former members for normal (not disbanded) groups -->
+        {% if artist_data.former_members %}
+            <p style="margin-bottom: 5px;"><b>Former Member(s):</b></p>
+            <div style="display: flex;">
+                <ul style="list-style-type: none; flex: 1; padding: 0; margin: 0;">
+                    {% for former_member in artist_data.former_members %}
+                        <li style="margin-bottom: 5px; margin-left: 20px;">- {{ former_member }}</li>
+                        {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                            </ul><ul style="list-style-type: none; flex: 1; padding: 0; margin: 0;">
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% if artist_data.sub_units %}
+        <p style="margin-bottom: 5px;"><b>Sub-Unit(s):</b></p>
+        <div style="display: flex;">
+            <ul style="list-style-type: none; flex: 1; padding: 0; margin: 0;">
+                {% for sub_unit in artist_data.sub_units %}
+                    <li style="margin-bottom: 5px; margin-left: 20px;">- {{ sub_unit }}</li>
+                    {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                        </ul><ul style="list-style-type: none; flex: 1; padding: 0; margin: 0;">
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if artist_data.supporters %}
+        <p style="margin-bottom: 5px;"><b>Fan Club Name(s):</b> {{ artist_data.supporters|join:", " }}</p>
+    {% endif %}
+
+    <hr>
+
+    <p><b>About:</b></p>
+    <p>{{ artist_data.description }}</p>
+    <hr>
+
+    <p><b><a href="{% url 'main:full_list' %}" style = "text-decoration: none; color: inherit;">Albums:</a></b></p>
+    <ul>
+        {% for album in artist_data.albums %}
+            <h4><a href="{% url 'main:album_detail' artist_data.name album.name %}">{{ album.name }}</a></h4>
+        {% endfor %}
+    </ul>
+    <hr>
+
+    <a href="{% url 'main:show_main' %}">Back to Main</a>
+</body>
+</html>

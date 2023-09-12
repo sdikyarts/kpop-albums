@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ album_data.name }}  by {{ artist_data.name }} - kpop-albums</title>
+</head>
+<body>
+    <h1>{{ album_data.name }}</h1>
+    <h2><a href="{% url 'main:artist_detail' artist_name=artist_data.name %}">{{ artist_data.name }}</a></h2>
+    <a href="{% url 'main:show_main' %}">Back to Main</a>
+
+    <hr>
+    <br>
+
+    <!-- Correct usage of MEDIA_URL -->
+    <img src="{{ album_data.album_cover }}" alt="{{ album_data.name }}" style="max-width: 250px; max-height: 250px; border: 1px solid #ccc;">
+
+    <br>
+    <br>
+
+    <hr>
+    <p><b>Release Date:</b> {{ album_data.release_date }}</p>
+    <p><b>Label:</b> {{ artist_data.company }}</p>
+    <p><b>Price:</b> IDR {{ album_data.price }}</p>
+
+    <hr>
+    <p><b>Tracklist:</b></p>
+    <ol>
+        {% for track in album_data.tracklist %}
+            <li>{{ track }}</li>
+        {% endfor %}
+    </ol>
+    
+    <hr>
+
+    <a href="{% url 'main:show_main' %}">Back to Main</a>
+</body>
+</html>
