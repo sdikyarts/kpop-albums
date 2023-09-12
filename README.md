@@ -213,12 +213,7 @@ Link App Adaptable  :
     - Pastikan struktur direktori lokal dan repository GitHub sudah benar
     </details>
 
-
-</details>
-
-<details>
-
-  <summary><h2>Melakukan deployment ke Adaptable terhadap aplikasi yang sudah dibuat</h2></summary>
+    <summary><h2>Melakukan deployment ke Adaptable terhadap aplikasi yang sudah dibuat</h2></summary>
     - Login ke [Adaptable.io](https://adaptable.io/)
     - Tekan tombol <code>New App</code> lalu pilih <code>Connect an Existing Repository</code>
     - Hubungkan [Adaptable.io](https://adaptable.io/) dengan GitHub dan pilih <code>All Repositories</code> pada proses instalasi
@@ -261,7 +256,7 @@ Link App Adaptable  :
     - Buat direktori baru <code>templates</code> di dalam direktori <code>main</code>
     - Di dalam direktori baru <code>templates</code>, buat berkas HTML baru berjudul <code>main.html</code>, lalu isi sesuai selera :D
   </details>
-
+    
 </details>
 
 ## Membuat model pada aplikasi <code>main</code> dengan nama <code>Item</code>
