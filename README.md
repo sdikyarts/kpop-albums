@@ -30,9 +30,6 @@ Grup yang saya gunakan sebagai contoh untuk membangun proyek ini adalah <b>NCT</
 </details>
 </p>
 
-</details>
-</p>
-
 <p>
 <details>
 <summary><h2>Detail dalam kode</h2></summary>
@@ -51,6 +48,9 @@ asdfghjkl
 <summary><h3>Implementasi <code>views.py</code></h3></summary>
 
 asdfghjkl
+
+</details>
+</p>
 
 </details>
 </p>
