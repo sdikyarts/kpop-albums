@@ -216,28 +216,35 @@ Link App Adaptable  :
 
 </details>
 
-## Melakukan deployment ke Adaptable terhadap aplikasi yang sudah dibuat
-- Login ke [Adaptable.io](https://adaptable.io/)
-- Tekan tombol <code>New App</code> lalu pilih <code>Connect an Existing Repository</code>
-- Hubungkan [Adaptable.io](https://adaptable.io/) dengan GitHub dan pilih <code>All Repositories</code> pada proses instalasi
-- Pilih proyek <code>kpop_albums</code> sebagai basis aplikasi yang akan di-deploy
-- Pilih branch <code>main</code>
-- Pilih <code>Python App Template</code> sebagai template deployment
-- Pilih <code>PostgreSQL</code> sebagai tipe database yang digunakan
-- Sesuaikan versi Python dengan spek aplikasi (saya memakai versi 3.10). Trik: gunakan command <code>python3 --version</code> (MacOS)
-- Pada bagian <code>Start Command</code>, masukkan perintah <code>python3 manage.py migrate && gunicorn shopping_list.wsgi</code> (MacOS)
-- Masukkan nama aplikasi <code>kpop-albums</code> sebagai nama domain situs web aplikasi
-- Centang bagian <code>HTTP Listener on PORT</code> dan klik <code>Deploy App</code> untuk mendeploy app
+<details>
 
-# Membuat aplikasi <code>main</code> dalam proyek tersebut
+  <summary><h2>Melakukan deployment ke Adaptable terhadap aplikasi yang sudah dibuat</h2></summary>
+    - Login ke [Adaptable.io](https://adaptable.io/)
+    - Tekan tombol <code>New App</code> lalu pilih <code>Connect an Existing Repository</code>
+    - Hubungkan [Adaptable.io](https://adaptable.io/) dengan GitHub dan pilih <code>All Repositories</code> pada proses instalasi
+    - Pilih proyek <code>kpop_albums</code> sebagai basis aplikasi yang akan di-deploy
+    - Pilih branch <code>main</code>
+    - Pilih <code>Python App Template</code> sebagai template deployment
+    - Pilih <code>PostgreSQL</code> sebagai tipe database yang digunakan
+    - Sesuaikan versi Python dengan spek aplikasi (saya memakai versi 3.10). Trik: gunakan command <code>python3 --version</code> (MacOS)
+    - Pada bagian <code>Start Command</code>, masukkan perintah <code>python3 manage.py migrate && gunicorn shopping_list.wsgi</code> (MacOS)
+    - Masukkan nama aplikasi <code>kpop-albums</code> sebagai nama domain situs web aplikasi
+    - Centang bagian <code>HTTP Listener on PORT</code> dan klik <code>Deploy App</code> untuk mendeploy app
 
-## Konfigurasi model dan implementasi model dasar
-- Aktifkan virtual environment terlebih dahulu
-- Buat aplikasi <code>main</code> di directory <code>kpop_albums</code> (yang luar/utama) dengan cara
+</details>
+
+<details>
+
+  <summary><h2>Membuat aplikasi <code>main</code> dalam proyek tersebut</h2></summary>
+
+  <details>
+    <summary><h3>Konfigurasi model dan implementasi model dasar</h3></summary>
+    - Aktifkan virtual environment terlebih dahulu
+    - Buat aplikasi <code>main</code> di directory <code>kpop_albums</code> (yang luar/utama) dengan cara
     ```
     python3 manage.py startapp main
     ```
-- Mendaftarkan aplikasi <code>main</code> ke dalam proyek
+    - Mendaftarkan aplikasi <code>main</code> ke dalam proyek
     - Buka berkas <code>settings.py</code>
     - Tambahkan <code>'main'</code> di variabel <code>INSTALLED_APPS</code><br>
     ```
@@ -247,9 +254,15 @@ Link App Adaptable  :
         ...
     ]
     ```
-## Membuat dan mengisi berkas <code>main.html</code>
-- Buat direktori baru <code>templates</code> di dalam direktori <code>main</code>
-- Di dalam direktori baru <code>templates</code>, buat berkas HTML baru berjudul <code>main.html</code>, lalu isi sesuai selera :D
+  </details>
+
+  <details>
+    <summary><h3>Membuat dan mengisi berkas <code>main.html</code></h3></summary>
+    - Buat direktori baru <code>templates</code> di dalam direktori <code>main</code>
+    - Di dalam direktori baru <code>templates</code>, buat berkas HTML baru berjudul <code>main.html</code>, lalu isi sesuai selera :D
+  </details>
+
+</details>
 
 ## Membuat model pada aplikasi <code>main</code> dengan nama <code>Item</code>
 
