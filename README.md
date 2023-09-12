@@ -5,7 +5,12 @@ Kelas               : PBP A<br>
 Nama App            : K-Pop Albums<br>
 Link App Adaptable  :
 
-# Checklist Tugas
+
+<p>
+<details>
+<summary><h1>Checklist Tugas</h1></summary>
+
+<!-- Markdown content here -->
 ## Membuat sebuah proyek Django baru
 
 ### Inisiasi Direktori Lokal
@@ -251,3 +256,8 @@ Link App Adaptable  :
     ```
     python3 manage.py migrate
     ```
+
+
+</details>
+</p>
+
