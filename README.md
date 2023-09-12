@@ -321,7 +321,7 @@ asdfghjkl
         ...
     ]
     ```
-- Jalankan projek Django dengan perintah <code>python3 manage.py runserver</c> (MacOS)
+- Jalankan projek Django dengan perintah <code>python3 manage.py runserver</code> (MacOS)
 - Buka http://localhost:8000/main/ untuk test
 
 </details>
