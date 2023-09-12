@@ -210,10 +210,11 @@ Link App Adaptable  :
 </details>
 </p>
 
+<p>
+<details>
+<summary><h2>Melakukan deployment ke Adaptable terhadap aplikasi yang sudah dibuat<h2></summary>
 
-
-
-## Melakukan deployment ke Adaptable terhadap aplikasi yang sudah dibuat
+<!-- Markdown content here -->
 - Login ke [Adaptable.io](https://adaptable.io/)
 - Tekan tombol <code>New App</code> lalu pilih <code>Connect an Existing Repository</code>
 - Hubungkan [Adaptable.io](https://adaptable.io/) dengan GitHub dan pilih <code>All Repositories</code> pada proses instalasi
@@ -226,9 +227,14 @@ Link App Adaptable  :
 - Masukkan nama aplikasi <code>kpop-albums</code> sebagai nama domain situs web aplikasi
 - Centang bagian <code>HTTP Listener on PORT</code> dan klik <code>Deploy App</code> untuk mendeploy app
 
-# Membuat aplikasi <code>main</code> dalam proyek tersebut
+</details>
+</p>
 
-## Konfigurasi model dan implementasi model dasar
+
+
+## Membuat aplikasi <code>main</code> dalam proyek tersebut
+
+### Konfigurasi model dan implementasi model dasar
 - Aktifkan virtual environment terlebih dahulu
 - Buat aplikasi <code>main</code> di directory <code>kpop_albums</code> (yang luar/utama) dengan cara
     ```
