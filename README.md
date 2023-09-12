@@ -24,8 +24,9 @@ Link App Adaptable  :
 <p>
 <details>
 <summary><h2>Context / Contoh Sampel</h2></summary>
-
+<ul>
 Grup yang saya gunakan sebagai contoh untuk membangun proyek ini adalah <b>NCT</b> dan <b>Stray Kids</b>
+</ul>
 
 </details>
 </p>
