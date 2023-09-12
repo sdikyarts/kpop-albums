@@ -11,8 +11,11 @@ Link App Adaptable  :
 <summary><h1>Checklist Tugas</h1></summary>
 
 <!-- Markdown content here -->
-## Membuat sebuah proyek Django baru
+<p>
+<details>
+<summary><h2>Membuat sebuah proyek Django baru<h2></summary>
 
+<!-- Markdown content here -->
 ### Inisiasi Direktori Lokal
 - Sebelum membuat proyek Django, dibuatlah sebuah direktori kosong baru di lokal. Saya menamainya sebagai <code>kpop_albums</code>
 - Setelah membuat direktori, kita harus menginisiasi repositori Git kosong di direktori tersebut dengan perintah <code>git_init</code>
@@ -203,6 +206,12 @@ Link App Adaptable  :
     git push -u origin main
     ```
 - Pastikan struktur direktori lokal dan repository GitHub sudah benar
+
+</details>
+</p>
+
+
+
 
 ## Melakukan deployment ke Adaptable terhadap aplikasi yang sudah dibuat
 - Login ke [Adaptable.io](https://adaptable.io/)
