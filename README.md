@@ -6,240 +6,221 @@ Nama App            : K-Pop Albums<br>
 Link App Adaptable  :
 
 # Checklist Tugas
-<details>
-  <summary><h2>Membuat sebuah proyek Django baru</h2></summary>
+## Membuat sebuah proyek Django baru
 
-  <details>
-    <summary><h3>Inisiasi Direktori Lokal</h3></summary>
+### Inisiasi Direktori Lokal
+- Sebelum membuat proyek Django, dibuatlah sebuah direktori kosong baru di lokal. Saya menamainya sebagai <code>kpop_albums</code>
+- Setelah membuat direktori, kita harus menginisiasi repositori Git kosong di direktori tersebut dengan perintah <code>git_init</code>
+- Lalu, kita harus mengkonfigurasi username dan email GitHub ke repositori Git tersebut di Terminal (MacOS) dengan cara:
+    ```
+    git config user.name "<NAME>"
+    git config user.email "<EMAIL>"
+    ```
+- Kita juga bisa mengkonfigurasi secara global dengan cara:<br>
+    ```
+    git config --global user.name "<NAME>"
+    git config --global user.email
+    ```
+- Verifikasi git lokal dengan menginput kode <code>git config --list --local</code>
 
-    - Sebelum membuat proyek Django, dibuatlah sebuah direktori kosong baru di lokal. Saya menamainya sebagai <code>kpop_albums</code>
-    - Setelah membuat direktori, kita harus menginisiasi repositori Git kosong di direktori tersebut dengan perintah <code>git_init</code>
-    - Lalu, kita harus mengkonfigurasi username dan email GitHub ke repositori Git tersebut di Terminal (MacOS) dengan cara:
-        ```
-        git config user.name "<NAME>"
-        git config user.email "<EMAIL>"
-        ```
-    - Kita juga bisa mengkonfigurasi secara global dengan cara:<br>
-        ```
-        git config --global user.name "<NAME>"
-        git config --global user.email
-        ```
-    - Verifikasi git lokal dengan menginput kode <code>git config --list --local</code>
-  </details>
+### Membuat repository baru di GitHub
 
-  <details>
-    <summary><h3>Membuat repository baru di GitHub</h3></summary>
 
-    <!-- Content for "Membuat repository baru di GitHub" -->
-  </details>
+### Instalasi + Inisiasi Django pada repository
+- Menambahkan virtual environment ke dalam directory <code>kpop_albums</code> dengan menjalankan kode <code>python3 -m venv env</code> (di MacOS)
+- Menjalankan virtual environment dengan cara <code>source env/bin/activate</code> (MacOS)
+- Menyiapkan Dependencies dengan membuat berkas <code>requirements.txt</code> di directory yang sama, lalu menambahkan kode di bawah ke dalam berkas <code>.txt</code> tersebut:<br>
+    ```
+    django
+    gunicorn
+    whitenoise
+    psycopg2-binary
+    requests
+    urllib3                   
+    ```
+- Install dependencies dengan menjalankan <code>pip install -r requirements.txt</code>
+- Buat proyek Django dengan nama <code>kpop_albums</code> dengan menjalankan perintah <code>django-admin startproject kpop_albums .</code>
+- Tambahkan <code>*</code> pada <code>ALLOWED_HOSTS</code> di <code>settings.py</code><br>
+    ```
+    ...
+    ALLOWED_HOSTS = ["*"]
+    ...
+    ```
+- Setelah memastikan file <code>manage.py</code> ada di directory, jalankan instruksi <code>./manage.py runserver</code> (MacOS). Saat menjalankan domain http://localhost:8000 muncul animasi roket
 
-  <details>
-    <summary><h3>Instalasi + Inisiasi Django pada repository</h3></summary>
+### Push ke repository GitHub
+- Buat file <code>.gitignore</code> (masih di directory <code>kpop_albums</code> yng luar), lalu isi dengan kode berikut <br>
+    ```
+    # Django
+    *.log
+    *.pot
+    *.pyc
+    __pycache__
+    db.sqlite3
+    media
 
-    - Menambahkan virtual environment ke dalam directory <code>kpop_albums</code> dengan menjalankan kode <code>python3 -m venv env</code> (di MacOS)
-    - Menjalankan virtual environment dengan cara <code>source env/bin/activate</code> (MacOS)
-    - Menyiapkan Dependencies dengan membuat berkas <code>requirements.txt</code> di directory yang sama, lalu menambahkan kode di bawah ke dalam berkas <code>.txt</code> tersebut:<br>
-        ```
-        django
-        gunicorn
-        whitenoise
-        psycopg2-binary
-        requests
-        urllib3                   
-        ```
-    - Install dependencies dengan menjalankan <code>pip install -r requirements.txt</code>
-    - Buat proyek Django dengan nama <code>kpop_albums</code> dengan menjalankan perintah <code>django-admin startproject kpop_albums .</code>
-    - Tambahkan <code>*</code> pada <code>ALLOWED_HOSTS</code> di <code>settings.py</code><br>
-        ```
-        ...
-        ALLOWED_HOSTS = ["*"]
-        ...
-        ```
-    - Setelah memastikan file <code>manage.py</code> ada di directory, jalankan instruksi <code>./manage.py runserver</code> (MacOS). Saat menjalankan domain http://localhost:8000 muncul animasi roket
-  </details>
+    # Backup files
+    *.bak 
 
-  <details>
-    <summary><h3>Push ke repository GitHub</h3></summary>
+    # If you are using PyCharm
+    # User-specific stuff
+    .idea/**/workspace.xml
+    .idea/**/tasks.xml
+    .idea/**/usage.statistics.xml
+    .idea/**/dictionaries
+    .idea/**/shelf
 
-    - Buat file <code>.gitignore</code> (masih di directory <code>kpop_albums</code> yang luar), lalu isi dengan kode berikut:
-        ```
-        # Django
-        *.log
-        *.pot
-        *.pyc
-        __pycache__
-        db.sqlite3
-        media
+    # AWS User-specific
+    .idea/**/aws.xml
 
-        # Backup files
-        *.bak 
+    # Generated files
+    .idea/**/contentModel.xml
 
-        # If you are using PyCharm
-        # User-specific stuff
-        .idea/**/workspace.xml
-        .idea/**/tasks.xml
-        .idea/**/usage.statistics.xml
-        .idea/**/dictionaries
-        .idea/**/shelf
+    # Sensitive or high-churn files
+    .idea/**/dataSources/
+    .idea/**/dataSources.ids
+    .idea/**/dataSources.local.xml
+    .idea/**/sqlDataSources.xml
+    .idea/**/dynamic.xml
+    .idea/**/uiDesigner.xml
+    .idea/**/dbnavigator.xml
 
-        # AWS User-specific
-        .idea/**/aws.xml
+    # Gradle
+    .idea/**/gradle.xml
+    .idea/**/libraries
 
-        # Generated files
-        .idea/**/contentModel.xml
+    # File-based project format
+    *.iws
 
-        # Sensitive or high-churn files
-        .idea/**/dataSources/
-        .idea/**/dataSources.ids
-        .idea/**/dataSources.local.xml
-        .idea/**/sqlDataSources.xml
-        .idea/**/dynamic.xml
-        .idea/**/uiDesigner.xml
-        .idea/**/dbnavigator.xml
+    # IntelliJ
+    out/
 
-        # Gradle
-        .idea/**/gradle.xml
-        .idea/**/libraries
+    # JIRA plugin
+    atlassian-ide-plugin.xml
 
-        # File-based project format
-        *.iws
+    # Python
+    *.py[cod] 
+    *$py.class 
 
-        # IntelliJ
-        out/
+    # Distribution / packaging 
+    .Python build/ 
+    develop-eggs/ 
+    dist/ 
+    downloads/ 
+    eggs/ 
+    .eggs/ 
+    lib/ 
+    lib64/ 
+    parts/ 
+    sdist/ 
+    var/ 
+    wheels/ 
+    *.egg-info/ 
+    .installed.cfg 
+    *.egg 
+    *.manifest 
+    *.spec 
 
-        # JIRA plugin
-        atlassian-ide-plugin.xml
+    # Installer logs 
+    pip-log.txt 
+    pip-delete-this-directory.txt 
 
-        # Python
-        *.py[cod] 
-        *$py.class 
+    # Unit test / coverage reports 
+    htmlcov/ 
+    .tox/ 
+    .coverage 
+    .coverage.* 
+    .cache 
+    .pytest_cache/ 
+    nosetests.xml 
+    coverage.xml 
+    *.cover 
+    .hypothesis/ 
 
-        # Distribution / packaging 
-        .Python build/ 
-        develop-eggs/ 
-        dist/ 
-        downloads/ 
-        eggs/ 
-        .eggs/ 
-        lib/ 
-        lib64/ 
-        parts/ 
-        sdist/ 
-        var/ 
-        wheels/ 
-        *.egg-info/ 
-        .installed.cfg 
-        *.egg 
-        *.manifest 
-        *.spec 
+    # Jupyter Notebook 
+    .ipynb_checkpoints 
 
-        # Installer logs 
-        pip-log.txt 
-        pip-delete-this-directory.txt 
+    # pyenv 
+    .python-version 
 
-        # Unit test / coverage reports 
-        htmlcov/ 
-        .tox/ 
-        .coverage 
-        .coverage.* 
-        .cache 
-        .pytest_cache/ 
-        nosetests.xml 
-        coverage.xml 
-        *.cover 
-        .hypothesis/ 
+    # celery 
+    celerybeat-schedule.* 
 
-        # Jupyter Notebook 
-        .ipynb_checkpoints 
+    # SageMath parsed files 
+    *.sage.py 
 
-        # pyenv 
-        .python-version 
+    # Environments 
+    .env 
+    .venv 
+    env/ 
+    venv/ 
+    ENV/ 
+    env.bak/ 
+    venv.bak/ 
 
-        # celery 
-        celerybeat-schedule.* 
+    # mkdocs documentation 
+    /site 
 
-        # SageMath parsed files 
-        *.sage.py 
+    # mypy 
+    .mypy_cache/ 
 
-        # Environments 
-        .env 
-        .venv 
-        env/ 
-        venv/ 
-        ENV/ 
-        env.bak/ 
-        venv.bak/ 
+    # Sublime Text
+    *.tmlanguage.cache 
+    *.tmPreferences.cache 
+    *.stTheme.cache 
+    *.sublime-workspace 
+    *.sublime-project 
 
-        # mkdocs documentation 
-        /site 
+    # sftp configuration file 
+    sftp-config.json 
 
-        # mypy 
-        .mypy_cache/ 
+    # Package control specific files Package 
+    Control.last-run 
+    Control.ca-list 
+    Control.ca-bundle 
+    Control.system-ca-bundle 
+    GitHub.sublime-settings 
 
-        # Sublime Text
-        *.tmlanguage.cache 
-        *.tmPreferences.cache 
-        *.stTheme.cache 
-        *.sublime-workspace 
-        *.sublime-project 
+    # Visual Studio Code
+    .vscode/* 
+    !.vscode/settings.json 
+    !.vscode/tasks.json 
+    !.vscode/launch.json 
+    !.vscode/extensions.json 
+    .history
+    ```
+- Lakukan add, commit, dan push dari directory <code>kpop_albums</code> ke branch <code>main</code> di repository GitHub <code>kpop_albums</code> (ini akan mem-push README.md, proyek Django, dan .gitignore ke repository)<br>
+    ```
+    git add .
+    git commit -m "Push README + .gitignore + proyek"
+    git branch -M main
+    git remote add origin "https://github.com/sdikyarts/kpop-albums.git"
+    git push -u origin main
+    ```
+- Pastikan struktur direktori lokal dan repository GitHub sudah benar
 
-        # sftp configuration file 
-        sftp-config.json 
+## Melakukan deployment ke Adaptable terhadap aplikasi yang sudah dibuat
+- Login ke [Adaptable.io](https://adaptable.io/)
+- Tekan tombol <code>New App</code> lalu pilih <code>Connect an Existing Repository</code>
+- Hubungkan [Adaptable.io](https://adaptable.io/) dengan GitHub dan pilih <code>All Repositories</code> pada proses instalasi
+- Pilih proyek <code>kpop_albums</code> sebagai basis aplikasi yang akan di-deploy
+- Pilih branch <code>main</code>
+- Pilih <code>Python App Template</code> sebagai template deployment
+- Pilih <code>PostgreSQL</code> sebagai tipe database yang digunakan
+- Sesuaikan versi Python dengan spek aplikasi (saya memakai versi 3.10). Trik: gunakan command <code>python3 --version</code> (MacOS)
+- Pada bagian <code>Start Command</code>, masukkan perintah <code>python3 manage.py migrate && gunicorn shopping_list.wsgi</code> (MacOS)
+- Masukkan nama aplikasi <code>kpop-albums</code> sebagai nama domain situs web aplikasi
+- Centang bagian <code>HTTP Listener on PORT</code> dan klik <code>Deploy App</code> untuk mendeploy app
 
-        # Package control specific files Package 
-        Control.last-run 
-        Control.ca-list 
-        Control.ca-bundle 
-        Control.system-ca-bundle 
-        GitHub.sublime-settings 
+# Membuat aplikasi <code>main</code> dalam proyek tersebut
 
-        # Visual Studio Code
-        .vscode/* 
-        !.vscode/settings.json 
-        !.vscode/tasks.json 
-        !.vscode/launch.json 
-        !.vscode/extensions.json 
-        .history
-        ```
-    
-    - Lakukan add, commit, dan push dari directory <code>kpop_albums</code> ke branch <code>main</code> di repository GitHub <code>kpop_albums</code> (ini akan mem-push README.md, proyek Django, dan .gitignore ke repository)<br>
-        ```
-        git add .
-        git commit -m "Push README + .gitignore + proyek"
-        git branch -M main
-        git remote add origin "https://github.com/sdikyarts/kpop-albums.git"
-        git push -u origin main
-        ```
-    - Pastikan struktur direktori lokal dan repository GitHub sudah benar
-    </details>
-
-    <summary><h2>Melakukan deployment ke Adaptable terhadap aplikasi yang sudah dibuat</h2></summary>
-    - Login ke [Adaptable.io](https://adaptable.io/)
-    - Tekan tombol <code>New App</code> lalu pilih <code>Connect an Existing Repository</code>
-    - Hubungkan [Adaptable.io](https://adaptable.io/) dengan GitHub dan pilih <code>All Repositories</code> pada proses instalasi
-    - Pilih proyek <code>kpop_albums</code> sebagai basis aplikasi yang akan di-deploy
-    - Pilih branch <code>main</code>
-    - Pilih <code>Python App Template</code> sebagai template deployment
-    - Pilih <code>PostgreSQL</code> sebagai tipe database yang digunakan
-    - Sesuaikan versi Python dengan spek aplikasi (saya memakai versi 3.10). Trik: gunakan command <code>python3 --version</code> (MacOS)
-    - Pada bagian <code>Start Command</code>, masukkan perintah <code>python3 manage.py migrate && gunicorn shopping_list.wsgi</code> (MacOS)
-    - Masukkan nama aplikasi <code>kpop-albums</code> sebagai nama domain situs web aplikasi
-    - Centang bagian <code>HTTP Listener on PORT</code> dan klik <code>Deploy App</code> untuk mendeploy app
-
-</details>
-
-<details>
-
-  <summary><h2>Membuat aplikasi <code>main</code> dalam proyek tersebut</h2></summary>
-
-  <details>
-    <summary><h3>Konfigurasi model dan implementasi model dasar</h3></summary>
-    - Aktifkan virtual environment terlebih dahulu
-    - Buat aplikasi <code>main</code> di directory <code>kpop_albums</code> (yang luar/utama) dengan cara
+## Konfigurasi model dan implementasi model dasar
+- Aktifkan virtual environment terlebih dahulu
+- Buat aplikasi <code>main</code> di directory <code>kpop_albums</code> (yang luar/utama) dengan cara
     ```
     python3 manage.py startapp main
     ```
-    - Mendaftarkan aplikasi <code>main</code> ke dalam proyek
+- Mendaftarkan aplikasi <code>main</code> ke dalam proyek
     - Buka berkas <code>settings.py</code>
     - Tambahkan <code>'main'</code> di variabel <code>INSTALLED_APPS</code><br>
     ```
@@ -249,15 +230,9 @@ Link App Adaptable  :
         ...
     ]
     ```
-  </details>
-
-  <details>
-    <summary><h3>Membuat dan mengisi berkas <code>main.html</code></h3></summary>
-    - Buat direktori baru <code>templates</code> di dalam direktori <code>main</code>
-    - Di dalam direktori baru <code>templates</code>, buat berkas HTML baru berjudul <code>main.html</code>, lalu isi sesuai selera :D
-  </details>
-    
-</details>
+## Membuat dan mengisi berkas <code>main.html</code>
+- Buat direktori baru <code>templates</code> di dalam direktori <code>main</code>
+- Di dalam direktori baru <code>templates</code>, buat berkas HTML baru berjudul <code>main.html</code>, lalu isi sesuai selera :D
 
 ## Membuat model pada aplikasi <code>main</code> dengan nama <code>Item</code>
 
