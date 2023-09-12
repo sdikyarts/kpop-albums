@@ -7,10 +7,10 @@ Link App Adaptable  :
 
 # Checklist Tugas
 <details>
-  <summary><b>Membuat sebuah proyek Django baru</b></summary>
+  <summary><h2>Membuat sebuah proyek Django baru</h2></summary>
 
   <details>
-    <summary><b>Inisiasi Direktori Lokal</b></summary>
+    <summary><h3>Inisiasi Direktori Lokal</h3></summary>
 
     - Sebelum membuat proyek Django, dibuatlah sebuah direktori kosong baru di lokal. Saya menamainya sebagai <code>kpop_albums</code>
     - Setelah membuat direktori, kita harus menginisiasi repositori Git kosong di direktori tersebut dengan perintah <code>git_init</code>
@@ -28,13 +28,13 @@ Link App Adaptable  :
   </details>
 
   <details>
-    <summary><b>Membuat repository baru di GitHub</b></summary>
+    <summary><h3>Membuat repository baru di GitHub</h3></summary>
 
     <!-- Content for "Membuat repository baru di GitHub" -->
   </details>
 
   <details>
-    <summary><b>Instalasi + Inisiasi Django pada repository</b></summary>
+    <summary><h3>Instalasi + Inisiasi Django pada repository</h3></summary>
 
     - Menambahkan virtual environment ke dalam directory <code>kpop_albums</code> dengan menjalankan kode <code>python3 -m venv env</code> (di MacOS)
     - Menjalankan virtual environment dengan cara <code>source env/bin/activate</code> (MacOS)
@@ -59,7 +59,7 @@ Link App Adaptable  :
   </details>
 
   <details>
-    <summary><b>Push ke repository GitHub</b></summary>
+    <summary><h3>Push ke repository GitHub</h3></summary>
 
     - Buat file <code>.gitignore</code> (masih di directory <code>kpop_albums</code> yang luar), lalu isi dengan kode berikut:
         ```
