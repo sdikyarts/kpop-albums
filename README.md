@@ -33,19 +33,8 @@ Link App Adaptable  :
 </details>
 </p>
 
-<p>
-<details id = "views-py">
-<summary><h2>Implementasi <code>views.py</code></h2></summary>
-
-
 </details>
 </p>
-
-</details>
-</p>
-
-
-
 
 
 <p>
@@ -276,7 +265,11 @@ Link App Adaptable  :
 ### Membuat dan mengisi berkas <code>main.html</code>
 - Buat direktori baru <code>templates</code> di dalam direktori <code>main</code>
 - Di dalam direktori baru <code>templates</code>, buat berkas HTML baru berjudul <code>main.html</code>, lalu isi sesuai selera :D
-
+- Ada total 4 halaman HTML yang saya buat:
+    1. <code>main.html</code> sebagai halaman utama
+    2. <code>artists.html</code> sebagai halaman artis yang disesuaikan dengan nama artis
+    3. <code>albums.html</code> sebagai halaman album yang disesuaikan dengan nama album
+    4. <code>full_list.html</code> sebagai daftar artis dan album mereka
 
 </details>
 </p>
@@ -288,8 +281,7 @@ Link App Adaptable  :
 <!-- Markdown content here -->
 ### Konfigurasi <i>routing</i> app main
 - Buat berkas <code>urls.py</code> di directory aplikasi
-- Isi berkas <code>urls.py</code> nya
-- Karena saya membuat total 4 halaman, maka ada 4 path yang saya buat
+- Isi berkas lengkap bisa dilihat disini
 
 </details>
 </p>
@@ -305,7 +297,8 @@ Link App Adaptable  :
 - <code>description</code> sebagai deskripsi *item* dengan tipe <code>TextField</code>
 
 ### Mengubah berkas <code>models.py</code> pada aplikasi <code>main</code>, lalu membuat dan mengaplikasikan migrasi model
-- Buka berkas <code>models.py</code> di dalam direktori aplikasi <code>main</code>, kemudian isi dengan kode berikut:
+- Buka berkas <code>models.py</code> di dalam direktori aplikasi <code>main</code>
+- Isi berkas lengkap bisa dilihat disini
 - Jalankan perintah berikut untuk membuat berkas migrasi yang berisi perubahan model yang belum diaplikasikan ke dalam basis data
     ```
     python3 manage.py makemigrations
@@ -331,7 +324,7 @@ Link App Adaptable  :
     ```
     from django.shortcuts import render
     ```
-- Penjelasan lengkap [di bagian ini](#views-py)
+- Penjelasan lengkap di bagian ini
 
 
 </details>
@@ -384,50 +377,19 @@ Link App Adaptable  :
 </details>
 </p>
 
-<p>
-<details id = "testing">
-<summary><h2>Membuat README.md<h2></summary>
-
-<!-- Markdown content here -->
-
-</details>
-</p>
+## Membuat <code>README.md</code>
 
 <p>
 <details id = "testing">
 <summary><h2>Bonus: Melakukan Testing<h2></summary>
 
 <!-- Markdown content here -->
+### Membuat Unit Test
+- Buka berkas <code>tests.py</code> di directory main
+- Penjelasan lengkap di bagian ini
 
 </details>
 </p>
 
 </details>
 </p>
-
-<!-- JavaScript to show spoiler sections -->
-<script>
-  function showSpoilers(spoilerIds) {
-    spoilerIds.forEach(function (spoilerId) {
-      var spoiler = document.getElementById(spoilerId);
-      if (spoiler) {
-        spoiler.open = true;
-        // Open all parent spoiler sections recursively
-        var parent = spoiler.parentElement;
-        while (parent && parent.tagName === "DETAILS") {
-          parent.open = true;
-          parent = parent.parentElement;
-        }
-      }
-    });
-  }
-
-  // Automatically open the parent and target spoilers when the page loads
-  window.onload = function () {
-    var initialHash = window.location.hash;
-    if (initialHash) {
-      var targetSpoilers = [initialHash.substring(1), "app-data"]; // Remove the "#" character
-      showSpoilers(targetSpoilers);
-    }
-  };
-</script>
