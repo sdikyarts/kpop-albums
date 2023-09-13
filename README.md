@@ -408,19 +408,19 @@ Link App Adaptable  : https://kpop-albums.adaptable.app/ (emang lagi error)
 </p>
 
 # Pertanyaan
-## 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)
+### 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)
 - Baca bagian spoiler Checklist Tugas di atas
 
-## 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara <code>urls.py</code>, <code>views.py</code>, <code>models.py</code>, dan berkas <code>html</code>
+### 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara <code>urls.py</code>, <code>views.py</code>, <code>models.py</code>, dan berkas <code>html</code>
 <img src = "https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Home_page/basic-django.png">
 <p>Sumber: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Home_page</p>
 
-## 3. Jelaskan mengapa kita menggunakan virtual environment? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment?
+### 3. Jelaskan mengapa kita menggunakan virtual environment? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment?
 - Virtual environment digunakan untuk mengisolasi dan mengelola dependensi Python dalam proyek yang dibuat
 - Hal ini bertujuan untuk memastikan bahwa setiap proyek memiliki lingkungan yang terpisah, menghindari konflik, meningkatkan kebersihan, dan memudahkan pemeliharaan antar satu proyek dengan proyek lain
 - Kita bisa saja membuat app Django tanpa virtual environment. Namun, untuk mengurangi risiko konflik versi paket serta membuat pengerjaan lebih rapi dan terorganisasi, maka sebaiknya kita menggunakan virtual environment.
 
-## 4. Jelaskan apakah itu MVC, MVT, MVVM dan perbedaan dari ketiganya.
+### 4. Jelaskan apakah itu MVC, MVT, MVVM dan perbedaan dari ketiganya.
 1. **MVC (Model-View-Controller)**:
    - **Model**: Representasi dari data dan logika bisnis aplikasi. Ini mengurus semua data dan aturan bisnis.
    - **View**: Bertanggung jawab untuk tampilan antarmuka pengguna. Ini menampilkan data dari Model dan mengirim input pengguna ke Controller.
