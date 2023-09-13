@@ -3,7 +3,7 @@ Nama                : Yasmine Putri Viryadhani<br>
 NPM                 : 2206081862<br>
 Kelas               : PBP A<br>
 Nama App            : K-Pop Albums<br>
-Link App Adaptable  :
+Link App Adaptable  : https://kpop-albums.adaptable.app/ (emang lagi error)
 
 <p>
 <details id = "app deta">
@@ -63,7 +63,7 @@ Link App Adaptable  :
 - Verifikasi git lokal dengan menginput kode <code>git config --list --local</code>
 
 ### Membuat repository baru di GitHub
-![Repository Baru](/Users/yasmineputri/Downloads/repo baru.png)
+<img src="repo baru.png">
 
 ### Instalasi + Inisiasi Django pada repository
 - Menambahkan virtual environment ke dalam directory <code>kpop_albums</code> dengan menjalankan kode <code>python3 -m venv env</code> (di MacOS)
@@ -370,7 +370,7 @@ Link App Adaptable  :
 
 <p>
 <details>
-<summary><h2>Melakukan <i>deployment</i> ke Adaptable terhadap aplikasi yang sudah dibuat<h2></summary>
+<summary><h2>Melakukan <i>deployment</i> ke Adaptable terhadap aplikasi yang sudah dibuat (udah deploy berhasil tapi gak keload webnya)<h2></summary>
 
 <!-- Markdown content here -->
 - Login ke [Adaptable.io](https://adaptable.io/)
@@ -385,6 +385,8 @@ Link App Adaptable  :
 - Masukkan nama aplikasi <code>kpop-albums</code> sebagai nama domain situs web aplikasi
 - Centang bagian <code>HTTP Listener on PORT</code> dan klik <code>Deploy App</code> untuk mendeploy app
 
+<img src="adaptable.png">
+
 </details>
 </p>
 
@@ -397,10 +399,42 @@ Link App Adaptable  :
 <!-- Markdown content here -->
 ### Membuat Unit Test
 - Buka berkas <code>tests.py</code> di directory main
-- Isi berkas lengkap bisa dilihat [disini]()
+- Isi berkas lengkap bisa dilihat [disini](https://github.com/sdikyarts/kpop-albums/blob/main/main/tests.py)
 
 </details>
 </p>
 
 </details>
 </p>
+
+# Pertanyaan
+## 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)
+- Baca bagian spoiler Checklist Tugas di atas
+
+## 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara <code>urls.py</code>, <code>views.py</code>, <code>models.py</code>, dan berkas <code>html</code>
+<img src = "https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Home_page/basic-django.png">
+<p>Sumber: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Home_page</p>
+
+## 3. Jelaskan mengapa kita menggunakan virtual environment? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment?
+- Virtual environment digunakan untuk mengisolasi dan mengelola dependensi Python dalam proyek yang dibuat
+- Hal ini bertujuan untuk memastikan bahwa setiap proyek memiliki lingkungan yang terpisah, menghindari konflik, meningkatkan kebersihan, dan memudahkan pemeliharaan antar satu proyek dengan proyek lain
+- Kita bisa saja membuat app Django tanpa virtual environment. Namun, untuk mengurangi risiko konflik versi paket serta membuat pengerjaan lebih rapi dan terorganisasi, maka sebaiknya kita menggunakan virtual environment.
+
+## 4. Jelaskan apakah itu MVC, MVT, MVVM dan perbedaan dari ketiganya.
+1. **MVC (Model-View-Controller)**:
+   - **Model**: Representasi dari data dan logika bisnis aplikasi. Ini mengurus semua data dan aturan bisnis.
+   - **View**: Bertanggung jawab untuk tampilan antarmuka pengguna. Ini menampilkan data dari Model dan mengirim input pengguna ke Controller.
+   - **Controller**: Bertindak sebagai penghubung antara Model dan View. Ini menerima input pengguna dari View, memprosesnya, dan memperbarui Model atau View sesuai kebutuhan.
+   - Pada arsitektur ini, Controller berfungsi sebagai perantara antara Model dan View.
+
+2. **MVT (Model-View-Template)**:
+   - **Model**: Mirip dengan MVC, ini mengurus data dan logika bisnis.
+   - **View**: Menangani tampilan antarmuka pengguna seperti pada MVC.
+   - **Template**: Ini adalah perbedaan utama dengan MVC. Template adalah lapisan yang terpisah yang digunakan untuk menghasilkan tampilan HTML dinamis. Template berisi markup HTML dan bahasa templating yang digunakan untuk mengisi data dari Model ke View.
+   - Dalam MVT, Template digunakan untuk memisahkan tampilan dari kode aplikasi, sedangkan di MVC, View biasanya lebih tahu tentang logika tampilan.
+
+3. **MVVM (Model-View-ViewModel)**:
+   - **Model**: Mirip dengan MVC dan MVT, ini mengurus data dan bisnis logic.
+   - **View**: Bertanggung jawab untuk tampilan antarmuka pengguna seperti pada MVC dan MVT.
+   - **ViewModel**: Ini adalah komponen tambahan yang berperan sebagai perantara antara Model dan View. ViewModel mengubah data dari Model ke bentuk yang dapat ditampilkan di View. Ini memungkinkan pemisahan yang lebih besar antara tampilan dan logika aplikasi, dan juga mendukung binding data dua arah antara View dan Model.
+   - MVVM memungkinkan View untuk lebih independen dari Model dibandingkan dengan MVC atau MVT, karena ViewModel bertanggung jawab atas sebagian besar logika tampilan.
