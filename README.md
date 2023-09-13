@@ -6,52 +6,37 @@ Nama App            : K-Pop Albums<br>
 Link App Adaptable  :
 
 <p>
-<details>
+<details id = "app deta">
 <summary><h1>Penjelasan App</h1></summary>
 
 <p>
-<details>
+<details id = "background">
 <summary><h2>Latar Belakang</h2></summary>
 
 - Tema besar aplikasi untuk tugas PBP adalah aplikasi pengelolaan (inventori). 
-- Tema yang saya pilih adalah <b>inventori album K-Pop</b> 
-- Banyaknya jumlah grup yang debut dan album yang dirilis sehingga memungkinkan untuk dilakukan pengorganisasian album berdasarkan artis yang merilis album tersebut
+- Tema yang saya pilih adalah <b>inventori album K-Pop</b> .
+- Banyaknya jumlah grup yang debut dan album yang dirilis sehingga memungkinkan untuk dilakukan pengorganisasian album berdasarkan artis yang merilis album tersebut.
 
 
 </details>
 </p>
 
 <p>
-<details>
+<details id = "context">
 <summary><h2>Context / Contoh Sampel</h2></summary>
-<ul>
-Grup yang saya gunakan sebagai contoh untuk membangun proyek ini adalah <b>NCT</b> dan <b>Stray Kids</b>
-</ul>
 
-</details>
-</p>
+- Grup yang saya gunakan sebagai contoh untuk membangun proyek ini adalah [<b>NCT</b>](https://en.m.wikipedia.org/wiki/NCT_(group)) dan [<b>Stray Kids</b>](https://en.wikipedia.org/wiki/Stray_Kids)
 
-<p>
-<details>
-<summary><h2>Detail dalam kode</h2></summary>
 
-<p>
-<details>
-<summary><h3>Implementasi <code>models.py</code></h3></summary>
 
-asdfghjkl
 
 </details>
 </p>
 
 <p>
 <details id = "views-py">
-<summary><h3>Implementasi <code>views.py</code></h3></summary>
+<summary><h2>Implementasi <code>views.py</code></h2></summary>
 
-asdfghjkl
-
-</details>
-</p>
 
 </details>
 </p>
@@ -59,17 +44,17 @@ asdfghjkl
 </details>
 </p>
 
-</details>
-</p>
+
+
 
 
 <p>
-<details>
+<details id = "checklist-tugas">
 <summary><h1>Checklist Tugas</h1></summary>
 
 <!-- Markdown content here -->
 <p>
-<details>
+<details id = "proyek-django">
 <summary><h2>Membuat sebuah proyek Django baru<h2></summary>
 
 <!-- Markdown content here -->
@@ -268,7 +253,7 @@ asdfghjkl
 </p>
 
 <p>
-<details>
+<details id = "app-making">
 <summary><h2>Membuat aplikasi <code>main</code> dalam proyek tersebut<h2></summary>
 
 <!-- Markdown content here -->
@@ -297,7 +282,7 @@ asdfghjkl
 </p>
 
 <p>
-<details>
+<details id = "routing-app">
 <summary><h2>Membuat sebuah <i>routing</i> pada proyek agar dapat menjalankan aplikasi <code>main</code><h2></summary>
 
 <!-- Markdown content here -->
@@ -306,30 +291,11 @@ asdfghjkl
 - Isi berkas <code>urls.py</code> nya
 - Karena saya membuat total 4 halaman, maka ada 4 path yang saya buat
 
-### Konfigurasi <i>routing</i> proyek kpop-albums
-- Buat berkas <code>urls.py</code> di directory proyek (terluar)
-- impor fungsi <code>include</code> dari <code>django.urls</code>
-    ```
-    ...
-    from django.urls import path, include
-    ...
-    ```
-- Tambahkan URL berikut untuk mengarahkan tampilan main di dalam variabel <c>urlpatterns</c>
-    ```
-    urlpatterns = [
-        ...
-        path('main/', include('main.urls')),
-        ...
-    ]
-    ```
-- Jalankan projek Django dengan perintah <code>python3 manage.py runserver</code> (MacOS)
-- Buka http://localhost:8000/main/ untuk test
-
 </details>
 </p>
 
 <p>
-<details>
+<details id = "model-making">
 <summary><h2>Membuat model pada aplikasi <code>main</code> dengan nama <code>Item</code><h2></summary>
 
 <!-- Markdown content here -->
@@ -355,8 +321,8 @@ asdfghjkl
 
 
 <p>
-<details>
-<summary><h2>Membuat sebuah fungsi pada <code>views.py</code> untuk dikemballikan ke dalam sebuah template HTML yang menampilkan nama<h2></summary>
+<details id = "view-making">
+<summary><h2>Membuat sebuah fungsi pada <code>views.py</code> untuk dikemballikan ke dalam sebuah template HTML yang menampilkan nama dan kelas<h2></summary>
 
 <!-- Markdown content here -->
 ### Mengintegrasikan komponen MVT
@@ -372,10 +338,28 @@ asdfghjkl
 </p>
 
 <p>
-<details>
-<summary><h2>Membuat sebuah <i>routing</i> fungsi pada <code>views.py</code> untuk dikemballikan ke dalam sebuah template HTML yang menampilkan nama<h2></summary>
+<details id = "routing-project">
+<summary><h2>Membuat sebuah <i>routing</i> pada <code>urls.py</code> untuk memetakan fungsi yang telah dibuat pada views.py<h2></summary>
 
 <!-- Markdown content here -->
+### Konfigurasi <i>routing</i> proyek kpop-albums
+- Buat berkas <code>urls.py</code> di directory proyek (terluar)
+- impor fungsi <code>include</code> dari <code>django.urls</code>
+    ```
+    ...
+    from django.urls import path, include
+    ...
+    ```
+- Tambahkan URL berikut untuk mengarahkan tampilan main di dalam variabel <c>urlpatterns</c>
+    ```
+    urlpatterns = [
+        ...
+        path('main/', include('main.urls')),
+        ...
+    ]
+    ```
+- Jalankan projek Django dengan perintah <code>python3 manage.py runserver</code> (MacOS)
+- Buka http://localhost:8000/main/ untuk test webnya
 
 </details>
 </p>
@@ -400,6 +384,50 @@ asdfghjkl
 </details>
 </p>
 
+<p>
+<details id = "testing">
+<summary><h2>Membuat README.md<h2></summary>
+
+<!-- Markdown content here -->
+
 </details>
 </p>
 
+<p>
+<details id = "testing">
+<summary><h2>Bonus: Melakukan Testing<h2></summary>
+
+<!-- Markdown content here -->
+
+</details>
+</p>
+
+</details>
+</p>
+
+<!-- JavaScript to show spoiler sections -->
+<script>
+  function showSpoilers(spoilerIds) {
+    spoilerIds.forEach(function (spoilerId) {
+      var spoiler = document.getElementById(spoilerId);
+      if (spoiler) {
+        spoiler.open = true;
+        // Open all parent spoiler sections recursively
+        var parent = spoiler.parentElement;
+        while (parent && parent.tagName === "DETAILS") {
+          parent.open = true;
+          parent = parent.parentElement;
+        }
+      }
+    });
+  }
+
+  // Automatically open the parent and target spoilers when the page loads
+  window.onload = function () {
+    var initialHash = window.location.hash;
+    if (initialHash) {
+      var targetSpoilers = [initialHash.substring(1), "app-data"]; // Remove the "#" character
+      showSpoilers(targetSpoilers);
+    }
+  };
+</script>

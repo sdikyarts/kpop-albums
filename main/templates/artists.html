@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{{ artist_data.name }} - kpop-albums</title>
+    <title>{{ artist_data.artist }} - kpop-albums</title>
 </head>
 <body>
-    <h1>{{ artist_data.name }}</h1>
+    <h1>{{ artist_data.artist }}</h1>
     <a href="{% url 'main:show_main' %}">Back to Main</a>
     <hr style="margin-bottom: 30px;"> <!-- Add margin-bottom to the <hr> element -->
 
@@ -107,7 +107,7 @@
     <p><b><a href="{% url 'main:full_list' %}" style = "text-decoration: none; color: inherit;">Albums:</a></b></p>
     <ul>
         {% for album in artist_data.albums %}
-            <h4><a href="{% url 'main:album_detail' artist_data.name album.name %}">{{ album.name }}</a></h4>
+            <h4><a href="{% url 'main:album_detail' artist_data.artist album.name %}">{{ album.name }}</a></h4>
         {% endfor %}
     </ul>
     <hr>

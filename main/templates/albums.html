@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{{ album_data.name }}  by {{ artist_data.name }} - kpop-albums</title>
+    <title>{{ album_data.name }}  by {{ artist_data.artist }} - kpop-albums</title>
 </head>
 <body>
     <h1>{{ album_data.name }}</h1>
-    <h2><a href="{% url 'main:artist_detail' artist_name=artist_data.name %}">{{ artist_data.name }}</a></h2>
+    <h2><a href="{% url 'main:artist_detail' artist_name=artist_data.artist %}">{{ artist_data.artist }}</a></h2>
     <a href="{% url 'main:show_main' %}">Back to Main</a>
 
     <hr>
@@ -21,6 +21,7 @@
     <p><b>Release Date:</b> {{ album_data.release_date }}</p>
     <p><b>Label:</b> {{ artist_data.company }}</p>
     <p><b>Price:</b> IDR {{ album_data.price }}</p>
+    <p><b>Amount:</b> {{ album_data.amount }}</p>
 
     <hr>
     <p><b>Tracklist:</b></p>
