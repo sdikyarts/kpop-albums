@@ -9,29 +9,16 @@ Link App Adaptable  : https://kpop-albums.adaptable.app/ (emang lagi error)
 <details id = "app deta">
 <summary><h1>Penjelasan App</h1></summary>
 
-<p>
-<details id = "background">
-<summary><h2>Latar Belakang</h2></summary>
-
+## Latar Belakang
 - Tema besar aplikasi untuk tugas PBP adalah aplikasi pengelolaan (inventori). 
 - Tema yang saya pilih adalah <b>inventori album K-Pop</b> .
 - Banyaknya jumlah grup yang debut dan album yang dirilis sehingga memungkinkan untuk dilakukan pengorganisasian album berdasarkan artis yang merilis album tersebut.
 
-
-</details>
-</p>
-
-<p>
-<details id = "context">
-<summary><h2>Context / Contoh Sampel</h2></summary>
-
+## Contoh Proyek
 - Grup yang saya gunakan sebagai contoh untuk membangun proyek ini adalah [<b>NCT</b>](https://en.m.wikipedia.org/wiki/NCT_(group)) dan [<b>Stray Kids</b>](https://en.wikipedia.org/wiki/Stray_Kids)
 
-
-
-
-</details>
-</p>
+## Tampilan App (sementara)
+<img src="main view.png">
 
 </details>
 </p>
