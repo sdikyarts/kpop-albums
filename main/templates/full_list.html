@@ -11,12 +11,12 @@
         {% for artist in artists %}
             <li>
                 <!-- Link to the artist page using the artist's name -->
-                <h2><a href="{% url 'main:artist_detail' artist_name=artist.name %}">{{ artist.name }}</a></h2>
+                <h2><a href="{% url 'main:artist_detail' artist_name=artist.artist %}">{{ artist.artist }}</a></h2>
                 <ul>
                     {% for album in artist.albums %}
                         <li>
                             <!-- Link to the album page using the artist and album names -->
-                            <h3><a href="{% url 'main:album_detail' artist_name=artist.name album_name=album.name %}">{{ album.name }}</a></h3>
+                            <h3><a href="{% url 'main:album_detail' artist_name=artist.artist album_name=album.name %}">{{ album.name }}</a></h3>
                             <p>Release Date: {{ album.release_date }}</p>
                             <!-- Add more album details here as needed -->
                         </li>

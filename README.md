@@ -63,7 +63,7 @@ Link App Adaptable  :
 - Verifikasi git lokal dengan menginput kode <code>git config --list --local</code>
 
 ### Membuat repository baru di GitHub
-
+![Repository Baru](/Users/yasmineputri/Downloads/repo baru.png)
 
 ### Instalasi + Inisiasi Django pada repository
 - Menambahkan virtual environment ke dalam directory <code>kpop_albums</code> dengan menjalankan kode <code>python3 -m venv env</code> (di MacOS)
@@ -266,10 +266,10 @@ Link App Adaptable  :
 - Buat direktori baru <code>templates</code> di dalam direktori <code>main</code>
 - Di dalam direktori baru <code>templates</code>, buat berkas HTML baru berjudul <code>main.html</code>, lalu isi sesuai selera :D
 - Ada total 4 halaman HTML yang saya buat:
-    1. <code>main.html</code> sebagai halaman utama
-    2. <code>artists.html</code> sebagai halaman artis yang disesuaikan dengan nama artis
-    3. <code>albums.html</code> sebagai halaman album yang disesuaikan dengan nama album
-    4. <code>full_list.html</code> sebagai daftar artis dan album mereka
+    1. [<code>main.html</code>](https://github.com/sdikyarts/kpop-albums/blob/main/main/templates/main.html) sebagai halaman utama
+    2. [<code>artists.html</code>](https://github.com/sdikyarts/kpop-albums/blob/main/main/templates/artists.html) sebagai halaman artis yang disesuaikan dengan nama artis
+    3. [<code>albums.html</code>](https://github.com/sdikyarts/kpop-albums/blob/main/main/templates/albums.html) sebagai halaman album yang disesuaikan dengan nama album
+    4. [<code>full_list.html</code>](https://github.com/sdikyarts/kpop-albums/blob/main/main/templates/full_list.html) sebagai daftar artis dan album mereka dalam bentuk list and bullets
 
 </details>
 </p>
@@ -280,8 +280,8 @@ Link App Adaptable  :
 
 <!-- Markdown content here -->
 ### Konfigurasi <i>routing</i> app main
-- Buat berkas <code>urls.py</code> di directory aplikasi
-- Isi berkas lengkap bisa dilihat disini
+- Buat berkas <code>urls.py</code> di directory aplikasi, kemudian isi
+- Isi berkas lengkap bisa dilihat [disini](https://github.com/sdikyarts/kpop-albums/blob/main/main/urls.py)
 
 </details>
 </p>
@@ -298,7 +298,7 @@ Link App Adaptable  :
 
 ### Mengubah berkas <code>models.py</code> pada aplikasi <code>main</code>, lalu membuat dan mengaplikasikan migrasi model
 - Buka berkas <code>models.py</code> di dalam direktori aplikasi <code>main</code>
-- Isi berkas lengkap bisa dilihat disini
+- Isi berkas lengkap bisa dilihat [disini](https://github.com/sdikyarts/kpop-albums/blob/main/main/models.py)
 - Jalankan perintah berikut untuk membuat berkas migrasi yang berisi perubahan model yang belum diaplikasikan ke dalam basis data
     ```
     python3 manage.py makemigrations
@@ -324,8 +324,19 @@ Link App Adaptable  :
     ```
     from django.shortcuts import render
     ```
-- Penjelasan lengkap di bagian ini
+- Isi berkas lengkap bisa dilihat [disini](https://github.com/sdikyarts/kpop-albums/blob/main/main/views.py)
+- Penjelasan fungsi di dalam <code>views.py</code>:
+    - <code>convert_date_string(date_string)</code> mengonversi format tanggal dari "Bulan Tanggal, Tahun" menjadi "YYYY-MM-DD".
 
+    - <code>get_artist_data()</code> mengembalikan sebuah context yang beris data dari artis beserta detailnya, seperti nama artis, agensi, tanggal debut, anggota, mantan anggota, sub-unit, nama fandom, deskripsi, dan informasi album.
+
+    - <code>show_main(request: HttpRequest) -> HttpResponse</code> menampilkan halaman utama aplikasi yang mencakup pengurutan artis secara alfabetis dan penentuan album of the day
+
+    - <code> show_artist_detail(request: HttpRequest, artist_name: str) -> HttpResponse</code> menampilkan halaman detail artis berdasarkan nama artis
+
+    - <code>show_album_detail(request, artist_name, album_name)</code> menampilkan halaman detail album berdasarkan nama artis dan nama album
+
+    - <code>show_full_list(request)</code> menampilkan halaman daftar lengkap artis yang dalam urutan alfabetis beserta album yang pernah mereka rilis
 
 </details>
 </p>
@@ -386,7 +397,7 @@ Link App Adaptable  :
 <!-- Markdown content here -->
 ### Membuat Unit Test
 - Buka berkas <code>tests.py</code> di directory main
-- Penjelasan lengkap di bagian ini
+- Isi berkas lengkap bisa dilihat [disini]()
 
 </details>
 </p>
