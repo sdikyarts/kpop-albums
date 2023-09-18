@@ -12,11 +12,14 @@ Link App            :
 - Banyaknya jumlah grup yang debut dan album yang dirilis sehingga memungkinkan untuk dilakukan pengorganisasian album berdasarkan artis yang merilis album tersebut
 
 ## Contoh Proyek
-- Grup-grup yang saya gunakan sebagai contoh untuk membangun proyek ini adalah [<b>NCT</b>](https://en.m.wikipedia.org/wiki/NCT_(group)) dan [<b>Stray Kids</b>](https://en.wikipedia.org/wiki/Stray_Kids)
+- Grup-grup yang saya gunakan sebagai contoh untuk membangun proyek ini adalah [**NCT**](https://en.m.wikipedia.org/wiki/NCT_(group)) dan [**Stray Kids**](https://en.wikipedia.org/wiki/Stray_Kids)
     - Karena keterbatasan waktu dalam *development* proyek ini, grup-grup lain akan ditambahkan seiring waktu
 
 ## Tampilan App (sementara)
+- Progres **Tugas 2**
 <img src="main view.png">
+
+- Progres **Tugas 3**
 
 
 # Checklist Tugas 3
@@ -30,7 +33,9 @@ Link App            :
 
 ### 2. Implementasi Skeleton sebagai Kerangka dari Views
 - Pada *root directory* <code>kpop_albums</code>, saya membuat folder baru bernama <code>templates</code>. 
-- Lalu didalamnya, saya membuat berkas <code>base.html</code>
+- Lalu didalamnya, saya membuat berkas <code>base.html</code> yang berisi kerangka untuk file-file HTML yang ada
+    - Isi <code>base.html</code> yang saya buat dapat dilihat di [sini]()
+- Di <code>settings.py</code> yang ada di *sub-directory* <code>kpop_albums</code>, saya memodifikasi bagian <code>TEMPLATES</code>
 
 
 # Pertanyaan
