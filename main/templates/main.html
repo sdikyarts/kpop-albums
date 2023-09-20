@@ -1,6 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends 'base.html' %}
+
+{% block meta %}
     <title>kpop-albums</title>
     <style>
         ul {
@@ -11,20 +11,24 @@
             margin-top: 5px; /* Adjust the margin to your desired spacing */
             margin-bottom: 5px; /* Adjust the margin to your desired spacing */
         }
-        .flex-container {
-            display: flex;
-            flex-direction: column; /* Change to column to place "Album of the Day" at the bottom */
-        }
-        .artist-list, .album-of-the-day {
+        .artist-list {
             margin-right: 20px; /* Adjust the left indent as needed */
         }
     </style>
-</head>
-<body>
-    <p>Nama: {{ data.nama }}</p>
-    <p>NPM: {{ data.npm }}</p>
-    <p>Kelas: {{ data.kelas }}</p>
-    <p>Nama App: {{ data.nama_app }}</p>
+{% endblock meta %}
+
+{% block content %}
+    <div id="header" style="display: {% if show_header %}block{% else %}none{% endif %};">
+        <p>Nama: {{ data.nama }}</p>
+        <p>NPM: {{ data.npm }}</p>
+        <p>Kelas: {{ data.kelas }}</p>
+        <p>Nama App: {{ data.nama_app }}</p>
+    </div>
+
+    <button id="toggleHeaderButton" class="toggle-button">
+        {% if show_header %}Hide Header{% else %}Show Header{% endif %}
+    </button>
+    
 
     <hr>
 
@@ -32,33 +36,73 @@
     <h2>Your archive for your faves' discography</h2>
     <hr>
     <div class="flex-container">
-        <h3><a href="{% url 'main:full_list' %}" style = "text-decoration: none; color: inherit;">Artists</a></h3>
+        <h3 style="display: inline-block;">Artists</h3>
+        <a href="{% url 'main:full_list' %}" class="button-link" style="display: inline-block; margin-left: 10px;">
+            <button class="directory">
+                See Full List
+            </button>
+        </a>
         <div class="artist-list">
-            <ul style="list-style: none; padding: 0; margin: 0;">
-                {% for artist_data in contexts %}
-                <li style="display: inline-block; margin-right: 10px;">
-                    <ul>
-                        <a href="{% url 'main:artist_detail' artist_data.artist %}">
-                            <img src="{{ artist_data.artist_logo }}" alt="{{ artist_data.artist }}" style="max-width: 100px; max-height: 100px; border: 1px solid #ccc;">
-                        </a>
-                        <h4><a href="{% url 'main:artist_detail' artist_data.artist %}">{{ artist_data.artist }}</a></h4>
-                    </ul>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
+            {% if artists %}
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    {% for artist in artists %}
+                    <li style="display: inline-block; margin-right: 10px;">
+                        <ul>
+                            <a href="{% if artist.name %}{% url 'main:artist_detail' artist.name %}{% endif %}">
+                                <img src="{{ artist.artist_logo_url }}" alt="{{ artist.name }}" style="max-width: 100px; max-height: 100px; border: 1px solid #ccc;">
+                            </a>
+                            <h4 style="text-align: center; margin-bottom: 10px;">
+                                <a href="{% if artist.name %}{% url 'main:artist_detail' artist.name %}{% endif %}">{{ artist.name }}</a>
+                            </h4>
+                            <p style="text-align: center;">Albums: {{ artist.albums_count }}</p>
+                            <a href="{% if artist.name %}{% url 'main:add_album' artist_name=artist.name %}{% endif %}" class="button-link">
+                                <button class="add-button" style="display: block; width: 100px; margin-top: 5px;">
+                                    Add New Album
+                                </button>
+                            </a>
+                        </ul>
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No artists added</p>
+            {% endif %}
+        </div>        
+    </div>        
+    <hr>
+    <div class="button-container">
+        <a href="{% url 'main:add_artist' %}" class="button-link">
+            <button class="add-button" style="width: 100px;">
+                Add New Artist
+            </button>
+        </a>
+        {% if artists %}
+        <!-- Add a reset button for the form on the main page -->
+        <a href="{% url 'main:reset_form' %}" class="reset-button">
+            <button type="button" id="resetFormButton" class="reset-button" style="width: 100px;">
+                Reset Directory
+            </button>
+        </a>
+        {% endif %}
+    </div>   
     
-
-        <div class="album-of-the-day">
-            <h3>Album of the Day</h3>
-            <ul>
-                <a href="{% url 'main:album_detail' artist_name=random_artist.artist album_name=random_album.name %}">
-                    <img src="{{ random_album.album_cover }}" alt="{{ random_album.name }}" style="max-width: 100px; max-height: 100px; border: 1px solid #ccc;">
-                </a>
-                <h4><a href="{% url 'main:album_detail' artist_name=random_artist.artist album_name=random_album.name %}">{{ random_album.name }}</a></h4>
-                <h5><a href="{% url 'main:artist_detail' artist_name=random_artist.artist %}">{{ random_artist.artist }}</a></h5>
-            </ul>
-        </div>
-    </div>
-</body>
-</html>
+    <script>
+        // Function to toggle the header visibility
+        function toggleHeader() {
+            var header = document.getElementById("header");
+            var toggleButton = document.getElementById("toggleHeaderButton");
+    
+            if (header.style.display === "none") {
+                header.style.display = "block";
+                toggleButton.innerText = "Hide Header";
+            } else {
+                header.style.display = "none";
+                toggleButton.innerText = "Show Header";
+            }
+        }
+    
+        // Add a click event listener to the toggle button
+        var toggleButton = document.getElementById("toggleHeaderButton");
+        toggleButton.addEventListener("click", toggleHeader);
+    </script>    
+{% endblock content %}

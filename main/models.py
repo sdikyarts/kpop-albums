@@ -1,39 +1,50 @@
 from django.db import models
-from django.utils.html import format_html
 
-# Create your models here.
-class Item(models.Model):
-    # Atribut wajib
+class Artist(models.Model):
     name = models.CharField(max_length=255)
-    amount = models.IntegerField(default = 0)
-    description = models.TextField(default='')
-
-    artist = models.CharField(max_length=255)
-    artist_logo = models.URLField(max_length=255, null=True, blank=True)
-
     company = models.CharField(max_length=255)
     debut_date = models.DateField(null=True, blank=True)
     disband_date = models.DateField(null=True, blank=True)
-
-    members = models.TextField(default='')
-    former_members = models.TextField(default='')
-
+    members = models.CharField(max_length=1000, default='')
+    former_members = models.CharField(max_length=1000, default='')
     sub_units = models.TextField(default='')
-    supporters = models.CharField(max_length=255, default='')
+    supporters = models.CharField(max_length=1000, default='')
+    description = models.TextField(default='')
+    artist_pic = models.ImageField(upload_to='artist_pics/', null=True, blank=True)
+    artist_logo = models.ImageField(upload_to='artist_logos/', null=True, blank=True)
 
-    price = models.IntegerField(default = 0)
-    release_date = models.DateField(null=True, blank=True)
-    tracklist = models.TextField(default='')
-
-    artist_pic = models.URLField(max_length=255, null=True, blank=True)
-    album_cover = models.URLField(max_length=255, null=True, blank=True)
-
-    def artist_pic_display(self):
+    def delete(self, *args, **kwargs):
+        # Delete associated image files when an artist is deleted
         if self.artist_pic:
-            return format_html('<a href="{}" target="_blank">{}</a>', self.artist_pic, self.artist_pic)
-        return ""
+            storage, path = self.artist_pic.storage, self.artist_pic.path
+            if storage.exists(path):
+                storage.delete(path)
 
-    def album_cover_display(self):
+        if self.artist_logo:
+            storage, path = self.artist_logo.storage, self.artist_logo.path
+            if storage.exists(path):
+                storage.delete(path)
+
+        super().delete(*args, **kwargs)
+
+class Album(models.Model):
+    name = models.CharField(max_length=255)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    company = models.CharField(max_length=255)
+    price = models.IntegerField(default=0)
+    release_date = models.DateField(null=True, blank=True)
+    tracklist = models.CharField(max_length=2000, default='')
+    album_cover = models.ImageField(upload_to='album_covers/', null=True, blank=True)
+    amount = models.IntegerField(default=0)
+
+    def delete(self, *args, **kwargs):
+        # Delete associated image file when an album is deleted
         if self.album_cover:
-            return format_html('<a href="{}" target="_blank">{}</a>', self.album_cover, self.album_cover)
-        return ""
+            storage, path = self.album_cover.storage, self.album_cover.path
+            if storage.exists(path):
+                storage.delete(path)
+
+        super().delete(*args, **kwargs)
+
+# The Item model is no longer needed for artists and albums.
+# You can remove it or keep it for other purposes.

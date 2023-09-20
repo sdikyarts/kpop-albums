@@ -1,0 +1,31 @@
+{% extends 'base.html' %} 
+
+{% block meta %}
+    <title>{{ artist_name }}: Add New Album - kpop-albums</title>
+{% endblock meta %}
+
+{% block content %}
+<h1>Add New Album for {{ artist_name }}</h1>
+
+<form method="POST" enctype="multipart/form-data" style="margin: 20px;" action="{% url 'main:add_album' artist_name=artist_name %}">
+    {% csrf_token %}
+    <table>
+        <input type="hidden" name="artist" value="{{ artist_name }}">
+        {{ form.as_table }}
+        <tr>
+            <td></td>
+            <td style="padding-top: 10px;"> <!-- Add padding to the top of the submit button -->
+                <input type="submit" value="Add Album"/>
+            </td>
+        </tr>
+    </table>
+</form>
+
+<style>
+    /* Add styles to increase spacing between form fields */
+    table tr td {
+        padding: 10px; /* Adjust the padding to control the spacing */
+    }
+</style>
+
+{% endblock %}

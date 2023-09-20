@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>Add New Artist - kpop-albums</title>
+{% endblock meta %}
+
+{% block content %}
+<h1>Add New Artist</h1>
+
+<form method="POST" enctype="multipart/form-data" style="margin: 20px;">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+        <tr>
+            <td></td>
+            <td style="padding-top: 10px;">
+                <input type="submit" value="Add Artist"/>
+            </td>
+        </tr>
+    </table>
+</form>
+
+<style>
+    table tr td {
+        padding: 10px;
+    }
+</style>
+
+{% endblock %}

@@ -1,18 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>{{ album_data.name }}  by {{ artist_data.artist }} - kpop-albums</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>{{ album_data.name }} by {{ artist_data.name }} - kpop-albums</title>
+{% endblock meta %}
+
+{% block content %}
     <h1>{{ album_data.name }}</h1>
-    <h2><a href="{% url 'main:artist_detail' artist_name=artist_data.artist %}">{{ artist_data.artist }}</a></h2>
-    <a href="{% url 'main:show_main' %}">Back to Main</a>
+    <h2><a href="{% url 'main:artist_detail' artist_name=artist_data.name %}">{{ artist_data.name }}</a></h2>
+    <a href="{% url 'main:show_main' %}" class="button-link">
+        <button class="back-to-main">
+            Back to Main
+        </button>
+    </a>
 
     <hr>
     <br>
 
     <!-- Correct usage of MEDIA_URL -->
-    <img src="{{ album_data.album_cover }}" alt="{{ album_data.name }}" style="max-width: 250px; max-height: 250px; border: 1px solid #ccc;">
+    <img src="{{ album_data.album_cover.url }}" alt="{{ album_data.name }}" style="max-width: 250px; max-height: 250px; border: 1px solid #ccc;">
 
     <br>
     <br>
@@ -27,12 +32,15 @@
     <p><b>Tracklist:</b></p>
     <ol>
         {% for track in album_data.tracklist %}
-            <li>{{ track }}</li>
+            <li>{{ track|safe }}</li>
         {% endfor %}
     </ol>
     
     <hr>
 
-    <a href="{% url 'main:show_main' %}">Back to Main</a>
-</body>
-</html>
+    <a href="{% url 'main:show_main' %}" class="button-link">
+        <button class="back-to-main">
+            Back to Main
+        </button>
+    </a>
+{% endblock content %}

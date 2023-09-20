@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>Edit Artist - kpop-albums</title>
+{% endblock meta %}
+
+{% block content %}
+<h1>Edit Artist</h1>
+<form method="post" enctype="multipart/form-data" style="margin: 20px;"> <!-- Apply the same form style -->
+
+<div class="flex-container"> <!-- Apply a similar container style -->
+      {% csrf_token %}
+      <table>
+        {{ form.as_table }}
+      </table>
+        <tr>
+          <td></td>
+          <td style="padding-top: 10px;"> <!-- Add padding to the top of the buttons -->
+              <button type="submit">Save Changes</button> <!-- Use a button element for consistency -->
+          </td>
+          <td></td>
+          <td style="padding-top: 10px;"> <!-- Add padding to the top of the buttons -->
+            <button type="button" onclick="window.location.href='{% url 'main:artist_detail' artist_name=artist.artist %}'">Cancel</button> <!-- Use a button element for Cancel and add JavaScript to redirect to the artist detail page -->
+          </td>
+        </tr>
+</div>
+</form>
+
+<style>
+    /* Add styles to increase spacing between form fields */
+    table tr td {
+        padding: 10px; /* Adjust the padding to control the spacing */
+    }
+    .button-container {
+        display: inline-block; /* Display buttons side by side */
+        margin-top: 10px; /* Add margin to separate buttons from form fields */
+    }
+</style>
+
+{% endblock %}

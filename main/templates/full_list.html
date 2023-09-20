@@ -1,29 +1,80 @@
-<!DOCTYPE html>
-<html>
-<head>
+{% extends 'base.html' %}
+
+{% block meta %}
     <title>Directory - kpop-albums</title>
-</head>
-<body>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            text-align: center;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            border-right: 1px solid #ddd; /* Add border between columns */
+        }
+
+        td {
+            border-right: 1px solid #ddd; /* Add border between columns */
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Add border-right to the last td in each row */
+        td:last-child {
+            border-right: 1px solid #ddd;
+        }
+
+        /* Add border-bottom to the last td in each column */
+        tr:last-child td {
+            border-bottom: 1px solid #ddd;
+        }
+
+    </style>
+{% endblock meta %}
+
+{% block content %}
     <h1>Directory</h1>
-    <a href="{% url 'main:show_main' %}">Back to Main</a>
+    <a href="{% url 'main:show_main' %}" class="button-link">
+        <button class="back-to-main">
+            Back to Main
+        </button>
+    </a>
     <hr>
-    <ul>
-        {% for artist in artists %}
-            <li>
-                <!-- Link to the artist page using the artist's name -->
-                <h2><a href="{% url 'main:artist_detail' artist_name=artist.artist %}">{{ artist.artist }}</a></h2>
-                <ul>
-                    {% for album in artist.albums %}
-                        <li>
-                            <!-- Link to the album page using the artist and album names -->
-                            <h3><a href="{% url 'main:album_detail' artist_name=artist.artist album_name=album.name %}">{{ album.name }}</a></h3>
-                            <p>Release Date: {{ album.release_date }}</p>
-                            <!-- Add more album details here as needed -->
-                        </li>
-                    {% endfor %}
-                </ul>
-            </li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+    <table>
+        <thead>
+            <tr>
+                <th>Artist</th>
+                <th>Album</th>
+                <th>Release Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for artist in artists %}
+                <tr>
+                    <td>
+                        <!-- Link to the artist's page using the artist's name -->
+                        <a href="{% url 'main:artist_detail' artist_name=artist.name %}">{{ artist.name }}</a>
+                    </td>
+                    <td>
+                        {% for album in artist.album_set.all %}
+                            <a href="{% url 'main:album_detail' artist_name=artist.name album_name=album.name %}">{{ album.name }}</a><br>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for album in artist.album_set.all %}
+                            {{ album.release_date }}<br>
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
