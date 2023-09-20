@@ -38,7 +38,7 @@ Link App            :
 ### 2. Implementasi Skeleton sebagai Kerangka dari Views
 - Pada *root directory* <code>kpop_albums</code>, saya membuat folder baru bernama <code>templates</code>. 
 - Lalu didalamnya, saya membuat berkas <code>base.html</code> yang berisi kerangka untuk file-file HTML yang ada
-    - Isi <code>base.html</code> yang saya buat dapat dilihat di [sini]()
+    - Isi <code>base.html</code> yang saya buat dapat dilihat di [sini](https://github.com/sdikyarts/kpop-albums/blob/main/templates/base.html)
 - Di <code>settings.py</code> yang ada di *sub-directory* <code>kpop_albums</code>, saya memodifikasi bagian <code>TEMPLATES</code> seperti yang ada di kode spoiler di bawah:
     ```
     ...
@@ -78,7 +78,7 @@ Link App            :
     - <code>forms.py</code> berfungsi untuk membuat struktur form yang dapat menerima data produk baru
     - Isi dari <code>forms.py</code> disesuaikan dengan *attributes* yang ada di <code>context</code> pada <code>forms.py</code>
     - Saya membuat dua forms, yaitu <code>ArtistForm</code> (untuk data artis) dan <code>AlbumForm</code> (untuk data album tiap artisnya)
-    - Isi lengkap dari <code>forms.py</code> dapat dilihat di [sini]()
+    - Isi lengkap dari <code>forms.py</code> dapat dilihat di [sini](https://github.com/sdikyarts/kpop-albums/blob/main/main/forms.py)
 - Di <code>views.py</code>, saya menambahkan bebrapa import dan fungsi baru untuk menghasilkan formulir yang dapat menambahkan data artis dan album secara otomatis ketika data di-submit dari form.
     - Fungsi untuk menambahkan data artis dan album akan dijelaskan di section berikutnya
     - Saya juga menambahkan function <code>reset</code> untuk menghapus semua artis dan album mereka
@@ -95,7 +95,7 @@ Link App            :
         return redirect('main:show_main')
         ```
         </details>
-    - Isi lengkap dari <code>views.py</code> dapat dilihat di [sini]()
+    - Isi lengkap dari <code>views.py</code> dapat dilihat di [sini](https://github.com/sdikyarts/kpop-albums/blob/main/main/views.py)
 - Lalu saya buat dua berkas HTML baru bernama <code>add_artist.html</code> dan <code>add_album.html</code> pada *directory* <code>main/templates</code>
     - Berikut isi lengkap dari:
         - [<code>add_artist.html</code>]()
