@@ -337,7 +337,7 @@ JSON by ID di Postman
 
     ```
     </details>
-- Setelah itu, saya membuat <code>register.html</code> yang kode lengkapnya dapat dilihat di [sini]()
+- Setelah itu, saya membuat <code>register.html</code> yang kode lengkapnya dapat dilihat di [sini](https://github.com/sdikyarts/kpop-albums/blob/main/main/templates/register.html)
 - Kemudian di <code>urls.py</code> yang ada di *subdirectory* <code>main</code>, saya tambahkan path di <code>urlpatterns</code> agar web dapat mengakses <code>register.html</code>
     <details>
     <summary>Show Code</summary>
@@ -383,7 +383,7 @@ JSON by ID di Postman
 
     ```
     </details>
-- Setelah itu, saya membuat <code>login.html</code> yang kode lengkapnya dapat dilihat di [sini]()
+- Setelah itu, saya membuat <code>login.html</code> yang kode lengkapnya dapat dilihat di [sini](https://github.com/sdikyarts/kpop-albums/blob/main/main/templates/login.html)
 - Kemudian di <code>urls.py</code> yang ada di *subdirectory* <code>main</code>, saya tambahkan path di <code>urlpatterns</code> agar web dapat mengakses <code>login.html</code>
     <details>
     <summary>Show Code</summary>
@@ -751,6 +751,7 @@ JSON by ID di Postman
     ```
     </details>
 - Hasilnya, ketika kita menekan tombol plus-minus, amount album yang dikenakan tambah-kurang akan ter-update
+- Saya juga sudah menodifikasi tampilan halaman [<code>full_list.html</code>](https://github.com/sdikyarts/kpop-albums/blob/main/main/templates/full_list.html) agar lebih berwarna dan terkoordinasi
 ## BONUS: Menambahkan tombol untuk menghapus suatu objek dari inventori
 ### 1. Menghapus Artis dari inventori
 - Menghapus artis berarti juga menghapus album yang dimiliki artis tersebut dari inventori
