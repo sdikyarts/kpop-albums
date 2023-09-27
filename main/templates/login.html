@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>Login - kpop-albums</title>
+    <style>
+        .login form {
+            width: 350px; /* Adjust the width of the form as needed */
+        }
+        form table tr {
+            vertical-align: top; /* Align form rows to the top */
+            text-align: left;
+        }
+        table tr td {
+            padding-bottom: 15px;
+            padding-left: 20px;
+        }
+    </style>
+{% endblock meta %}
+
+{% block content %}
+
+<div class = "login">
+
+    <h1>Login</h1>
+    <h3>kpop-albums</h3>
+    <form method="POST" action="" style="margin: 20px;">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Username: </td>
+                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
+            </tr>
+                    
+            <tr>
+                <td>Password: </td>
+                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><input class="btn login_btn" type="submit" value="Login"></td>
+            </tr>
+        </table>
+        <div class = "no-account" style = "padding-left: 10px">
+            Don't have an account yet? <a href="{% url 'main:register' %}">Register Now</a>
+        </div>
+    </form>
+
+    <div class="message">
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </ul>
+    {% endif %} 
+    </div>
+    
+</div>
+
+{% endblock content %}

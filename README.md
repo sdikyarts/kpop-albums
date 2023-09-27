@@ -14,8 +14,37 @@ Link App            :
 ## Contoh Proyek
 - Grup-grup yang saya gunakan sebagai contoh untuk membangun proyek ini adalah [**NCT**](https://en.m.wikipedia.org/wiki/NCT_(group)) dan [**Stray Kids**](https://en.wikipedia.org/wiki/Stray_Kids)
     - Karena keterbatasan waktu dalam *development* proyek ini, grup-grup lain akan ditambahkan seiring waktu
+- **UPDATE TUGAS 4:** Dikarenakan Tugas 4 memerlukan dua contoh *dummy accounts*, maka test case yang saya pakai untuk masing-masing user akan terdiri dari grup berikut:
+    - User <code>dummy</code>: [**Stray Kids**](https://en.wikipedia.org/wiki/Stray_Kids) dan [**NewJeans**](https://en.m.wikipedia.org/wiki/NewJeans)
+    - User <code>tester</code>: [**NCT**](https://en.m.wikipedia.org/wiki/NCT_(group)) dan [**TWICE**](https://en.wikipedia.org/wiki/Twice)
 
-## Tampilan App (sementara)
+## Tampilan App (Tugas 4)
+<details>
+<summary>Spoiler</summary>
+
+### Log In / Log Out
+<img src="login flow.gif">
+
+### Register
+<img src="register flow.gif">
+
+### Add Artist
+<img src="add artist fix.gif">
+
+### Add Album
+<img src="add album fix.gif">
+
+### Delete Artist
+<img src="delete artist fix.gif">
+
+### Delete Album
+<img src="delete album flow.gif">
+
+### Add/Minus Amount
+<img src="add-minus amount fix.gif">
+</details>
+
+## Progres Tugas Lampau
 - Progres **Tugas 2**
     <details>
     <summary>Show Images</summary>
@@ -23,10 +52,18 @@ Link App            :
     <img src="main view.png">
     </details>
 - Progres **Tugas 3**
-<img src="update tugas 3.png">
+    <details>
+    <summary>Show Images</summary>
+
+    <img src="update tugas 3.png">
+    </details>
 
 
-# Checklist Tugas 3
+# Checklist 
+## Checklist Tugas 3
+<details>
+<summary>Spoiler</summary>
+
 ## ✅ Membuat input form untuk menambahkan objek model pada app sebelumnya.
 
 ### 1. Routing dari <code>main/</code> ke <code>/</code>
@@ -213,7 +250,7 @@ Link App            :
         path('reset_form/', reset_form, name='reset_form'),
     ]
     ```
-## Mengakses kelima URL di poin 2 menggunakan Postman, membuat screenshot dari hasil akses URL pada Postman
+## ✅ Mengakses kelima URL di poin 2 menggunakan Postman, membuat screenshot dari hasil akses URL pada Postman
 HTML di Postman
 <img src="html postman.png">
 
@@ -228,8 +265,590 @@ XML by ID di Postman
 
 JSON by ID di Postman
 <img src="json id.png">
+</details>
+
+## Checklist Tugas 4
+## ✅ Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna untuk mengakses aplikasi sebelumnya dengan lancar
+
+### 1. Membuat Fungsi dan Form Registrasi
+- Setelah menjalankan virtual environment, kita ingin membuat page kita restricted hanya untuk pengguna.
+- Pertama, saya mengimpor potongan kode berikut di <code>views.py</code>:
+    ```
+    from django.shortcuts import redirect
+    from django.contrib.auth.forms import UserCreationForm
+    from django.contrib import messages  
+    ```
+- Kemudian, saya membuat form registrasi kustom di <code>forms.py</code>. 
+    - Hal ini dikarenakan <code>UserCreationForm</code> secara default memiliki *messages* yang menampilkan syarat username dan password yang dibuat. 
+    - Saya ingin beberapa penamaan label di form tersebut untuk diganti, sehingga cara terbaik untuk melakukannya adalah membuat form registrasi kustom.
+    - Untuk membuat form kustom, saya mengimpor <code>UserCreationForm</code> dan <code>User</code> di forms.py
+        <details>
+        <summary>Show Code</summary>
+
+        ```
+        from django.contrib.auth.forms import UserCreationForm
+        from django.contrib.auth.models import User
+        ...
+
+        # Portongan Kode yang Sudah Ada
+
+        ...
+        # Class untuk modifikasi form Register
+        class RegisterForm(UserCreationForm):
+            class Meta:
+                model = User  # Make sure to import User from django.contrib.auth.models
+                fields = ['username', 'password1', 'password2']
+
+            username = forms.CharField(
+                label = 'Username',
+            )
+
+            password1 = forms.CharField(
+                label = 'Password',
+            )
+
+            password2 = forms.CharField(
+                label = 'Confirm Password',
+            )
+
+        ```
+        </details>
+- Di  <code>views.py</code>, saya membuat fungsi untuk menampilkan form register dengan mengimpor yang sudah kita buat
+    <details>
+    <summary>Show Code</summary>
+
+    ```
+    from .forms import RegisterForm 
+    ...
+
+    ...
+    def register(request):
+    form = RegisterForm()
+
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your account has been successfully created!')
+            return redirect('main:login')
+        
+    context = {'form':form}
+    return render(request, 'register.html', context)
+
+    ```
+    </details>
+- Setelah itu, saya membuat <code>register.html</code> yang kode lengkapnya dapat dilihat di [sini]()
+- Kemudian di <code>urls.py</code> yang ada di *subdirectory* <code>main</code>, saya tambahkan path di <code>urlpatterns</code> agar web dapat mengakses <code>register.html</code>
+    <details>
+    <summary>Show Code</summary>
+
+    ```
+    from main.views import register
+    ...
+
+    ...
+    urlpatterns = [
+        ...
+
+        # register, login, logout
+        path('register/', register, name='register'),
+    ]
+
+    ```
+    </details>
+### 2. Membuat Fungsi dan Form Registrasi
+- Di  <code>views.py</code>, saya membuat fungsi untuk menampilkan halaman login pengguna
+    <details>
+    <summary>Show Code</summary>
+
+    ```
+    from django.contrib.auth import authenticate, login 
+    ...
+
+    ...
+    def login_user(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            response = HttpResponseRedirect(reverse("main:show_main")) 
+            response.set_cookie('last_login', str(datetime.datetime.now()))
+            return response
+        else:
+            messages.info(request, 'Sorry, incorrect username or password. Please try again.')
+    context = {}
+    return render(request, 'login.html', context)
+
+    ```
+    </details>
+- Setelah itu, saya membuat <code>login.html</code> yang kode lengkapnya dapat dilihat di [sini]()
+- Kemudian di <code>urls.py</code> yang ada di *subdirectory* <code>main</code>, saya tambahkan path di <code>urlpatterns</code> agar web dapat mengakses <code>login.html</code>
+    <details>
+    <summary>Show Code</summary>
+
+    ```
+    from main.views import register, login_user
+    ...
+
+    ...
+    urlpatterns = [
+        ...
+
+        # register, login, logout
+        path('register/', register, name='register'),
+        path('login/', login_user, name='login'),
+    ]
+
+    ```
+    </details>
+### 3. Membuat Fungsi Logout
+- Di  <code>views.py</code>, saya membuat fungsi untuk menampilkan halaman login pengguna
+    <details>
+    <summary>Show Code</summary>
+
+    ```
+    from django.contrib.auth import logout
+    ...
+
+    ...
+    def logout_user(request):
+        logout(request)
+        return redirect('main:login')
+    ```
+    </details>
+- Setelah itu, saya membuat *button* logout di <code>main.html</code>
+    ```
+    <a href="{% url 'main:logout' %}">
+        <button>
+            Logout
+        </button>
+    </a>
+    ```
+- Kemudian di <code>urls.py</code> yang ada di *subdirectory* <code>main</code>, saya tambahkan path di <code>urlpatterns</code> agar web dapat mengakses <code>login.html</code>
+    ```
+    from main.views import logout_user
+    ...
+
+    ...
+    urlpatterns = [
+        ...
+
+        # register, login, logout
+        path('register/', register, name='register'),
+        path('login/', login_user, name='login'),
+        path('logout/', logout_user, name='logout'),
+    ]
+
+    ```
+### 4. Merestriksi Akses Halaman Main
+- Di  <code>views.py</code>, tambahan restriksi di atas fungsi <code>show_main</code>
+    <details>
+    <summary>Show Code</summary>
+
+    ```
+    from django.contrib.auth.decorators import login_required
+    ...
+
+    ...
+    @login_required(login_url='/login')
+    def show_main(request):
+    ```
+    </details>
+## ✅ Membuat dua akun pengguna dengan masing-masing tiga dummy data menggunakan model yang telah dibuat pada aplikasi sebelumnya untuk setiap akun di lokal.
+- Saya membuat dua akun untuk testing Tugas 4
+    <img src="account 1.png">
+    <img src="account 2.png">
+- Untuk dummy data, lebih dari 3 karena atribut model yang saya pakai banyak
+## ✅ Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi.
+### 1. Menggunakan Data Dari Cookie
+- Jika masih login ke akun, maka logout terlebih dahulu
+- Di  <code>views.py</code>, saya menambahkan import dan mengupdate <code>login_user</code>
+    <details>
+    <summary>Show Code</summary>
+
+    ```
+    import datetime
+    from django.http import HttpResponseRedirect
+    from django.urls import reverse
+    ...
+
+    ...
+    def login_user(request):
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                response = HttpResponseRedirect(reverse("main:show_main")) 
+                response.set_cookie('last_login', str(datetime.datetime.now()))
+                return response
+            else:
+                messages.info(request, 'Sorry, incorrect username or password. Please try again.')
+        context = {}
+        return render(request, 'login.html', context)
+    ```
+    </details>
+- Di <code>show_main</code>, saya menambahkan potongan kode ke dalam <code>data</code> agar dapat mengakses cookies
+    ```
+    ...
+    def show_main(request):
+        data = {
+            'last_login': request.COOKIES['last_login']
+        }
+    ...
+    ```
+- Kemudian, saya memodifikasi isi <code>logout_user</code> agar dapat menghapus cookies saat logout
+    ```
+    ...
+    def logout_user(request):
+        logout(request)
+        response = HttpResponseRedirect(reverse('main:login'))
+        response.delete_cookie('last_login')
+        return response
+    ...
+    ```
+- Setelah itu, saya menambahkan bagian untuk show last login di <code>main.html</code>
+    ```
+    <h5>Last login: {{ data.last_login }}</h5>
+    ```
+### 2. Menampilkan detail informasi pengguna yang sedang logged in
+- Jalankan checklist [Menghubungkan model <code>Item</code> dengan <code>User</code>](#menghubungkan-model-item-dengan-user) terlebih dahulu (kecuali migrasi model)
+- Di <code>show_main</code>, tambahkan atribut untuk mengakses username
+    ```
+    ...
+    def show_main(request):
+        data = {
+            'name': request.user.username,
+            ...
+        }
+    ...
+    ```
+- Di <code>main.html</code>, tambahkan bagian untuk menampilkan username
+    ```
+    ...
+    <h4>Logged in as {{ request.user.username }}</h3>
+    ...
+    ```
+- Lanjut ke tahap migrasi model di checklist yang tadi
+
+## ✅ Menghubungkan model <code>Item</code> dengan <code>User</code>
+- Saya mengimpor import dan menambahkan potongan kode untuk atribut user di setiap model untuk menghubungkan model-model tersebut dengan user
+    ```
+    ...
+    from django.contrib.auth.models import User
+    
+    class Artist(models.Model):
+        user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+        ...
+    ...
+
+    class Album(models.Model):
+        user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+        ...
+    ...
+    ```
+- Saya mengupdate <code>add_album</code> di <code>views.py</code> sebagai berikut agar dapat menambahkan album bagi artis yang telah ditambahkan oleh user
+    <details>
+    <summary>Show Code</summary>
+
+    ```
+    ...
+    def add_album(request, artist_name):
+        artist = Artist.objects.get(name=artist_name, user=request.user)  # Ensure the artist belongs to the current user
+
+        if request.method == 'POST':
+            form = AlbumForm(request.POST, request.FILES)
+
+            if form.is_valid():
+                album = form.save(commit=False)
+                album.artist = artist  # Associate the album with the artist
+                album.company = artist.company  # Set the album's company to be the same as the artist's company
+                album.save()
+                return HttpResponseRedirect(reverse('main:artist_detail', args=[artist_name]))
+        else:
+            # Pass the artist name and company as context to the template
+            form = AlbumForm(initial={'artist': artist, 'company': artist.company})
+
+        return render(request, 'add_album.html', {'form': form, 'artist': artist, 'artist_name': artist_name})
+    ...
+    ```
+    </details>
+- Pastikan bahwa model yang dipakai di <code>views.py</code> sudah difilter berdasarkan user
+    <details>
+    <summary><code>show_main</code></summary>
+
+    ```
+    ...
+    def show_main(request):
+        template_name = 'main.html'
+
+        artists = Artist.objects.all().filter(user=request.user).order_by('name')
+
+        artist_data_list = []  # Initialize an empty list to store artist data
+
+        data = {
+            'name': request.user.username,
+            'last_login': request.COOKIES['last_login']
+        }
+
+        for artist in artists:
+            artist_data = {
+                'name': artist.name,
+                'artist_logo_url': artist.artist_logo.url,
+                'albums_count': Album.objects.filter(artist=artist).count(),
+                # Add other artist data as needed
+            }
+            artist_data_list.append(artist_data)
+
+        return render(request, template_name, {'data': data, 'artists': artist_data_list})
+    ...
+    ```
+    </details>
+
+    <details>
+    <summary><code>show_artist_detail</code></summary>
+
+    ```
+    ...
+    def show_artist_detail(request, artist_name):
+        artist_data = Artist.objects.get(name=artist_name)
+        artist_data.former_members = artist_data.former_members.split(',') if artist_data.former_members else []
+        artist_data.members = artist_data.members.split(',') if artist_data.members else []
+        artist_data.sub_units = artist_data.sub_units.split(',') if artist_data.sub_units else []
+        artist_data.supporters = artist_data.supporters.split(',') if artist_data.supporters else []
+
+        # Retrieve the albums associated with the artist
+        artist_albums = Album.objects.filter(artist=artist_data).order_by('release_date')
+
+        template_name = 'artists.html'
+
+        return render(request, template_name, {'artist_data': artist_data, 'artist_albums': artist_albums})
+    ...
+    ```
+    </details>
+
+    <details>
+    <summary><code>show_album_detail</code></summary>
+
+    ```
+    ...
+    def show_album_detail(request, artist_name, album_name):
+        # Retrieve the album data
+        album_data = Album.objects.get(artist__name=artist_name, name=album_name)
+        album_data.tracklist = album_data.tracklist.split(',') if album_data.tracklist else []
+
+        # Retrieve the associated artist data
+        artist_data = Artist.objects.get(name=artist_name)
+
+        template_name = 'albums.html'
+
+        return render(request, template_name, {'album_data': album_data, 'artist_data': artist_data, 'artist_name': artist_name})
+    ...
+    ```
+    </details>
+
+    <details>
+    <summary><code>show_full_list</code></summary>
+
+    ```
+    ...
+    def show_full_list(request):
+        # Retrieve all artists from the Artist model
+        artists = Artist.objects.all().filter(user=request.user).order_by('name')
+
+        template_name = 'full_list.html'
+
+        # Pass the list of artists to the template without removing duplicates
+        return render(request, template_name, {'artists': artists})
+    ...
+    ```
+    </details>
+- Setelah [menampilkan username](#2-menampilkan-detail-informasi-pengguna-yang-sedang-logged-in) di <code>main.html</code>, lakukan migrasi model dan terapkan default value sesuai dengan apa yang Django sarankan
+## BONUS: Menambahkan tombol untuk menambah dan/atau mengurangi amount barang
+- Saya menerapkan bonus ini pada model <code>Album</code>
+- Di <code>albums.html</code>, saya modifikasi bagian yang menampilkan <code>amount</code> agar dapat menampilkan tombol plus minus
+    ```
+    ...
+    <!-- Add plus and minus buttons to adjust the amount -->
+    <p>
+        <b>Amount:</b> 
+        <span id="amount">{{ album_data.amount }}</span> 
+        <button id="minus" class="amount-button" style="margin-left:7px">-</button> 
+        <button id="plus" class="amount-button">+</button>
+    </p>
+    ...
+    ```
+- Di <code>views.py</code>, saya buat fungsi untuk mengupdate amount
+    <details>
+    <summary>Show Code</summary>
+
+    ```
+    def update_album_amount(request, album_id):
+        # Get the album object by its ID
+        album = Album.objects.get(pk=album_id)
+
+        # Check if the request method is POST
+        if request.method == 'POST':
+            action = request.POST.get('action', None)
+
+            # Update the album amount based on the action
+            if action == 'plus':
+                album.amount += 1
+            elif action == 'minus':
+                if album.amount > 0:
+                    album.amount -= 1
+
+            # Save the updated album object
+            album.save()
+
+            return JsonResponse({'success': True, 'new_amount': album.amount})
+
+    ```
+    </details>
+- Kembali ke <code>albums.html</code>, saya tambahkan script jQuery untuk menghandle peng-klikan tombol plus minus
+    <details>
+    <summary>Show Code</summary>
+
+    ```
+    ...
+    <!-- Include jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Add JavaScript to handle plus and minus button clicks -->
+    <script>
+        // Wait for the document to be ready
+        $(document).ready(function() {
+            // Use event delegation to handle button clicks
+            $('#plus').on('click', function() {
+                updateAmount('plus');
+            });
+
+            $('#minus').on('click', function() {
+                updateAmount('minus');
+            });
+        });
+
+        // Function to update the album amount
+        function updateAmount(action) {
+            $.post(
+                "{% url 'main:update_album_amount' album_data.id %}",
+                { action: action, csrfmiddlewaretoken: "{{ csrf_token }}" },
+                function(data) {
+                    if (data.success) {
+                        // Update the displayed amount
+                        $('#amount').text(data.new_amount);
+                    } else {
+                        console.error(data.message);
+                    }
+                }
+            );
+        }
+    </script>
+    ...
+    ```
+    </details>
+- Hasilnya, ketika kita menekan tombol plus-minus, amount album yang dikenakan tambah-kurang akan ter-update
+## BONUS: Menambahkan tombol untuk menghapus suatu objek dari inventori
+### 1. Menghapus Artis dari inventori
+- Menghapus artis berarti juga menghapus album yang dimiliki artis tersebut dari inventori
+- Di <code>views.py</code>, saya buat fungsi baru untuk menghapus artis
+    <details>
+    <summary>Show Code</summary>
+    ```
+    def delete_artist(request, artist_name):
+        # Ensure the artist belongs to the current user and delete it
+        artist = Artist.objects.filter(name=artist_name, user=request.user).first()
+        if artist:
+            # Delete albums associated with the artist
+            Album.objects.filter(artist=artist).delete()
+            artist.delete()
+        return redirect('main:show_main')
+    ```
+    </details>
+- Lalu, saya memodifikasi <code>main.html</code> agar muncul tombol untuk menghapus artis secara individu
+    <details>
+    <summary>Show Code</summary>
+    
+    ```
+    <div class="artist-list">
+        {% if artists %}
+            <ul style="list-style: none; padding: 0; margin: 0;">
+                {% for artist in artists %}
+                <li style="display: inline-block; margin-right: 10px;">
+                    <ul>
+                        ...
+                        <a href="{% url 'main:delete_artist' artist.name %}" class="delete-link" style="display: block; width: 100px; margin-top: 5px;">
+                            <button class="delete-button" style="display: block; width: 100px; margin-top: 5px;">
+                                Delete Artist
+                            </button>
+                        </a>
+                    </ul>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No artists added</p>
+        {% endif %}
+    </div>  
+    ```
+    </details>
+### 2. Menghapus Album dari inventori
+- Menghapus album hanya menghapus salah satu album yang dimiliki oleh artis
+- Di <code>views.py</code>, saya buat fungsi baru untuk menghapus album
+    <details>
+    <summary>Show Code</summary>
+    ```
+    def delete_album(request, artist_name, album_name):
+        # Ensure the album belongs to the current user and delete it
+        album = Album.objects.filter(artist__name=artist_name, name=album_name, artist__user=request.user).first()
+        if album:
+            album.delete()
+        return redirect('main:artist_detail', artist_name=artist_name)
+    ```
+    </details>
+- Lalu, saya memodifikasi <code>artists.html</code> agar muncul tombol untuk menghapus artis secara individu
+    <details>
+    <summary>Show Code</summary>
+    
+    ```
+    <div class="artist-list">
+        {% if artist_albums %}
+            <ul style="list-style: none; padding: 0; margin: 0;">
+                {% for album in artist_albums %}
+                    <li style="display: flex; align-items: center; margin-left: 25px; margin-right: 10px; margin-bottom: 20px;"> <!-- Center-align the album title beside the album cover -->
+                        ...
+                        <table style="border-collapse: collapse;">
+                            ...
+                            <tr>
+                                <td style="text-align: center;">
+                                    <!-- Add a delete link that triggers the deletion when clicked -->
+                                    <a href="{% url 'main:delete_album' artist_name=album.artist.name album_name=album.name %}" class="delete-link">
+                                        <button class="delete-button" style="display: block; width: 100px; margin-top: 5px;">
+                                            Delete Album
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No albums found for this artist.</p>
+        {% endif %}
+    </div>
+    ```
+    </details>
+    
 
 # Pertanyaan
+## Pertanyan Tugas 3
+<details>
+<summary>Spoiler</summary>
+
 ### 1. Apa perbedaan antara form POST dan form GET dalam Django?
 <details>
 <summary>Show Answer</summary>
@@ -274,3 +893,54 @@ JSON by ID di Postman
 
 ### 4. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 Baca bagian [Checklist Tugas 3](#checklist-tugas-3) di atas
+</details>
+
+## Pertanyaan Tugas 4
+
+### 1. Apa itu Django <code>UserCreationForm</code>, dan jelaskan apa kelebihan dan kekurangannya?
+<details>
+<summary>Show Answer</summary>
+
+- <code>UserCreationForm</code> adalah import bawaan yang berfungsi untuk memudahkan pembuatan formulir pendaftaran user dalam suatu aplikasi web.
+- Kelebihan:
+    - <code>UserCreationForm</code> memudahkan pengguna baru untuk mendaftar sebagai user di website yang kita buat tanpa harus membuat kode dari awal. 
+    - Kita juga dapat mengkustomisasi label dari form yang kita buat dengan membuat forms yang dilengkapi dengan impor <code>UserCreationForm</code> sehingga tidak mengikuti format default yang disediakan Django
+- Kekurangan:
+    - Field-field dalam <code>UserCreationForm</code> secara default hanya terdiri atas username, password, dan konfirmasi password. Jika user ingin menambahkan field-field lain, maka mereka harus membuat kustomisasi form.
+    - <code>UserCreationForm</code> tidak langsung terhubung ke user, sehingga kita harus menghubungkan model-model dalam app dengan user secara manual
+</details>
+
+### 2. Apa perbedaan antara autentikasi dan otorisasi dalam konteks Django, dan mengapa keduanya penting?
+<details>
+
+- Authentication (AuthN) adalah suatu proses memastikan dan memverifikasi user bahwa mereka benar-benar dirinya. Biasanya di dalam proses ini dilakukan pengecekan atribut user dengan database aplikasi. Jika atribut user cocok dengan data yang ada di database, user tersebut dikatakan telah terautentikasi.
+- Authorization (AuthZ) adalah proses menentukan apa yang seorang user boleh lakukan dalam aplikasi. Biasanya proses ini berupa pemberian *roles*, *groups*, *permissions*, dll yang menunjukkan apa yang user tersebut bisa lakukan.
+- Authentication dan Authorization dibutuhkan untuk keamanan aset data dalam app. Tanpa keduanya, data dalam app kita akan rentan pada kebocoran data serta pembobolan akses data.
+<summary>Show Answer</summary>
+</details>
+
+### 3. Apa itu cookies dalam konteks aplikasi web, dan bagaimana Django menggunakan cookies untuk mengelola data sesi pengguna?
+<details>
+<summary>Show Answer</summary>
+
+- Cookies adalah secuil informasi yang disimpan di browser milik klien.
+- Cookies digunakan untuk menyimpan data di dalam suatu file secara permanen atau dalam jangka waktu tertentu.
+- Cookies memiliki batas waktu dan akan hilang jika kadaluwarsa.
+- Django menyediakan metode bawaan untuk meng-*set* dan *fetch* cookie:
+    - Method <code>set_cookie()</code> digunakan untuk meng-*set* cookie
+    - Method <code>get()</code> digunakan untuk mendapatkan cookie
+    - Array <code>request.COOKIES['key']</code> digunakan untuk mendapatkan value dari cookie
+</details>
+
+### 4. Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai?
+<details>
+<summary>Show Answer</summary>
+
+- Beberapa cookies lebih *secure* dari cookies lainnya.
+- Secara default, cookies terkoneksi dengan <code>http</code>.
+- Dalam beberapa kasus, kita perlu menggunakan <code>https</code> untuk mengirim cookie
+- Untuk mengindari kebocoran data cookies, kita harus meng-*set* setting <code>SESSION_COOKIE_SECURE</code> dan <code>CSRF_COOKIE_SECURE</code> ke <code>True</code>
+</details>
+
+### 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+Baca bagian [Checklist Tugas 4](#checklist-tugas-4) di atas

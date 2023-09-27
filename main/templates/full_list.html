@@ -11,33 +11,41 @@
         th, td {
             text-align: center;
             padding: 8px;
-            border-bottom: 1px solid #ddd;
+            border: 1px solid #d2d2d2; /* Add a border to all cells */
         }
 
         th {
             background-color: #f2f2f2;
-            border-right: 1px solid #ddd; /* Add border between columns */
         }
 
-        td {
-            border-right: 1px solid #ddd; /* Add border between columns */
+        /* Define CSS classes for lighter pink and lighter blue accent backgrounds */
+        .lighter-pink-accent {
+            background-color: #fae8f1; /* Lighter pink accent color */
         }
 
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
+        .lighter-blue-accent {
+            background-color: #d9eefa; /* Lighter blue accent color */
         }
 
-        /* Add border-right to the last td in each row */
-        td:last-child {
-            border-right: 1px solid #ddd;
+        /* Define CSS class for artist entries with conditional coloring */
+        .artist-entry-pink {
+            background-color: #fce4eb; /* Light pink background color for girl groups */
         }
 
-        /* Add border-bottom to the last td in each column */
-        tr:last-child td {
-            border-bottom: 1px solid #ddd;
+        .artist-entry-blue {
+            background-color: #d9eefa; /* Light blue background color for boy groups */
         }
 
+        /* Define CSS classes for albums of girl and boy groups */
+        .girl-group-album {
+            background-color: #fdf0f7; /* Lighter pink accent color for girl group albums */
+        }
+
+        .boy-group-album {
+            background-color: #e7f5ff; /* Lighter blue accent color for boy group albums */
+        }
     </style>
+</head>
 {% endblock meta %}
 
 {% block content %}
@@ -54,27 +62,53 @@
                 <th>Artist</th>
                 <th>Album</th>
                 <th>Release Date</th>
+                <th>Price</th>
+                <th>Amount</th>
             </tr>
         </thead>
         <tbody>
             {% for artist in artists %}
-                <tr>
-                    <td>
-                        <!-- Link to the artist's page using the artist's name -->
+                {% with artist.description|lower as description %}
+                    {% if "girl group" in description %}
+                        <tr class="artist-entry-pink">
+                    {% elif "boy group" in description %}
+                        <tr class="artist-entry-blue">
+                    {% else %}
+                        <tr>
+                    {% endif %}
+                {% endwith %}
+                    <td rowspan="{{ artist.album_set.count }}">
                         <a href="{% url 'main:artist_detail' artist_name=artist.name %}">{{ artist.name }}</a>
                     </td>
-                    <td>
-                        {% for album in artist.album_set.all %}
-                            <a href="{% url 'main:album_detail' artist_name=artist.name album_name=album.name %}">{{ album.name }}</a><br>
-                        {% endfor %}
-                    </td>
-                    <td>
-                        {% for album in artist.album_set.all %}
-                            {{ album.release_date }}<br>
-                        {% endfor %}
-                    </td>
-                </tr>
+                    {% for album in artist.album_set.all %}
+                        {% with artist.description|lower as description %}
+                            {% if "girl group" in description %}
+                                <td class="girl-group-album">
+                                    <a href="{% url 'main:album_detail' artist_name=artist.name album_name=album.name %}">{{ album.name }}</a>
+                                </td>
+                                <td class="girl-group-album">{{ album.release_date }}</td>
+                                <td class="girl-group-album">{{ album.price }}</td>
+                                <td class="girl-group-album">{{ album.amount }}</td>
+                            {% elif "boy group" in description %}
+                                <td class="boy-group-album">
+                                    <a href="{% url 'main:album_detail' artist_name=artist.name album_name=album.name %}">{{ album.name }}</a>
+                                </td>
+                                <td class="boy-group-album">{{ album.release_date }}</td>
+                                <td class="boy-group-album">{{ album.price }}</td>
+                                <td class="boy-group-album">{{ album.amount }}</td>
+                            {% else %}
+                                <td>
+                                    <a href="{% url 'main:album_detail' artist_name=artist.name album_name=album.name %}">{{ album.name }}</a>
+                                </td>
+                                <td>{{ album.release_date }}</td>
+                                <td>{{ album.price }}</td>
+                                <td>{{ album.amount }}</td>
+                            {% endif %}
+                        {% endwith %}
+                    </tr>
+                {% endfor %}
             {% endfor %}
         </tbody>
     </table>
+</body>
 {% endblock content %}

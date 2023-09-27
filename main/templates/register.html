@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 
 {% block meta %}
-    <title>Add New Artist - kpop-albums</title>
+    <title>Register - kpop-albums</title>
     <style>
+        h2.page-header {
+            margin: 0;
+            padding: 0;
+        }
         .login form {
             width: 350px; /* Adjust the width of the form as needed */
             margin: 0 auto; /* Center the form horizontally */
@@ -20,31 +24,32 @@
             padding-bottom: 15px;
             padding-left: 20px;
         }
-        .add-button {
+        .register-button {
             text-align: center; /* Center-align the button */
-            padding-right: 200px;
+            padding-right: 40px;
             padding-bottom: 50px;
         }
-        .add-button input[type="submit"] {
-            width: 140px;
+        .register-button input[type="submit"] {
+            width: 90px;
         }
     </style>
 {% endblock meta %}
 
 {% block content %}
-<h1>Add New Artist</h1>
+<div class="login">
+    <h1>Register</h1>
+    <form method="POST" style="margin: 20px; ">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+            <tr>
+                <td></td>
+            </tr>
+        </table>
+        <div class="register-button">
+            <input type="submit" name="submit" value="Register" />
+        </div>
+    </form>
 
-<form method="POST" enctype="multipart/form-data" style="margin: 20px;">
-    {% csrf_token %}
-    <table>
-        {{ form.as_table }}
-        <tr>
-            <td></td>
-        </tr>
-    </table>
-    <div class="add-button">
-        <input type="submit" value="Add Artist"/>
-    </div>
-</form>
-
-{% endblock %}
+</div>
+{% endblock content %}

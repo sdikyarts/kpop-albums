@@ -1,12 +1,24 @@
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from datetime import datetime
-from django.http import HttpResponseRedirect
 from main.forms import ArtistForm, AlbumForm
 from .models import Artist, Album
-from django.urls import reverse
 from django.core import serializers
 
+from django.shortcuts import redirect
+from django.contrib import messages  
+
+from django.contrib.auth import authenticate, login
+from django.contrib.auth import logout
+
+from django.contrib.auth.decorators import login_required
+
+import datetime
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
+from .forms import RegisterForm 
+
+from django.http import JsonResponse
 
 # DELETED THE ALBUM OF THE DAY SECTION
 
@@ -14,19 +26,20 @@ from django.core import serializers
 def convert_date_string(date_string):
     return datetime.strptime(date_string, '%B %d, %Y').strftime('%Y-%m-%d')
 
+@login_required(login_url='/login')
+## TUGAS 2 ##
 def show_main(request):
-    data = {
-        'nama': 'Yasmine Putri Viryadhani',
-        'npm': '2206081862',
-        'kelas': 'PBP A',
-        'nama_app': 'kpop-albums',
-    }
 
     template_name = 'main.html'
 
-    artists = Artist.objects.all().order_by('name')
+    artists = Artist.objects.all().filter(user=request.user).order_by('name')
 
     artist_data_list = []  # Initialize an empty list to store artist data
+
+    data = {
+        'name': request.user.username,
+        'last_login': request.COOKIES['last_login']
+    }
 
     for artist in artists:
         artist_data = {
@@ -49,7 +62,7 @@ def show_artist_detail(request, artist_name):
     artist_data.supporters = artist_data.supporters.split(',') if artist_data.supporters else []
 
     # Retrieve the albums associated with the artist
-    artist_albums = Album.objects.filter(artist=artist_data)
+    artist_albums = Album.objects.filter(artist=artist_data).order_by('release_date')
 
     template_name = 'artists.html'
 
@@ -73,21 +86,22 @@ def show_album_detail(request, artist_name, album_name):
 # Function to show the full list of artists
 def show_full_list(request):
     # Retrieve all artists from the Artist model
-    artists = Artist.objects.all().order_by('name')
+    artists = Artist.objects.all().filter(user=request.user).order_by('name')
 
     template_name = 'full_list.html'
 
     # Pass the list of artists to the template without removing duplicates
     return render(request, template_name, {'artists': artists})
 
+## TUGAS 3 ##
 def add_artist(request):
     if request.method == 'POST':
         form = ArtistForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            # Fetch all artists again after adding a new one
-            artists = Artist.objects.all()
-            return render(request, 'main.html', {'artists': artists})  # Pass the updated list of artists to the main page
+            artist = form.save(commit=False)
+            artist.user = request.user  # Set the user field with the currently logged-in user
+            artist.save()
+            return HttpResponseRedirect(reverse('main:show_main'))
     else:
         form = ArtistForm()
 
@@ -95,7 +109,7 @@ def add_artist(request):
     return render(request, "add_artist.html", context)
 
 def add_album(request, artist_name):
-    artist = Artist.objects.get(name=artist_name)
+    artist = Artist.objects.get(name=artist_name, user=request.user)  # Ensure the artist belongs to the current user
 
     if request.method == 'POST':
         form = AlbumForm(request.POST, request.FILES)
@@ -161,3 +175,77 @@ def show_json_by_id(request, id):
     json_data = serializers.serialize("json", combined_data)
 
     return HttpResponse(json_data, content_type="application/json")
+
+## TUGAS 4 ##
+def register(request):
+    form = RegisterForm()
+
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your account has been successfully created!')
+            return redirect('main:login')
+        
+    context = {'form':form}
+    return render(request, 'register.html', context)
+
+def login_user(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            response = HttpResponseRedirect(reverse("main:show_main")) 
+            response.set_cookie('last_login', str(datetime.datetime.now()))
+            return response
+        else:
+            messages.info(request, 'Sorry, incorrect username or password. Please try again.')
+    context = {}
+    return render(request, 'login.html', context)
+
+def logout_user(request):
+    logout(request)
+    response = HttpResponseRedirect(reverse('main:login'))
+    response.delete_cookie('last_login')
+    return response
+
+# Bonus Tugas 4: Menambahkan fungsi update jumlah amount (tombol plus-minus)
+def update_album_amount(request, album_id):
+    # Get the album object by its ID
+    album = Album.objects.get(pk=album_id)
+
+    # Check if the request method is POST
+    if request.method == 'POST':
+        action = request.POST.get('action', None)
+
+        # Update the album amount based on the action
+        if action == 'plus':
+            album.amount += 1
+        elif action == 'minus':
+            if album.amount > 0:
+                album.amount -= 1
+
+        # Save the updated album object
+        album.save()
+
+        return JsonResponse({'success': True, 'new_amount': album.amount})
+
+
+# Bonus Tugas 4: Menghapus Artis dan Album dari Inventory
+def delete_artist(request, artist_name):
+    # Ensure the artist belongs to the current user and delete it
+    artist = Artist.objects.filter(name=artist_name, user=request.user).first()
+    if artist:
+        # Delete albums associated with the artist
+        Album.objects.filter(artist=artist).delete()
+        artist.delete()
+    return redirect('main:show_main')
+
+def delete_album(request, artist_name, album_name):
+    # Ensure the album belongs to the current user and delete it
+    album = Album.objects.filter(artist__name=artist_name, name=album_name, artist__user=request.user).first()
+    if album:
+        album.delete()
+    return redirect('main:artist_detail', artist_name=artist_name)

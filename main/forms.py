@@ -6,6 +6,9 @@ from django.utils.html import format_html
 from django import forms
 from django.utils.safestring import mark_safe
 
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
 class ArtistForm(ModelForm):
     class Meta:
         model = Artist
@@ -126,4 +129,22 @@ class AlbumForm(ModelForm):
         widget=forms.Textarea(attrs={'rows': 8}),
     )
 
-    album_cover = forms.ImageField(widget=forms.FileInput(attrs={'accept': 'image/*'}), required=False, help_text='*upload image')
+    album_cover = forms.ImageField(widget=forms.FileInput(attrs={'accept': 'image/*'}), required=False)
+
+# Class untuk modifikasi form Register
+class RegisterForm(UserCreationForm):
+    class Meta:
+        model = User  # Make sure to import User from django.contrib.auth.models
+        fields = ['username', 'password1', 'password2']
+
+    username = forms.CharField(
+        label = 'Username',
+    )
+
+    password1 = forms.CharField(
+        label = 'Password',
+    )
+
+    password2 = forms.CharField(
+        label = 'Confirm Password',
+    )

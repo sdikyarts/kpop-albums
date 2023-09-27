@@ -18,11 +18,9 @@
 {% endblock meta %}
 
 {% block content %}
-    <div id="header" style="display: {% if show_header %}block{% else %}none{% endif %};">
-        <p>Nama: {{ data.nama }}</p>
-        <p>NPM: {{ data.npm }}</p>
-        <p>Kelas: {{ data.kelas }}</p>
-        <p>Nama App: {{ data.nama_app }}</p>
+    <div id="header">
+        <h4>Logged in as {{ request.user.username }}</h3>
+        <h5>Last login: {{ data.last_login }}</h5> <!-- Time displayed in UTC +7 (WIB) -->
     </div>
 
     <button id="toggleHeaderButton" class="toggle-button">
@@ -60,6 +58,11 @@
                                     Add New Album
                                 </button>
                             </a>
+                            <a href="{% url 'main:delete_artist' artist.name %}" class="delete-link" style="display: block; width: 100px; margin-top: 5px;">
+                                <button class="delete-button" style="display: block; width: 100px; margin-top: 5px;">
+                                    Delete Artist
+                                </button>
+                            </a>
                         </ul>
                     </li>
                     {% endfor %}
@@ -84,6 +87,11 @@
             </button>
         </a>
         {% endif %}
+        <a href="{% url 'main:logout' %}">
+            <button>
+                Logout
+            </button>
+        </a>
     </div>   
     
     <script>
@@ -92,17 +100,22 @@
             var header = document.getElementById("header");
             var toggleButton = document.getElementById("toggleHeaderButton");
     
-            if (header.style.display === "none") {
-                header.style.display = "block";
-                toggleButton.innerText = "Hide Header";
-            } else {
+            if (header.style.display === "block") {
                 header.style.display = "none";
                 toggleButton.innerText = "Show Header";
+            } else {
+                header.style.display = "block";
+                toggleButton.innerText = "Hide Header";
             }
         }
     
         // Add a click event listener to the toggle button
         var toggleButton = document.getElementById("toggleHeaderButton");
         toggleButton.addEventListener("click", toggleHeader);
-    </script>    
+    
+        // Set the initial state when the page loads
+        window.onload = function () {
+            toggleHeader();
+        };
+    </script>
 {% endblock content %}

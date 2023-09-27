@@ -1,31 +1,50 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 
 {% block meta %}
     <title>{{ artist_name }}: Add New Album - kpop-albums</title>
-{% endblock meta %}
+    <style>
+        .login form {
+            width: 350px; /* Adjust the width of the form as needed */
+            margin: 0 auto; /* Center the form horizontally */
+        }
+        form table tr {
+            vertical-align: top; /* Align form rows to the top */
+            text-align: left;
+        }
+        form table td label {
+            text-align: right;
+            display: inline-block;
+            width: 200px; /* Adjust the width as needed for the indentation */
+        }
+        table tr td {
+            padding-bottom: 15px;
+            padding-left: 20px;
+        }
+        .add-button {
+            text-align: center; /* Center-align the button */
+            padding-right: 200px;
+            padding-bottom: 50px;
+        }
+        .add-button input[type="submit"] {
+            width: 140px;
+        }
+    </style>
+</{% endblock meta %}
 
 {% block content %}
-<h1>Add New Album for {{ artist_name }}</h1>
+    <h1>Add New Album for {{ artist_name }}</h1>
 
-<form method="POST" enctype="multipart/form-data" style="margin: 20px;" action="{% url 'main:add_album' artist_name=artist_name %}">
-    {% csrf_token %}
-    <table>
-        <input type="hidden" name="artist" value="{{ artist_name }}">
-        {{ form.as_table }}
-        <tr>
-            <td></td>
-            <td style="padding-top: 10px;"> <!-- Add padding to the top of the submit button -->
-                <input type="submit" value="Add Album"/>
-            </td>
-        </tr>
-    </table>
-</form>
-
-<style>
-    /* Add styles to increase spacing between form fields */
-    table tr td {
-        padding: 10px; /* Adjust the padding to control the spacing */
-    }
-</style>
-
+    <form method="POST" enctype="multipart/form-data" style="margin: 20px;" action="{% url 'main:add_album' artist_name=artist_name %}">
+        {% csrf_token %}
+        <table>
+            <input type="hidden" name="artist" value="{{ artist_name }}">
+            {{ form.as_table }}
+            <tr>
+                <td></td>
+            </tr>
+        </table>
+        <div class="add-button">
+            <input type="submit" value="Add Album"/>
+        </div>
+    </form>
 {% endblock %}

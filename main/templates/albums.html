@@ -26,7 +26,14 @@
     <p><b>Release Date:</b> {{ album_data.release_date }}</p>
     <p><b>Label:</b> {{ artist_data.company }}</p>
     <p><b>Price:</b> IDR {{ album_data.price }}</p>
-    <p><b>Amount:</b> {{ album_data.amount }}</p>
+
+    <!-- Add plus and minus buttons to adjust the amount -->
+    <p>
+        <b>Amount:</b> 
+        <span id="amount">{{ album_data.amount }}</span> 
+        <button id="minus" class="amount-button" style="margin-left:7px">-</button> 
+        <button id="plus" class="amount-button">+</button>
+    </p>
 
     <hr>
     <p><b>Tracklist:</b></p>
@@ -43,4 +50,38 @@
             Back to Main
         </button>
     </a>
+    
+    <!-- Include jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Add JavaScript to handle plus and minus button clicks -->
+    <script>
+        // Wait for the document to be ready
+        $(document).ready(function() {
+            // Use event delegation to handle button clicks
+            $('#plus').on('click', function() {
+                updateAmount('plus');
+            });
+
+            $('#minus').on('click', function() {
+                updateAmount('minus');
+            });
+        });
+
+        // Function to update the album amount
+        function updateAmount(action) {
+            $.post(
+                "{% url 'main:update_album_amount' album_data.id %}",
+                { action: action, csrfmiddlewaretoken: "{{ csrf_token }}" },
+                function(data) {
+                    if (data.success) {
+                        // Update the displayed amount
+                        $('#amount').text(data.new_amount);
+                    } else {
+                        console.error(data.message);
+                    }
+                }
+            );
+        }
+    </script>
 {% endblock content %}
