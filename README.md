@@ -5,6 +5,11 @@ Kelas               : PBP A<br>
 Nama App            : K-Pop Albums<br>
 Link App            : 
 
+
+# Karena keterbatasan waktu (berbarengan dengan deadline TP 1 SDA), tampilan Tugas 5 yang lengkap baru akan jadi setelah deadline tugas 5 / 12.00 (harap maklum hehehe)
+## Halaman yang sudah jadi: Login
+## Klo memungkinkan nilai pake commit yang selanjutnya (setelah deadline)
+
 # Penjelasan App
 ## Latar Belakang
 - Tema besar aplikasi untuk tugas PBP adalah aplikasi pengelolaan (inventori)
@@ -268,6 +273,9 @@ JSON by ID di Postman
 </details>
 
 ## Checklist Tugas 4
+<details>
+<summary>Spoiler</summary>
+
 ## ✅ Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna untuk mengakses aplikasi sebelumnya dengan lancar
 
 ### 1. Membuat Fungsi dan Form Registrasi
@@ -843,7 +851,19 @@ JSON by ID di Postman
     </div>
     ```
     </details>
-    
+</details>
+
+## Checklist Tugas 5
+## ✅ Kustomisasi desain pada templat HTML yang telah dibuat pada Tugas 4 dengan menggunakan CSS atau CSS framework (seperti Bootstrap, Tailwind, Bulma) dengan ketentuan sebagai berikut:
+### Kustomisasi halaman login, register, dan tambah inventori semenarik mungkin.
+### Kustomisasi halaman daftar inventori menjadi lebih berwarna maupun menggunakan apporach lain seperti menggunakan Card.
+- Saya menggunakan Figma untuk mendesain tampilan UI
+<img src="figma.png">
+- Lalu saya mengeksport template yang ada dengan bantuan plugin Locofy dan Dev Mode Figma
+<img src="figma export.png">
+- Kemudian saya memodifikasi frontend program yang sudah ada dengan desain baru
+<img src="image 3.png">
+
 
 # Pertanyaan
 ## Pertanyan Tugas 3
@@ -897,6 +917,8 @@ Baca bagian [Checklist Tugas 3](#checklist-tugas-3) di atas
 </details>
 
 ## Pertanyaan Tugas 4
+<details>
+<summary>Spoiler</summary>
 
 ### 1. Apa itu Django <code>UserCreationForm</code>, dan jelaskan apa kelebihan dan kekurangannya?
 <details>
@@ -945,3 +967,71 @@ Baca bagian [Checklist Tugas 3](#checklist-tugas-3) di atas
 
 ### 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 Baca bagian [Checklist Tugas 4](#checklist-tugas-4) di atas
+</details>
+
+
+## Pertanyaan Tugas 5
+
+### 1. Jelaskan manfaat dari setiap element selector dan kapan waktu yang tepat untuk menggunakannya.
+<details>
+<summary>Show Answer</summary>
+
+1. Selector Element
+    - Element Selector memungkinkan kita mengubah properti untuk semua elemen yang memiliki tag HTML yang sama.
+    - Tepat digunakan ketika kita ingin memilih semua elemen dengan jenis tertentu.
+2. Selector Class
+    - Class Selector memungkinkan kita untuk mengelompokkan elemen dengan karakteristik yang sama.
+    - Cocok ketika kita ingin memanipulasi elemen-elemen dengan class tertentu.
+3. Selector ID 
+    - Memilih elemen berdasarkan id
+    - Digunakan untuk memilih elemen tertentu dengan kode yang unik
+4. Selector Attribute ([attribute])
+    - Digunakan untuk menyeleksi elemen berdasarkan atribut
+5. Selector *
+    - Menyeleksi semua elemen
+</details>
+
+### 2. Jelaskan HTML5 Tag yang kamu ketahui.
+<details>
+
+- Saya akan memberi contoh 5:
+    1. <a> = membuat teks menjadi hyperlink
+    2. <button> = membuat button yang clickable
+    3. <code> = mengubah format teks menjadi kode
+    4. <div> = membuat divisi/section dalam file html
+    5. <form> = membuat form input
+<summary>Show Answer</summary>
+
+</details>
+
+### 3. Jelaskan perbedaan antara margin dan padding.
+<details>
+<summary>Show Answer</summary>
+
+1. Margin:
+    - Margin adalah ruang di sekitar elemen HTML yang berfungsi untuk memberikan jarak antara elemen tersebut dan elemen-elemen lain di sekitarnya.
+    - Margin tidak berwarna atau transparan, sehingga elemen di bawahnya tidak akan terlihat di dalam margin.
+    - Margin dapat digunakan untuk mengatur jarak antara elemen dengan elemen-elemen lain di sekitarnya, seperti elemen-elemen tetangga atau batas halaman.
+2. Padding:
+    - Padding adalah ruang di dalam elemen HTML antara kontennya dan batas elemen tersebut
+    - Padding memiliki warna dan akan terlihat di sekitar konten elemen tersebut.
+    - Padding digunakan untuk mengatur jarak antara konten elemen dan batas elemen itu sendiri.
+</details>
+
+### 4. Jelaskan perbedaan antara framework CSS Tailwind dan Bootstrap. Kapan sebaiknya kita menggunakan Bootstrap daripada Tailwind, dan sebaliknya?
+<details>
+<summary>Show Answer</summary>
+
+- Perbedaan antara Tailwind CSS dan Bootstrap adalah:
+    - Cara Pendekatan Desain:
+        - Tailwind CSS: Memiliki pendekatan yang lebih modular dan memungkinkan pengguna untuk membangun tampilan dengan menggabungkan kelas-kelas ke dalam elemen HTML.
+        - Bootstrap: Menyediakan komponen-komponen desain yang siap pakai dengan kelas-kelas yang telah ditentukan.
+    - Customization:
+        - Tailwind CSS: Memungkinkan penyesuaian yang lebih besar dan fleksibilitas dalam desain, tetapi memerlukan lebih banyak penulisan kelas.
+        - Bootstrap: Lebih mudah digunakan untuk proyek-proyek kecil atau ketika ingin cepat menerapkan desain yang sudah ada.
+    - Ukuran:
+        - Tailwind CSS: Lebih ringan karena hanya menghasilkan CSS yang digunakan secara langsung.
+        - Bootstrap: Lebih besar karena mengandung banyak komponen yang mungkin tidak semua digunakan.
+- Kapan sebaiknya menggunakan Bootstrap atau Tailwind tergantung pada kebutuhan proyek. Gunakan Tailwind untuk proyek yang memerlukan desain kustomisasi yang tinggi dan fleksibilitas. Bootstrap cocok untuk proyek yang membutuhkan implementasi cepat atau ketika Anda ingin menghindari penulisan banyak kode CSS sendiri.
+</details>
+

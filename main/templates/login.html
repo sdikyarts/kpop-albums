@@ -3,59 +3,259 @@
 {% block meta %}
     <title>Login - kpop-albums</title>
     <style>
-        .login form {
-            width: 350px; /* Adjust the width of the form as needed */
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        form table tr {
-            vertical-align: top; /* Align form rows to the top */
-            text-align: left;
+
+        .login-page {
+            background-color: #191719;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
-        table tr td {
-            padding-bottom: 15px;
-            padding-left: 20px;
+
+        .login-page .group-wrapper {
+            background-color: #191719;
+            width: 1280px;
+            height: 720px;
+        }
+
+        .login-page .group {
+            position: relative;
+            width: 418px;
+            height: 380px;
+            top: 170px;
+            left: 431px;
+            background-color: #3b353a;
+            border-radius: 40px;
+        }
+
+        .login-page .frame {
+            align-items: center;
+            gap: 30px;
+            top: 43px;
+            left: 49px;
+            display: inline-flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .login-page .text-wrapper {
+            position: relative;
+            width: fit-content;
+            margin-top: -0.67px;
+            font-family: "SF Pro Display-Black", Helvetica;
+            font-weight: 900;
+            color: #ffffff;
+            font-size: 46.7px;
+            text-align: center;
+            letter-spacing: 0;
+            line-height: normal;
+            white-space: nowrap;
+        }
+
+        .login-page .div {
+            align-items: flex-start;
+            gap: 18px;
+            flex: 0 0 auto;
+            display: inline-flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .login-page .overlap-group-wrapper {
+            position: relative;
+            width: 323.33px;
+            height: 40px;
+            margin-right: -2px;
+        }
+
+        .login-page .overlap-group {
+            position: relative;
+            width: 321px;
+            height: 40px;
+            background-color: #5c525a;
+            border-radius: 23px;
+        }
+
+        .login-page .login {
+            position: relative;
+            width: 132.67px;
+            height: 33.33px;
+        }
+
+        .login-page .overlap {
+            position: relative;
+            width: 131px;
+            height: 33px;
+            background-color: #73a0c5;
+            border-radius: 16.54px;
+        }
+
+        .login-page .text-wrapper-4 {
+            position: absolute;
+            width: 50px;
+            top: 8px;
+            left: 40px;
+            font-family: "SF Pro Display-Heavy", Helvetica;
+            font-weight: 400;
+            color: #ffffff;
+            font-size: 14.7px;
+            text-align: center;
+            letter-spacing: 0;
+            line-height: normal;
+        }
+
+        .login-page .don-t-have-an {
+            position: relative;
+            width: fit-content;
+            font-family: "SF Pro Display-Regular", Helvetica;
+            font-weight: 400;
+            color: transparent;
+            font-size: 14.7px;
+            text-align: center;
+            letter-spacing: 0;
+            line-height: normal;
+        }
+
+        .login-page .span {
+            color: #b6abb5;
+        }
+
+        .login-page .text-wrapper-5 {
+            color: #ffffff;
+        }
+
+        .text-label {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            pointer-events: none;
+            transition: 0.2s ease-out;
+            color: #b6abb5;
+        }
+
+        .text-wrapper-2:focus + .text-label,
+        .text-wrapper-2:not(:placeholder-shown) + .text-label {
+            transform: translateY(-100%) scale(0.8);
+        }
+
+        .text-wrapper-3:focus + .text-label,
+        .text-wrapper-3:not(:placeholder-shown) + .text-label {
+            transform: translateY(-100%) scale(0.8);
+        }
+
+        .custom-input {
+            box-sizing: border-box; /* Include padding in width and height */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 321px; /* Set the width to match your previous size */
+            height: 40px; /* Set the height to match your previous size */
+            padding: 0 10px; /* Add padding to align the text with the design */
+            background-color: #5c525a; /* Match the background color of the design */
+            border: 2px solid #5c525a; /* Set the border to match the box size */
+            border-radius: 23px;
+            font-family: "SF Pro Display-Semibold", Helvetica;
+            font-weight: 400;
+            color: #f9ecf7;
+            font-size: 14.7px;
+            letter-spacing: 0;
+            line-height: normal;
+            outline: none; /* Remove the default input outline */
+        }
+
+        .custom-input:focus {
+            border: 2px solid #73a0c5; /* Change border color on focus */
+        }
+
+        .custom-input::placeholder {
+            color: #f9ecf7; /* Match the text color of the design */
+        }
+
+        /* Hide the label when the input is not empty */
+        .custom-input:not(:placeholder-shown) {
+            background-color: #3b353a; /* Change background color when not empty */
+        }
+
+        /* Override default button styling */
+        button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
         }
     </style>
 {% endblock meta %}
 
 {% block content %}
-
-<div class = "login">
-
-    <h1>Login</h1>
-    <h3>kpop-albums</h3>
-    <form method="POST" action="" style="margin: 20px;">
+<div class="login-page">
+    <form method="post" action="{% url 'main:login' %}">
         {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
-                    
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
-
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
-        </table>
-        <div class = "no-account" style = "padding-left: 10px">
-            Don't have an account yet? <a href="{% url 'main:register' %}">Register Now</a>
+        <div class="group-wrapper">
+            <div class="group">
+                <div class="frame">
+                    <div class="text-wrapper">kpop-albums</div>
+                    <div class="div">
+                        <div class="overlap-group-wrapper">
+                            <div class="overlap-group">
+                                <input
+                                  type="text"
+                                  class="custom-input"
+                                  name="username"
+                                  data-placeholder="Enter your username"
+                                  placeholder="Enter your username"
+                                  onfocus="hidePlaceholder(this)"
+                                  onblur="showPlaceholder(this)"
+                                />
+                            </div>
+                        </div>
+                        <div class="overlap-group-wrapper">
+                            <div class="overlap-group">
+                                <input
+                                  type="password"
+                                  class="custom-input"
+                                  name="password"
+                                  data-placeholder="Enter your password"
+                                  placeholder="Enter your password"
+                                  onfocus="hidePlaceholder(this)"
+                                  onblur="showPlaceholder(this)"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" onclick="submitForm()">
+                        <div class="overlap">
+                            <div class="text-wrapper-4">LOGIN</div>
+                        </div>
+                    </button>
+                    <p class="don-t-have-an">
+                        <span class="span">Don't have an account yet?</span>
+                        <a class="text-wrapper-5" href="{% url 'main:register' %}"> Register Now</a>
+                    </p>
+                </div>
+            </div>
         </div>
     </form>
 
-    <div class="message">
-    {% if messages %}
-    <ul>
-        {% for message in messages %}
-            {{ message }}
-        {% endfor %}
-    </ul>
-    {% endif %} 
-    </div>
-    
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            function hidePlaceholder(input) {
+                input.setAttribute("placeholder", "");
+            }
+
+            function showPlaceholder(input) {
+                if (!input.value) {
+                    input.setAttribute("placeholder", input.getAttribute("data-placeholder"));
+                }
+            }
+        });
+    </script>
 </div>
 
 {% endblock content %}

@@ -3,53 +3,299 @@
 {% block meta %}
     <title>Register - kpop-albums</title>
     <style>
-        h2.page-header {
+        body {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
-        .login form {
-            width: 350px; /* Adjust the width of the form as needed */
-            margin: 0 auto; /* Center the form horizontally */
+
+        .register {
+            background-color: #191719;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
-        form table tr {
-            vertical-align: top; /* Align form rows to the top */
-            text-align: left;
+
+        .register .section-wrapper {
+            background-color: #191719;
+            width: 1280px;
+            height: 720px;
         }
-        form table td label {
-            text-align: right;
-            display: inline-block;
-            width: 200px; /* Adjust the width as needed for the indentation */
+
+        .register .section {
+            display: flex;
+            flex-direction: column;
+            width: 418px;
+            height: 447px;
+            align-items: center;
+            justify-content: center;
+            gap: 6.67px;
+            position: relative;
+            top: 137px;
+            left: 431px;
         }
-        table tr td {
-            padding-bottom: 15px;
-            padding-left: 20px;
+
+        .register .rectangle {
+            position: relative;
+            align-self: stretch;
+            width: 100%;
+            height: 446px;
+            background-color: #3b353a;
+            border-radius: 40px;
         }
-        .register-button {
-            text-align: center; /* Center-align the button */
-            padding-right: 40px;
-            padding-bottom: 50px;
+
+        .register .contents {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            position: absolute;
+            top: 47px;
+            left: 49px;
         }
-        .register-button input[type="submit"] {
-            width: 90px;
+
+        .register .text-wrapper {
+            position: relative;
+            width: fit-content;
+            margin-top: -0.67px;
+            font-family: "SF Pro Display-Black", Helvetica;
+            font-weight: 900;
+            color: #ffffff;
+            font-size: 46.7px;
+            text-align: center;
+            letter-spacing: 0;
+            line-height: normal;
+            white-space: nowrap;
+        }
+
+        .register .inputs {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            position: relative;
+            flex: 0 0 auto;
+        }
+
+        .register .overlap-group-wrapper {
+            position: relative;
+            width: 323.33px;
+            height: 40px;
+            margin-right: -2px;
+        }
+
+        .register .overlap-group {
+            position: relative;
+            width: 321px;
+            height: 40px;
+            background-color: #5c525a;
+            border-radius: 23px;
+        }
+
+        .register .div {
+            left: 93px;
+            position: absolute;
+            top: 11px;
+            font-family: "SF Pro Display-Semibold", Helvetica;
+            font-weight: 400;
+            color: #f9ecf7;
+            font-size: 14.7px;
+            text-align: center;
+            letter-spacing: 0;
+            line-height: normal;
+        }
+
+        .register .text-wrapper-2 {
+            left: 94px;
+            position: absolute;
+            top: 11px;
+            font-family: "SF Pro Display-Semibold", Helvetica;
+            font-weight: 400;
+            color: #f9ecf7;
+            font-size: 14.7px;
+            text-align: center;
+            letter-spacing: 0;
+            line-height: normal;
+        }
+
+        .register .confirm {
+            position: absolute;
+            top: 11px;
+            left: 85px;
+            font-family: "SF Pro Display-Semibold", Helvetica;
+            font-weight: 400;
+            color: #f9ecf7;
+            font-size: 14.7px;
+            text-align: center;
+            letter-spacing: 0;
+            line-height: normal;
+        }
+
+        .register .overlap-wrapper {
+            position: relative;
+            width: 132.67px;
+            height: 33.33px;
+        }
+
+        .register .overlap {
+            position: relative;
+            width: 131px;
+            height: 33px;
+            background-color: #73a0c5;
+            border-radius: 16.54px;
+        }
+
+        .register .text-wrapper-3 {
+            position: absolute;
+            top: 8px;
+            left: 30px;
+            font-family: "SF Pro Display-Heavy", Helvetica;
+            font-weight: 400;
+            color: #ffffff;
+            font-size: 14.7px;
+            text-align: center;
+            letter-spacing: 0;
+            line-height: normal;
+        }
+
+        .register .already-have-an {
+            position: relative;
+            width: fit-content;
+            font-family: "SF Pro Display-Regular", Helvetica;
+            font-weight: 400;
+            color: transparent;
+            font-size: 14.7px;
+            text-align: center;
+            letter-spacing: 0;
+            line-height: normal;
+        }
+
+        .register .span {
+            color: #b6abb5;
+        }
+
+        .register .text-wrapper-4 {
+            color: #ffffff;
+        }
+
+        .custom-input {
+            box-sizing: border-box;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 321px;
+            height: 40px;
+            padding: 0 10px;
+            background-color: #5c525a;
+            border: 2px solid #5c525a;
+            border-radius: 23px;
+            font-family: "SF Pro Display-Semibold", Helvetica;
+            font-weight: 400;
+            color: #f9ecf7;
+            font-size: 14.7px;
+            letter-spacing: 0;
+            line-height: normal;
+            outline: none;
+        }
+
+        .custom-input:focus {
+            border: 2px solid #73a0c5;
+        }
+
+        .custom-input::placeholder {
+            color: #f9ecf7;
+        }
+
+        .custom-input:not(:placeholder-shown) {
+            background-color: #3b353a;
+        }
+
+        button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
         }
     </style>
 {% endblock meta %}
 
 {% block content %}
-<div class="login">
-    <h1>Register</h1>
-    <form method="POST" style="margin: 20px; ">
+<div class="register">
+    <form method="post" action="{% url 'main:register' %}">
         {% csrf_token %}
-        <table>
-            {{ form.as_table }}
-            <tr>
-                <td></td>
-            </tr>
-        </table>
-        <div class="register-button">
-            <input type="submit" name="submit" value="Register" />
+        <div class="section-wrapper">
+            <div class="section">
+                <div class="rectangle"></div>
+                <div class="contents">
+                    <div class="text-wrapper">kpop-albums</div>
+                    <div class="inputs">
+                        <div class="overlap-group">
+                            <input
+                                type="text"
+                                class="custom-input"
+                                name="username"
+                                data-placeholder="Enter your username"
+                                placeholder="Enter your username"
+                                onfocus="hidePlaceholder(this)"
+                                onblur="showPlaceholder(this)"
+                            />
+                        </div>
+                        <div class="overlap-group-wrapper">
+                            <div class="overlap-group">
+                                <input
+                                    type="password"
+                                    class="custom-input"
+                                    name="password"
+                                    data-placeholder="Enter your password"
+                                    placeholder="Enter your password"
+                                    onfocus="hidePlaceholder(this)"
+                                    onblur="showPlaceholder(this)"
+                                />
+                            </div>
+                        </div>
+                        <div class="overlap-group-wrapper">
+                            <div class="overlap-group">
+                                <input
+                                    type="password"
+                                    class="custom-input"
+                                    name="confirm_password"
+                                    data-placeholder="Confirm your password"
+                                    placeholder="Confirm your password"
+                                    onfocus="hidePlaceholder(this)"
+                                    onblur="showPlaceholder(this)"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" onclick="submitForm()">
+                        <div class="overlap">
+                            <div class="text-wrapper-3">REGISTER</div>
+                        </div>
+                    </button>
+                    <p class="already-have-an">
+                        <span class="span">Already have an account?</span>
+                        <a class="text-wrapper-4" href="{% url 'main:login' %}"> Sign In</span>
+                    </p>
+                </div>
+            </div>
         </div>
     </form>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            function hidePlaceholder(input) {
+                input.setAttribute("placeholder", "");
+            }
 
+            function showPlaceholder(input) {
+                if (!input.value) {
+                    input.setAttribute("placeholder", input.getAttribute("data-placeholder"));
+                }
+            }
+        });
+    </script>
 </div>
 {% endblock content %}

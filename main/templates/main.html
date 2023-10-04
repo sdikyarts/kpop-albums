@@ -2,120 +2,348 @@
 
 {% block meta %}
     <title>kpop-albums</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=SF Pro Display:wght@800;900&display=swap"
+    />
     <style>
-        ul {
-            margin-left: -20px; /* Adjust the margin as needed */
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        /* Add CSS rules to reduce the vertical gap */
-        ul h4, ul h5 {
-            margin-top: 5px; /* Adjust the margin to your desired spacing */
-            margin-bottom: 5px; /* Adjust the margin to your desired spacing */
+
+        .main {
+        background-color: #191719;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+        height: 100vh;
         }
-        .artist-list {
-            margin-right: 20px; /* Adjust the left indent as needed */
+
+        .main .div {
+        background-color: #191719;
+        overflow: hidden;
+        width: 1280px;
+        height: 720px;
+        position: relative;
         }
+
+        .main .contents-2 {
+        position: absolute;
+        width: 433px;
+        height: 342px;
+        top: 169px;
+        left: 423px;
+        }
+
+        .main .div-wrapper {
+        position: absolute;
+        width: 435px;
+        height: 32px;
+        top: 158px;
+        left: 0;
+        }
+
+        .main .text-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.8;
+        font-family: "SF Pro Display-Semibold", Helvetica;
+        font-weight: 400;
+        color: #ffffff;
+        font-size: 26.7px;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: normal;
+        }
+
+        .main .add-artists {
+        position: absolute;
+        width: 171px;
+        height: 33px;
+        top: 309px;
+        left: 132px;
+        }
+
+        .main .overlap-group {
+        width: 169px;
+        height: 33px;
+        border-radius: 17.98px;
+        position: relative;
+        background-color: #73a0c5;
+        }
+
+        .main .text-wrapper-2 {
+        position: absolute;
+        top: 8px;
+        left: 29px;
+        font-family: "SF Pro Display-Heavy", Helvetica;
+        font-weight: 400;
+        color: #ffffff;
+        font-size: 13.3px;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: normal;
+        }
+
+        .main .header {
+        position: fixed;
+        width: 100vw;
+        height: 87px;
+        top: 0;
+        left: 0;
+        background-color: #252124;
+        box-shadow: 0px 2.67px 26.67px #00000040;
+        }
+
+        .main .r {
+        position: absolute;
+        width: 217px;
+        height: 30px;
+        top: 29px;
+        left: 82vw;
+        }
+
+        .main .header-image {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        top: 0;
+        left: 187px;
+        }
+
+        .main .see-full-list {
+        position: absolute;
+        width: 72px;
+        height: 30px;
+        top: 0;
+        left: 103px;
+        }
+
+        .main .overlap-group-2 {
+        position: relative;
+        width: 70px;
+        height: 30px;
+        background-color: #aa8ec0;
+        border-radius: 16.67px;
+        }
+
+        .main .text-wrapper-4 {
+        position: absolute;
+        top: 9px;
+        left: 12px;
+        font-family: "SF Pro Display-Heavy", Helvetica;
+        font-weight: 400;
+        color: #ffffff;
+        font-size: 10px;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: normal;
+        white-space: nowrap;
+        }
+
+        .main .add-artist {
+        position: absolute;
+        width: 93px;
+        height: 30px;
+        top: 0;
+        left: 0;
+        }
+
+        .main .overlap {
+        width: 91px;
+        height: 30px;
+        border-radius: 16.67px;
+        position: relative;
+        background-color: #73a0c5;
+        }
+
+        .main .text-wrapper-5 {
+        position: absolute;
+        top: 9px;
+        left: 10px;
+        font-family: "SF Pro Display-Heavy", Helvetica;
+        font-weight: 400;
+        color: #ffffff;
+        font-size: 10px;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: normal;
+        white-space: nowrap;
+        }
+
+        .main .text-wrapper-6 {
+        position: absolute;
+        top: 31px;
+        left: 45px;
+        font-family: "SF Pro Display-Black", Helvetica;
+        font-weight: 900;
+        color: #ffffff;
+        font-size: 20px;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: normal;
+        white-space: nowrap;
+        }
+
+        .main .contents-1 {
+        position: absolute;
+        width: 227px;
+        height: 337px;
+        top: 169px;
+        left: 526px;
+        }
+
+        .main .artists {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 42.67px;
+            position: absolute;
+            top: 57%; /* Center the artists vertically */
+            transform: translateY(-50%); /* Adjust for centering */
+            left: 0;
+            right: 0; /* Center the artists horizontally */
+            z-index: 0; /* Ensure the artists are behind the title */
+        }
+
+        .main .artist {
+            position: relative;
+            width: 152px;
+            height: 230.67px;
+        }
+
+        .main .buttons {
+        position: absolute;
+        width: 121px;
+        height: 23px;
+        top: 207px;
+        left: 15px;
+        }
+
+        .main .collapse {
+        position: relative;
+        height: 23px;
+        background-color: #409b85;
+        border-radius: 11.67px;
+        }
+
+        .main .vector {
+        position: absolute;
+        width: 19px;
+        height: 6px;
+        top: 9px;
+        left: 51px;
+        }
+
+        .main .text-wrapper {
+        position: absolute;
+        width: 113px;
+        top: 165px;
+        left: 18px;
+        font-family: "SF Pro Display-Heavy", Helvetica;
+        font-weight: 400;
+        color: #ffffff;
+        font-size: 22.7px;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: normal;
+        }
+
+        .main .ellipse {
+            position: absolute;
+            width: 150px; /* Set the width to match the ellipse size */
+            height: 150px; /* Set the height to match the ellipse size */
+            top: 0;
+            left: 0;
+            background-color: #d9d9d9;
+            border-radius: 50%; /* Use border-radius to create a perfect circle */
+            overflow: hidden; /* Hide content outside the ellipse */
+        }
+
+        .main .ellipse img .artist-logo {
+            width: 100%; /* Make sure the image fills the ellipse */
+            height: 100%;
+            object-fit: cover; /* Maintain aspect ratio and cover the entire space */
+        }
+
+        .main .title {
+            position: absolute;
+            width: 229px;
+            height: 56px;
+            top: 25%;
+            left: 51%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+
+        .main .text-wrapper-3 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-family: "SF Pro Display-Heavy", Helvetica;
+            font-weight: 400;
+            color: #ffffff;
+            font-size: 46.7px;
+            text-align: center;
+            letter-spacing: 0;
+            line-height: normal;
+        }
+        
     </style>
 {% endblock meta %}
 
 {% block content %}
-    <div id="header">
-        <h4>Logged in as {{ request.user.username }}</h3>
-        <h5>Last login: {{ data.last_login }}</h5> <!-- Time displayed in UTC +7 (WIB) -->
+<div class="main">
+    <div class="div">
+    {% if artists %}
+    <div class="contents - 1">
+        <div class="artists">
+            {% for artist in artists %}
+            <div class="artist">
+                <div class="buttons">
+                    <div class="collapse"><img class="vector" src="./media/arrow down.png" /></div>
+                </div>
+                <div class="text-wrapper">{{ artist.name }}</div>
+                <div class="ellipse">
+                    <a href="{% if artist.name %}{% url 'main:artist_detail' artist.name %}{% endif %}">
+                        <img class="artist-logo" src="{{ artist.artist_logo_url }}" alt="{{ artist.name }}" style="max-width: 150px; max-height: 150px;">
+                    </a>
+                </div>
+            </div>            
+            {% endfor %}
+        </div>
+        <div class="title"><div class="text-wrapper-3">{{ request.user.username }}'s Artists</div></div>
     </div>
+    {% else %}
+    <div class="contents - 2">
+        <div class="div-wrapper"><p class="text-wrapper">You have no artists in your directory...</p></div>
+        <div class="add-artists">
+          <div class="overlap-group"><div class="text-wrapper-2">ADD NEW ARTIST</div></div>
+        </div>
+        <div class="title"><div class="text-wrapper-3">{{ request.user.username }}'s Artists</div></div>
+      </div>
+    {% endif %}
+      <header class="header">
+        <div class="r">
+            <img class="header-image" id="header-image" src="media/header pp.png" />
+          <div class="see-full-list">
+            <div class="overlap-group-2"><div class="text-wrapper-4">FULL LIST</div></div>
+          </div>
+          <div class="add-artist">
+            <div class="overlap"><div class="text-wrapper-5">+ ADD ARTIST</div></div>
+          </div>
+        </div>
+        <div class="text-wrapper-6">kpop-albums</div>
+      </header>
+  </div>
+</div>
 
-    <button id="toggleHeaderButton" class="toggle-button">
-        {% if show_header %}Hide Header{% else %}Show Header{% endif %}
-    </button>
-    
 
-    <hr>
 
-    <h1>kpop-albums</h1>
-    <h2>Your archive for your faves' discography</h2>
-    <hr>
-    <div class="flex-container">
-        <h3 style="display: inline-block;">Artists</h3>
-        <a href="{% url 'main:full_list' %}" class="button-link" style="display: inline-block; margin-left: 10px;">
-            <button class="directory">
-                See Full List
-            </button>
-        </a>
-        <div class="artist-list">
-            {% if artists %}
-                <ul style="list-style: none; padding: 0; margin: 0;">
-                    {% for artist in artists %}
-                    <li style="display: inline-block; margin-right: 10px;">
-                        <ul>
-                            <a href="{% if artist.name %}{% url 'main:artist_detail' artist.name %}{% endif %}">
-                                <img src="{{ artist.artist_logo_url }}" alt="{{ artist.name }}" style="max-width: 100px; max-height: 100px; border: 1px solid #ccc;">
-                            </a>
-                            <h4 style="text-align: center; margin-bottom: 10px;">
-                                <a href="{% if artist.name %}{% url 'main:artist_detail' artist.name %}{% endif %}">{{ artist.name }}</a>
-                            </h4>
-                            <p style="text-align: center;">Albums: {{ artist.albums_count }}</p>
-                            <a href="{% if artist.name %}{% url 'main:add_album' artist_name=artist.name %}{% endif %}" class="button-link">
-                                <button class="add-button" style="display: block; width: 100px; margin-top: 5px;">
-                                    Add New Album
-                                </button>
-                            </a>
-                            <a href="{% url 'main:delete_artist' artist.name %}" class="delete-link" style="display: block; width: 100px; margin-top: 5px;">
-                                <button class="delete-button" style="display: block; width: 100px; margin-top: 5px;">
-                                    Delete Artist
-                                </button>
-                            </a>
-                        </ul>
-                    </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>No artists added</p>
-            {% endif %}
-        </div>        
-    </div>        
-    <hr>
-    <div class="button-container">
-        <a href="{% url 'main:add_artist' %}" class="button-link">
-            <button class="add-button" style="width: 100px;">
-                Add New Artist
-            </button>
-        </a>
-        {% if artists %}
-        <!-- Add a reset button for the form on the main page -->
-        <a href="{% url 'main:reset_form' %}" class="reset-button">
-            <button type="button" id="resetFormButton" class="reset-button" style="width: 100px;">
-                Reset Directory
-            </button>
-        </a>
-        {% endif %}
-        <a href="{% url 'main:logout' %}">
-            <button>
-                Logout
-            </button>
-        </a>
-    </div>   
+
     
-    <script>
-        // Function to toggle the header visibility
-        function toggleHeader() {
-            var header = document.getElementById("header");
-            var toggleButton = document.getElementById("toggleHeaderButton");
-    
-            if (header.style.display === "block") {
-                header.style.display = "none";
-                toggleButton.innerText = "Show Header";
-            } else {
-                header.style.display = "block";
-                toggleButton.innerText = "Hide Header";
-            }
-        }
-    
-        // Add a click event listener to the toggle button
-        var toggleButton = document.getElementById("toggleHeaderButton");
-        toggleButton.addEventListener("click", toggleHeader);
-    
-        // Set the initial state when the page loads
-        window.onload = function () {
-            toggleHeader();
-        };
-    </script>
 {% endblock content %}
