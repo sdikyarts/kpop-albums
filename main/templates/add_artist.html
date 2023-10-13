@@ -2,49 +2,614 @@
 
 {% block meta %}
     <title>Add New Artist - kpop-albums</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
-        .login form {
-            width: 350px; /* Adjust the width of the form as needed */
-            margin: 0 auto; /* Center the form horizontally */
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        form table tr {
-            vertical-align: top; /* Align form rows to the top */
-            text-align: left;
+
+        :root {
+        /* font sizes */
+        --font-size-3xs: 10px;
+        --font-size-xl: 20px;
+        --font-size-sm-3: 13.3px;
+        --font-size-xs: 12px;
+
+        /* Colors */
+        --color-plum: #aa8fc0;
+        --color-white: #fff;
+        --color-steelblue: #73a0c6;
+        --color-dimgray-100: #5c525b;
+        --color-lavenderblush: #faecf7;
+
+        /* Gaps */
+        --gap-3xs: 10px;
+
+        /* Paddings */
+        --padding-10xl: 29px;
+        --padding-34xl-3: 53.3px;
+        --padding-5xs: 8px;
+        --padding-31xl: 50px;
+
+        /* Border radiuses */
+        --br-base-7: 16.7px;
+        --br-lg: 18px;
+        --br-4xl: 23px;
+        --br-mid-3: 17.3px;
         }
-        form table td label {
-            text-align: right;
-            display: inline-block;
-            width: 200px; /* Adjust the width as needed for the indentation */
+
+        .add-artistt {
+        background-color: #191719;
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+        height: 1450px;
         }
-        table tr td {
-            padding-bottom: 15px;
-            padding-left: 20px;
+
+        .add-new-artist1 {
+            font-family: "Helvetica";
+            font-weight: 800;
+            font-size: 30px;
+            text-align: center;
+            color: #ffffff
         }
-        .add-button {
-            text-align: center; /* Center-align the button */
-            padding-right: 200px;
-            padding-bottom: 50px;
+        .add-new-artist1,
+        .artist-name-child,
+        .artist-name1 {
+        align-self: stretch;
+        position: relative;
         }
-        .add-button input[type="submit"] {
-            width: 140px;
+        .artist-name1 {
+        font-size: 13.5px;
+        font-weight: 600;
+        font-family: "Helvetica";
+        color: var(--color-lavenderblush);
+        text-align: left;
         }
+        .artist-name-child {
+        border: 0;
+        background-color: var(--color-dimgray-100);
+        border-radius: var(--br-4xl);
+        height: 25.33px;
+        }
+        .artist-name {
+        align-self: stretch;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: var(--gap-3xs);
+        }
+        .debut-date-child {
+        border: 0;
+        background-color: var(--color-dimgray-100);
+        align-self: stretch;
+        position: relative;
+        border-radius: var(--br-4xl);
+        height: 25.32px;
+        }
+        .debut-date {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: var(--gap-3xs);
+        }
+        .disband-date-child {
+        border: 0;
+        background-color: var(--color-dimgray-100);
+        align-self: stretch;
+        position: relative;
+        border-radius: var(--br-4xl);
+        height: 25.36px;
+        }
+        .horizontal-slot {
+        align-self: stretch;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 33.33px;
+        }
+        .description-child,
+        .members-child {
+        border: 0;
+        background-color: var(--color-dimgray-100);
+        align-self: stretch;
+        position: relative;
+        border-radius: 17.33px;
+        height: 57.33px;
+        }
+        .description-child {
+        border-radius: 15.33px;
+        height: 112px;
+        }
+        .picture1 {
+        position: relative;
+        font-size: 13.33px;
+        font-weight: 800;
+        font-family: "Helvetica";
+        color: var(--color-white);
+        text-align: center;
+        display: inline-block;
+        width: 146px;
+        height: 16px;
+        flex-shrink: 0;
+        }
+        .picture {
+        cursor: pointer;
+        border: 0;
+        padding: var(--padding-5xs) 49.999996185302734px;
+        background-color: var(--color-plum);
+        border-radius: 17.98px;
+        width: 146px;
+        height: 32px;
+        flex-direction: row;
+        justify-content: center;
+        box-sizing: border-box;
+        }
+        .buttons,
+        .inputs,
+        .picture {
+        display: flex;
+        align-items: center;
+        }
+        .buttons{
+        width: 319.33px;
+        flex-direction: row;
+        justify-content: center;
+        gap: 27.33px;
+        }
+
+        .artist-name-child,
+        .members-child,
+        .debut-date-child,
+        .disband-date-child,
+        .description-child {
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .inputs {
+        align-self: stretch;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 26.67px;
+        }
+        .inputs input {
+            color: var(--color-white); /* Set text color to white */
+            font-size: 13px;
+            text-align: left; /* Adjust text alignment */
+            padding: 5px; /* Optional: Add padding for better appearance */
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+        .inputs textarea {
+            color: var(--color-white); /* Set text color to white */
+            font-size: 13px;
+            text-align: left; /* Adjust text alignment */
+            padding: 5px; /* Optional: Add padding for better appearance */
+            padding-left: 12px;
+            padding-right: 12px;
+            padding-top: 5px;
+        }
+        .inputs input:focus,
+        .inputs textarea:focus {
+            outline: none;
+            border: 2px solid #73a0c6;
+        }
+
+        .add-new-artist2 {
+        font-size: 13.33px;
+        font-weight: 800;
+        font-family: "Helvetica";
+        color: var(--color-white);
+        text-align: center;
+        justify-content: center;
+        margin-top: 10px;
+        display: inline-block;
+        width: 120px;
+        height: 16px;
+        flex-shrink: 0;
+        }
+        .add-artistz {
+            cursor: pointer;
+            border: 0;
+            padding: 0;
+            background-color: var(--color-steelblue);
+            border-radius: 17.98px;
+            width: 200px;
+            height: 35px;
+        }
+
+        .add-artistz,
+        .contents,
+        .form,
+        .frame {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        }
+        .contents {
+        align-self: stretch;
+        justify-content: flex-start;
+        gap: 48px;
+        }
+        .form,
+        .frame {
+        justify-content: center;
+        }
+        .form {
+        border-radius: 40px;
+        background-color: #3b353a;
+        width: 680.67px;
+        padding: 53.333309173583984px 51.333065032958984px 53.333309173583984px
+            52.000247955322266px;
+        box-sizing: border-box;
+        gap: 33px;
+        }
+        .frame {
+        position: absolute;
+        top: 40px;
+        left: calc(50% - 642px);
+        width: 1283px;
+        height: 170vh;
+        overflow: auto;
+        }
+
+        .header {
+            position: fixed;
+            width: 100%;
+            height: 87px;
+            top: 0;
+            left: 0;
+            background-color: #252124;
+            box-shadow: 0px 2.67px 26.67px #00000040;
+        }
+
+        .r {
+            position: relative;
+            height: 30px;
+            top: 29px;
+            left: 82%; /* Initial position */
+            transition: left 0.3s ease; /* Add smooth transition for the left property */
+        }
+
+        .header-image,
+        .see-full-list,
+        .add-artist {
+            position: relative; /* Ensure child elements are positioned relative to .r */
+        }
+
+        .header-image {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        top: 0;
+        left: 187px;
+        }
+
+        .see-full-list {
+        position: absolute;
+        width: 72px;
+        height: 30px;
+        top: 0;
+        left: 103px;
+        }
+
+        .overlap-group-2 {
+        position: relative;
+        width: 70px;
+        height: 30px;
+        background-color: #aa8ec0;
+        border-radius: 16.67px;
+        }
+
+        .text-wrapper-4 {
+        position: absolute;
+        top: 9px;
+        left: 12px;
+        font-family: 'Helvetica';
+        font-weight: 800;
+        color: #ffffff;
+        font-size: 10px;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: normal;
+        white-space: nowrap;
+        }
+
+        .add-artist {
+        position: absolute;
+        width: 93px;
+        height: 30px;
+        top: 0;
+        left: 0;
+        }
+
+        .overlap {
+        width: 91px;
+        height: 30px;
+        border-radius: 16.67px;
+        position: relative;
+        background-color: #73a0c5;
+        }
+
+        .text-wrapper-5 {
+        position: absolute;
+        top: 9px;
+        left: 10px;
+        font-family: 'Helvetica';
+        font-weight: 800;
+        color: #ffffff;
+        font-size: 10px;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: normal;
+        white-space: nowrap;
+        }
+
+        .text-wrapper-6 {
+        position: absolute;
+        top: 31px;
+        left: 45px;
+        font-family: 'Helvetica';
+        font-weight: 900;
+        color: #ffffff;
+        font-size: 20px;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: normal;
+        white-space: nowrap;
+        }
+
+        .vector-icon {
+        position: relative;
+        width: 80.67px;
+        height: 80.67px;
+        }
+        .dummy,
+        .reset-directory {
+        position: relative;
+        font-weight: 800;
+        }
+        .reset-directory {
+        font-size: var(--font-size-3xs);
+        font-family: 'Helvetica';
+        color: #ffffff;
+        text-align: center;
+        }
+        .logout,
+        .reset {
+        cursor: pointer;
+        border: 0;
+        padding: 0;
+        border-radius: 16.67px;
+        width: 130px;
+        height: 30px;
+        justify-content: center;
+        }
+        .reset {
+        background-color: #aa8fc0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        }
+        .logout {
+        background-color: #9b4141;
+        }
+        .logout,
+        .popup,
+        .vector-parent {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        }
+        .vector-parent {
+        border-radius: 16.67px;
+        background-color: #4f404b;
+        width: 330px;
+        height: 245px;
+        justify-content: center;
+        gap: 10px;
+        }
+        .popup {
+        display: none;
+        position: fixed;;
+        width: 349px;
+        height: 331px;
+        overflow: hidden;
+        justify-content: flex-end;
+        box-sizing: border-box;
+        max-width: 90%;
+        max-height: 90%;
+        margin-left: 1070px;
+        top: 75px;
+        text-align: center;
+        font-size: var(--font-size-xl);
+        color: #ffffff;
+        font-family: 'Helvetica';
+        }
+        
     </style>
 {% endblock meta %}
 
 {% block content %}
-<h1>Add New Artist</h1>
 
-<form method="POST" enctype="multipart/form-data" style="margin: 20px;">
-    {% csrf_token %}
-    <table>
-        {{ form.as_table }}
-        <tr>
-            <td></td>
-        </tr>
-    </table>
-    <div class="add-button">
-        <input type="submit" value="Add Artist"/>
+<div class="add-artistt">
+    <div class="frame">
+        <div class="form">
+            <div class="add-new-artist1">Add New Artist</div>
+            <div class="contents">
+                <form method="post" action="{% url 'main:add_artist' %}" enctype="multipart/form-data" class="inputs" id="artist-form">
+                    {% csrf_token %}
+                    <div class="artist-name">
+                        <div class="artist-name1">Artist Name *</div>
+                        <input
+                        class="artist-name-child"
+                        name="artist name input"
+                        id="aname"
+                        type="text"
+                        required
+                        />
+                    </div>
+                    <div class="artist-name">
+                        <div class="artist-name1">Company *</div>
+                        <input
+                        class="artist-name-child"
+                        name="company input"
+                        id="comp"
+                        type="text"
+                        required
+                        />
+                    </div>
+                    <div class="horizontal-slot">
+                        <div class="debut-date">
+                        <div class="artist-name1">Debut Date *</div>
+                        <input
+                            class="debut-date-child"
+                            name="debut input"
+                            id="debut"
+                            type="text"
+                            required
+                        />
+                    </div>
+                    <div class="debut-date">
+                        <div class="artist-name1">Disband Date</div>
+                        <input
+                            class="disband-date-child"
+                            name="disband input"
+                            id="disband"
+                            type="text"
+                        />
+                        </div>
+                    </div>
+                    <div class="artist-name">
+                        <div class="artist-name1">Members *</div>
+                        <textarea class="members-child" name="members input" id="member" required></textarea>
+                    </div>
+                    <div class="artist-name">
+                        <div class="artist-name1">Former Member(s)</div>
+                        <textarea class="members-child" name="former members " id="former"></textarea>
+                    </div>
+                    <div class="artist-name">
+                        <div class="artist-name1">Sub-Unit(s)</div>
+                        <textarea class="members-child" name="subunits input" id="subun"></textarea>
+                    </div>
+                    <div class="artist-name">
+                        <div class="artist-name1">Fan Club Name(s)</div>
+                        <input
+                        class="artist-name-child"
+                        name="fanclub input"
+                        id="fans"
+                        type="text"
+                        />
+                    </div>
+                    <div class="artist-name">
+                        <div class="artist-name1">Description *</div>
+                        <textarea class="description-child" name="description" id="desc" required></textarea>
+                    </div>
+                    <div class="buttons">
+                        <label for="pic add" class="picture">
+                            <div class="picture1">+ PICTURE</div>
+                            <input type="file" name="artist_pic" id="pic add" style="display: none;">
+                        </label>
+                        <label for="logo add" class="picture">
+                            <div class="picture1">+ LOGO</div>
+                            <input type="file" name="artist_logo" id="logo add" style="display: none;">
+                        </label>
+                    </div>
+                </form>
+                <button class="add-artistz" type="button" id="add-artist" name="submit-button">
+                    <div class="add-new-artist2">ADD NEW ARTIST</div>
+                </button>
+            </div>
+        </div>
+    </div>   
+</div>
+<nav class="header">
+    <div class="r">
+        <a href="#open-popup"><img class="header-image" id="header-image" src="media/header pp.png" /></a>
+        <div class="see-full-list">
+        <div class="overlap-group-2"><div class="text-wrapper-4">FULL LIST</div></div>
+        </div>
+        <div class="add-artist">
+        <div class="overlap"><div class="text-wrapper-5">+ ADD ARTIST</div></div>
+        </div>
     </div>
-</form>
+    <div class="text-wrapper-6">kpop-albums</div>
+</nav> 
+<div id="open-popup" class="popup">
+    <div class="vector-parent">
+        <img class="vector-icon" alt="" src="media/pp big.png" />
+        <div class="dummy">{{ request.user.username }}</div>
+        <button class="reset" autofocus="{true}" id="reset">
+            <div class="reset-directory" id="reset-button">RESET DIRECTORY</div>
+        </button>
+        <button class="logout" id="logout">
+            <div class="reset-directory">LOGOUT</div>
+        </button>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        // Add an event listener to the header pp button
+        $('#header-image').click(function () {
+            // Toggle the visibility of the popup
+            $('.popup').toggle();
 
+            // Add or remove a class to body to prevent scrolling
+            $('body').toggleClass('no-scroll');
+        });
+
+        // Add an event listener to the "RESET DIRECTORY" button in the popup
+        $('#reset-button').click(function () {
+            // Redirect to the reset_form URL
+            window.location.href = "{% url 'main:reset_form' %}";
+        });
+
+        // Close the popup when clicking outside of it
+        $(document).mouseup(function (e) {
+            var popup = $('.popup');
+            if (!popup.is(e.target) && popup.has(e.target).length === 0) {
+                popup.hide();
+                // Remove the no-scroll class when hiding the popup
+                $('body').removeClass('no-scroll');
+            }
+        });
+
+        // Add an event listener to the "LOGOUT" button in the popup
+        $('#logout').click(function () {
+            // Redirect to the logout URL
+            window.location.href = "{% url 'main:logout' %}";
+        });
+
+        // Add artist using AJAX and include the csrf token, then redirect to show_main
+        $('#add-artist').click(function () {
+            $.ajax({
+                type: 'POST',
+                url: '{% url "main:add_artist" %}',
+                data: {
+                    aname: $('#aname').val(),
+                    comp: $('#comp').val(),
+                    debut: $('#debut').val(),
+                    disband: $('#disband').val(),
+                    member: $('#member').val(),
+                    former: $('#former').val(),
+                    subun: $('#subun').val(),
+                    fans: $('#fans').val(),
+                    desc: $('#desc').val(),
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                },
+                success: function () {
+                    window.location.href = "{% url 'main:show_main' %}";
+                },
+            });
+        });
+    });
+</script>
 {% endblock %}

@@ -1035,3 +1035,60 @@ Baca bagian [Checklist Tugas 4](#checklist-tugas-4) di atas
 - Kapan sebaiknya menggunakan Bootstrap atau Tailwind tergantung pada kebutuhan proyek. Gunakan Tailwind untuk proyek yang memerlukan desain kustomisasi yang tinggi dan fleksibilitas. Bootstrap cocok untuk proyek yang membutuhkan implementasi cepat atau ketika Anda ingin menghindari penulisan banyak kode CSS sendiri.
 </details>
 
+
+## Pertanyaan Tugas 6
+### 1. Jelaskan perbedaan antara asynchronous programming dengan synchronous programming.
+<details>
+<summary>Show Answer</summary>
+
+Asynchronous programming dan synchronous programming merujuk pada dua gaya atau model eksekusi kode yang berbeda. Berikut adalah perbedaan singkat antara keduanya:
+
+Synchronous Programming:
+- Sequential Execution: Kode dieksekusi secara berurutan, satu perintah setelah yang lain.
+- Blocking: Setiap operasi (misalnya, pemanggilan fungsi atau operasi I/O) menghentikan eksekusi kode sampai operasi tersebut selesai.
+- Menunggu Hasil: Program menunggu hasil operasi sebelum melanjutkan eksekusi selanjutnya.
+Asynchronous Programming:
+- Concurrent Execution: Kode tidak menunggu operasi yang lambat untuk selesai. Sebaliknya, ia melanjutkan dengan eksekusi kode berikutnya.
+- Non-blocking: Operasi I/O atau pemanggilan fungsi asinkron tidak menghentikan eksekusi kode; kode berlanjut segera setelah operasi asinkron dimulai.
+- Callback atau Promise: Biasanya, penggunaan callback atau promise digunakan untuk menangani hasil operasi asinkron.
+
+Contoh penggunaan asynchronous programming umumnya terlihat dalam pemrograman web, di mana aplikasi perlu menangani banyak permintaan I/O secara bersamaan tanpa harus menunggu setiap permintaan selesai sebelum yang lain dimulai. Ini dapat meningkatkan responsivitas dan efisiensi aplikasi.
+</details>
+
+### 2. Dalam penerapan JavaScript dan AJAX, terdapat penerapan paradigma event-driven programming. Jelaskan maksud dari paradigma tersebut dan sebutkan salah satu contoh penerapannya pada tugas ini.
+<details>
+<summary>Show Answer</summary>
+
+Event-driven programming adalah paradigma pemrograman di mana aliran eksekusi program dikendalikan oleh kejadian atau peristiwa yang terjadi. Dalam konteks JavaScript dan Ajax, event-driven programming sangat penting karena banyak interaksi pengguna dan pertukaran data dengan server yang bergantung pada kejadian.
+
+Contoh: Event Listeners, Callback Functions, Fetch API
+</details>
+
+### 3. Jelaskan penerapan asynchronous programming pada AJAX.
+<details>
+<summary>Show Answer</summary>
+
+Asynchronous programming pada AJAX (Asynchronous JavaScript and XML) memungkinkan pengiriman dan penerimaan data dari server tanpa harus menunggu proses selesai. Singkatnya, penerapan asynchronous programming pada AJAX melibatkan penggunaan callback functions atau konsep Promise untuk menangani operasi asinkron, sehingga aplikasi dapat tetap responsif.
+
+Contohnya, ketika melakukan permintaan HTTP ke server menggunakan AJAX, kita tidak perlu menunggu respon server secara langsung. Sebaliknya, kita dapat menentukan fungsi yang akan dipanggil ketika permintaan selesai, dan selama waktu itu, aplikasi dapat melanjutkan eksekusi kode lainnya. Ini meningkatkan efisiensi dan responsivitas aplikasi web.
+</details>
+
+### 4. Pada PBP kali ini, penerapan AJAX dilakukan dengan menggunakan Fetch API daripada library jQuery. Bandingkanlah kedua teknologi tersebut dan tuliskan pendapat kamu teknologi manakah yang lebih baik untuk digunakan.
+
+<details>
+<summary>Show Answer</summary>
+
+
+Fetch dan jQuery adalah dua cara yang berbeda untuk mengakses dan memanipulasi data dari server dalam pengembangan web. Berikut perbandingan singkat di antara keduanya:
+
+1. Fetch:
+    - Vanilla JavaScript: Fetch adalah bagian dari JavaScript modern, sehingga tidak memerlukan pustaka tambahan.
+    - Promise-based: Menggunakan konsep Promise untuk mengelola permintaan asinkron.
+    - Fleksibel: Memungkinkan Anda mengelola permintaan HTTP dengan cara yang sangat fleksibel dan kuat.
+    - Lebih ringan: Lebih ringan karena tidak memuat seluruh pustaka seperti jQuery.
+2. jQuery:
+    - Library: jQuery adalah pustaka JavaScript yang dirancang untuk menyederhanakan banyak tugas umum dalam pengembangan web.
+    - Legacy: Meskipun masih digunakan secara luas, jQuery semakin kurang digunakan dengan kemunculan JavaScript modern.
+    - Mudah dipelajari: Cocok untuk pemula karena API-nya mudah dipahami.
+    - Ukuran: jQuery lebih besar dibandingkan Fetch, jadi dapat memperlambat kecepatan situs web jika tidak diperlukan.
+</details>

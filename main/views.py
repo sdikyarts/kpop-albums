@@ -20,6 +20,8 @@ from .forms import RegisterForm
 
 from django.http import JsonResponse
 
+from django.views.decorators.csrf import csrf_exempt
+
 # DELETED THE ALBUM OF THE DAY SECTION
 
 # Helper function to convert date strings to 'YYYY-MM-DD' format
@@ -38,7 +40,7 @@ def show_main(request):
 
     data = {
         'name': request.user.username,
-        'last_login': request.COOKIES['last_login']
+        #'last_login': request.COOKIES['last_login']
     }
 
     for artist in artists:
@@ -249,3 +251,31 @@ def delete_album(request, artist_name, album_name):
     if album:
         album.delete()
     return redirect('main:artist_detail', artist_name=artist_name)
+
+## TUGAS 5 dan 6
+def get_artist_json(request):
+    artists = Artist.objects.all()
+    return HttpResponse(serializers.serialize('json', artists))
+
+@csrf_exempt
+def add_artist_ajax(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        company = request.POST.get("company")
+        debut_date = request.POST.get("debut_date")
+        disband_date = request.POST.get("disband_date")
+        members = request.POST.get("members")
+        former_members = request.POST.get("former_members")
+        sub_units = request.POST.get("sub_units")
+        supporters = request.POST.get("supporters")
+        artist_pic = request.FILES.get("artist_pic")
+        artist_logo = request.FILES.get("artist_logo")
+
+        new_artist = Artist(name=name, company=company, debut_date=debut_date, disband_date=disband_date
+                            , members=members, former_members=former_members, sub_units=sub_units
+                            , supporters=supporters, artist_pic=artist_pic, artist_logo=artist_logo)
+        new_artist.save()
+
+        return HttpResponse(b"CREATED", status=201)
+    
+    return HttpResponseNotFound()

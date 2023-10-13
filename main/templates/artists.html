@@ -2,144 +2,288 @@
 
 {% block meta %}
     <title>{{ artist_data.name|safe }} - kpop-albums</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+        /* font sizes */
+        --font-size-3xs: 10px;
+        --font-size-xl: 20px;
+        --font-size-sm-3: 13.3px;
+        --font-size-xs: 12px;
+
+        /* Colors */
+        --color-plum: #aa8fc0;
+        --color-white: #fff;
+        --color-steelblue: #73a0c6;
+        --color-dimgray-100: #5c525b;
+        --color-lavenderblush: #faecf7;
+
+        /* Gaps */
+        --gap-3xs: 10px;
+
+        /* Paddings */
+        --padding-10xl: 29px;
+        --padding-34xl-3: 53.3px;
+        --padding-5xs: 8px;
+        --padding-31xl: 50px;
+
+        /* Border radiuses */
+        --br-base-7: 16.7px;
+        --br-lg: 18px;
+        --br-4xl: 23px;
+        --br-mid-3: 17.3px;
+        }
+
+        .add-artistt {
+        background-color: #191719;
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+        height: 1450px;
+        }
+
+        .header {
+            position: fixed;
+            width: 100%;
+            height: 87px;
+            top: 0;
+            left: 0;
+            background-color: #252124;
+            box-shadow: 0px 2.67px 26.67px #00000040;
+        }
+
+        .r {
+            position: relative;
+            height: 30px;
+            top: 29px;
+            left: 82%; /* Initial position */
+            transition: left 0.3s ease; /* Add smooth transition for the left property */
+        }
+
+        .header-image,
+        .see-full-list,
+        .add-artist {
+            position: relative; /* Ensure child elements are positioned relative to .r */
+        }
+
+        .header-image {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        top: 0;
+        left: 187px;
+        }
+
+        .see-full-list {
+        position: absolute;
+        width: 72px;
+        height: 30px;
+        top: 0;
+        left: 103px;
+        }
+
+        .overlap-group-2 {
+        position: relative;
+        width: 70px;
+        height: 30px;
+        background-color: #aa8ec0;
+        border-radius: 16.67px;
+        }
+
+        .text-wrapper-4 {
+        position: absolute;
+        top: 9px;
+        left: 12px;
+        font-family: 'Helvetica';
+        font-weight: 800;
+        color: #ffffff;
+        font-size: 10px;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: normal;
+        white-space: nowrap;
+        }
+
+        .add-artist {
+        position: absolute;
+        width: 93px;
+        height: 30px;
+        top: 0;
+        left: 0;
+        }
+
+        .overlap {
+        width: 91px;
+        height: 30px;
+        border-radius: 16.67px;
+        position: relative;
+        background-color: #73a0c5;
+        }
+
+        .text-wrapper-5 {
+        position: absolute;
+        top: 9px;
+        left: 10px;
+        font-family: 'Helvetica';
+        font-weight: 800;
+        color: #ffffff;
+        font-size: 10px;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: normal;
+        white-space: nowrap;
+        }
+
+        .text-wrapper-6 {
+        position: absolute;
+        top: 31px;
+        left: 45px;
+        font-family: 'Helvetica';
+        font-weight: 900;
+        color: #ffffff;
+        font-size: 20px;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: normal;
+        white-space: nowrap;
+        }
+
+        .vector-icon {
+        position: relative;
+        width: 80.67px;
+        height: 80.67px;
+        }
+        .dummy,
+        .reset-directory {
+        position: relative;
+        font-weight: 800;
+        }
+        .reset-directory {
+        font-size: var(--font-size-3xs);
+        font-family: 'Helvetica';
+        color: #ffffff;
+        text-align: center;
+        }
+        .logout,
+        .reset {
+        cursor: pointer;
+        border: 0;
+        padding: 0;
+        border-radius: 16.67px;
+        width: 130px;
+        height: 30px;
+        justify-content: center;
+        }
+        .reset {
+        background-color: #aa8fc0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        }
+        .logout {
+        background-color: #9b4141;
+        }
+        .logout,
+        .popup,
+        .vector-parent {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        }
+        .vector-parent {
+        border-radius: 16.67px;
+        background-color: #4f404b;
+        width: 330px;
+        height: 245px;
+        justify-content: center;
+        gap: 10px;
+        }
+        .popup {
+        display: none;
+        position: fixed;;
+        width: 349px;
+        height: 331px;
+        overflow: hidden;
+        justify-content: flex-end;
+        box-sizing: border-box;
+        max-width: 90%;
+        max-height: 90%;
+        margin-left: 1070px;
+        top: 75px;
+        text-align: center;
+        font-size: var(--font-size-xl);
+        color: #ffffff;
+        font-family: 'Helvetica';
+        }
+        
+    </style>
 {% endblock meta %}
     
 {% block content %}
-    <h1>{{ artist_data.name|escapejs }}</h1>
-    <a href="{% url 'main:show_main' %}" class="button-link">
-        <button class="back-to-main">
-            Back to Main
-        </button>
-    </a>
-
-    <hr style="margin-bottom: 30px;"> <!-- Add margin-bottom to the <hr> element -->
-
-    <!-- Image Container -->
-    <div style="position: relative;">
-        <img id="artistImage" src="{{ artist_data.artist_pic.url }}" alt="{{ artist_data.name|escapejs }}" style="max-width: 500px; max-height: 500px; border: 1px solid #ccc;">
-    </div>
-
-    <br>
-    <hr>
-
-    <p><b>Company:</b> {{ artist_data.company|safe }}</p>
-    <p><b>Debut Date:</b> {{ artist_data.debut_date  }}</p>
-
-    {% if artist_data.disband_date %}
-    <p><b>Disband Date:</b> {{ artist_data.disband_date }}</p>
-    
-    <!-- Display former members only for disbanded groups -->
-    <p style="margin-bottom: 5px;"><b>Former Member(s):</b></p>
-    <div style="display: flex;">
-        <ul style="list-style-type: none; flex: 1; padding: 0; margin: 0;">
-            {% for former_member in artist_data.former_members %}
-                <li style="margin-bottom: 5px; margin-left: 20px;">- {{ former_member|safe }}</li>
-                {% if forloop.counter|divisibleby:4 and not forloop.last %}
-                    </ul><ul style="list-style-type: none; flex: 1; padding: 0; margin: 0;">
-                {% endif %}
-            {% endfor %}
-        </ul>
-    </div>
-{% else %}
-    <!-- Display both members and former members for normal (not disbanded) groups -->
-    <p style="margin-bottom: 5px;"><b>Members:</b></p>
-    <div style="display: flex;">
-        <ul style="list-style-type: none; flex: 1; padding: 0; margin: 0;">
-            {% for member in artist_data.members %}
-                <li style="margin-bottom: 5px; margin-left: 20px;">- {{ member|safe }}</li>
-                {% if forloop.counter|divisibleby:4 and not forloop.last %}
-                    </ul><ul style="list-style-type: none; flex: 1; padding: 0; margin: 0;">
-                {% endif %}
-            {% endfor %}
-        </ul>
-    </div>
-    
-    <!-- Display former members for normal (not disbanded) groups -->
-    {% if artist_data.former_members %}
-        <p style="margin-bottom: 5px;"><b>Former Member(s):</b></p>
-        <div style="display: flex;">
-            <ul style="list-style-type: none; flex: 1; padding: 0; margin: 0;">
-                {% for former_member in artist_data.former_members%}
-                    <li style="margin-bottom: 5px; margin-left: 20px;">- {{ former_member|safe }}</li>
-                    {% if forloop.counter|divisibleby:4 and not forloop.last %}
-                        </ul><ul style="list-style-type: none; flex: 1; padding: 0; margin: 0;">
-                    {% endif %}
-                {% endfor %}
-            </ul>
+<nav class="header">
+    <div class="r">
+        <a href="#open-popup"><img class="header-image" id="header-image" src="media/header pp.png" /></a>
+        <div class="see-full-list">
+        <div class="overlap-group-2"><div class="text-wrapper-4">FULL LIST</div></div>
         </div>
-    {% endif %}
-{% endif %}
-
-
-    {% if artist_data.sub_units %}
-        <p style="margin-bottom: 5px;"><b>Sub-Unit(s):</b></p>
-        <div style="display: flex;">
-            <ul style="list-style-type: none; flex: 1; padding: 0; margin: 0;">
-                {% for sub_unit in artist_data.sub_units %}
-                    <li style="margin-bottom: 5px; margin-left: 20px;">- {{ sub_unit|safe }}</li>
-                    {% if forloop.counter|divisibleby:4 and not forloop.last %}
-                        </ul><ul style="list-style-type: none; flex: 1; padding: 0; margin: 0;">
-                    {% endif %}
-                {% endfor %}
-            </ul>
+        <div class="add-artist">
+        <div class="overlap"><div class="text-wrapper-5">+ ADD ARTIST</div></div>
         </div>
-    {% endif %}
-
-    {% if artist_data.supporters %}
-        <p style="margin-bottom: 5px;"><b>Fan Club Name(s):</b> {{ artist_data.supporters|join:", "|safe}}</p>
-    {% endif %}
-
-    <hr>
-
-    <p><b>About:</b></p>
-    <p>{{ artist_data.description }}</p>
-    <hr>
-
-    <p><b><a href="{% url 'main:full_list' %}" style = "display: inline-block; text-decoration: none; color: inherit;">Albums:</a></b></p>
-    <div class="artist-list">
-        {% if artist_albums %}
-            <ul style="list-style: none; padding: 0; margin: 0;">
-                {% for album in artist_albums %}
-                    <li style="display: flex; align-items: center; margin-left: 25px; margin-right: 10px; margin-bottom: 20px;"> <!-- Center-align the album title beside the album cover -->
-                        <a href="{% url 'main:album_detail' artist_name=album.artist.name album_name=album.name %}">
-                            <img src="{{ album.album_cover.url }}" alt="{{ album.name }}" style="max-width: 100px; max-height: 100px; border: 1px solid #ccc; margin-right: 10px;">
-                        </a>
-                        <table style="border-collapse: collapse;">
-                            <tr>
-                                <td style="padding-right: 10px;">
-                                    <a href="{% url 'main:album_detail' artist_name=album.artist.name album_name=album.name %}">
-                                        <b>{{ album.name|safe }}</b>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center;">
-                                    <!-- Add a delete link that triggers the deletion when clicked -->
-                                    <a href="{% url 'main:delete_album' artist_name=album.artist.name album_name=album.name %}" class="delete-link">
-                                        <button class="delete-button" style="display: block; width: 100px; margin-top: 5px;">
-                                            Delete Album
-                                        </button>
-                                    </a>
-                                </td>
-                            </tr>
-                        </table>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>No albums found for this artist.</p>
-        {% endif %}
     </div>
-    <a href="{% url 'main:add_album' artist_name=artist_data.name %}" class="button-link">
-        <button class="add-button">
-            Add New Album
+    <div class="text-wrapper-6">kpop-albums</div>
+</nav> 
+<div id="open-popup" class="popup">
+    <div class="vector-parent">
+        <img class="vector-icon" alt="" src="media/pp big.png" />
+        <div class="dummy">{{ request.user.username }}</div>
+        <button class="reset" autofocus="{true}" id="reset">
+            <div class="reset-directory" id="reset-button">RESET DIRECTORY</div>
         </button>
-    </a>    
-    <hr>
+        <button class="logout" id="logout">
+            <div class="reset-directory">LOGOUT</div>
+        </button>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        // Add an event listener to the header pp button
+        $('#header-image').click(function () {
+            // Toggle the visibility of the popup
+            $('.popup').toggle();
 
-    <a href="{% url 'main:show_main' %}" class="button-link">
-        <button class="back-to-main">
-            Back to Main
-        </button>
-    </a>
+            // Add or remove a class to body to prevent scrolling
+            $('body').toggleClass('no-scroll');
+        });
+
+        // Add an event listener to the "RESET DIRECTORY" button in the popup
+        $('#reset-button').click(function () {
+            // Redirect to the reset_form URL
+            window.location.href = "{% url 'main:reset_form' %}";
+        });
+
+        // Close the popup when clicking outside of it
+        $(document).mouseup(function (e) {
+            var popup = $('.popup');
+            if (!popup.is(e.target) && popup.has(e.target).length === 0) {
+                popup.hide();
+                // Remove the no-scroll class when hiding the popup
+                $('body').removeClass('no-scroll');
+            }
+        });
+
+        // Add an event listener to the "LOGOUT" button in the popup
+        $('#logout').click(function () {
+            // Redirect to the logout URL
+            window.location.href = "{% url 'main:logout' %}";
+        });
+    });
+</script>
 {% endblock content %}

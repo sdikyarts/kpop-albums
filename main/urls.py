@@ -4,6 +4,7 @@ from main.views import add_artist, add_album, reset_form
 from main.views import show_xml, show_json, show_xml_by_id, show_json_by_id
 from main.views import register, login_user, logout_user
 from main.views import delete_artist, delete_album, update_album_amount
+from main.views import get_artist_json, add_artist_ajax
 
 app_name = 'main'
 
@@ -35,5 +36,9 @@ urlpatterns = [
 
     # add/minus amount
     path('update_album_amount/<int:album_id>/', update_album_amount, name='update_album_amount'),
+
+    # ajax
+    path('get-artist/', get_artist_json, name='get_artist_json'),
+    path('create-artist-ajax/', add_artist_ajax, name='add_artist_ajax')
 ]
 

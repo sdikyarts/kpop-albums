@@ -1,0 +1,365 @@
+.my-artists {
+    align-self: stretch;
+    position: relative;
+    font-weight: 800;
+  }
+  .frame-child {
+    position: relative;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+  .artist-name {
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    align-self: stretch;
+    position: relative;
+    font-size: 22.67px;
+    font-weight: 800;
+    font-family: var(--font-sf-pro-display);
+    color: var(--color-white);
+    text-align: center;
+    display: inline-block;
+  }
+  .ellipse-parent {
+    width: 273px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--gap-sm);
+    cursor: pointer;
+  }
+  .add-new-album {
+    position: relative;
+    font-size: var(--font-size-3xs);
+    font-weight: 800;
+    font-family: var(--font-sf-pro-display);
+    color: var(--color-white);
+    text-align: center;
+  }
+  .add-album {
+    cursor: pointer;
+    border: 0;
+    padding: 5.333236217498779px 0;
+    background-color: var(--color-steelblue);
+    border-radius: 11.67px;
+    width: 120.67px;
+    height: 23.33px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    box-sizing: border-box;
+  }
+  .delete-artist1 {
+    position: relative;
+    font-size: var(--font-size-3xs);
+    font-weight: 800;
+    font-family: var(--font-sf-pro-display);
+    color: var(--color-white);
+    text-align: center;
+    display: inline-block;
+    width: 109px;
+  }
+  .delete-artist {
+    cursor: pointer;
+    border: 0;
+    padding: 5.333200931549072px 22.666643142700195px;
+    background-color: var(--color-indianred);
+    border-radius: 11.67px;
+    width: 120.67px;
+    height: 23.33px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+  .vector-icon {
+    position: relative;
+    width: 18.67px;
+    height: 6px;
+  }
+  .buttons,
+  .collapse {
+    flex-direction: column;
+  }
+  .collapse {
+    cursor: pointer;
+    border: 0;
+    padding: var(--padding-4xs) 51px;
+    background-color: var(--color-lightseagreen);
+    border-radius: 11.67px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .buttons {
+    width: 120.67px;
+    height: 88.67px;
+    justify-content: flex-start;
+    gap: 9.4px;
+  }
+  .artist-1,
+  .artists,
+  .buttons {
+    display: flex;
+    align-items: center;
+  }
+  .artist-1 {
+    flex: 1;
+    height: 297px;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 14.67px;
+  }
+  .artists {
+    align-self: stretch;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .artists-list,
+  .logout,
+  .reset {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .artists-list {
+    align-self: stretch;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+  .logout,
+  .reset {
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    flex: 1;
+    border-radius: 16.67px;
+    height: 30px;
+  }
+  .reset {
+    background-color: var(--color-plum);
+    display: flex;
+    align-items: center;
+  }
+  .logout {
+    background-color: var(--color-indianred);
+  }
+  .contents,
+  .info,
+  .logout,
+  .reset-parent {
+    display: flex;
+    align-items: center;
+  }
+  .reset-parent {
+    width: 245.33px;
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--gap-sm);
+  }
+  .contents,
+  .info {
+    flex-direction: column;
+  }
+  .contents {
+    align-self: stretch;
+    height: 468px;
+    justify-content: flex-start;
+    gap: 43px;
+  }
+  .info {
+    position: absolute;
+    top: 169px;
+    left: 139px;
+    width: 1001px;
+    overflow: hidden;
+    justify-content: flex-end;
+    text-align: center;
+    font-size: 46.67px;
+    color: var(--color-white);
+    font-family: var(--font-sf-pro-display);
+  }
+  .add-artist1,
+  .kpop-albums {
+    position: relative;
+    display: inline-block;
+  }
+  .kpop-albums {
+    font-weight: 900;
+    width: 191px;
+    flex-shrink: 0;
+  }
+  .add-artist1 {
+    font-weight: 800;
+    width: 91px;
+  }
+  .add-artist {
+    border-radius: 16.67px;
+    background-color: var(--color-steelblue);
+    width: 90.67px;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8.666585922241211px 10.33332347869873px;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+  .full-list {
+    position: relative;
+    font-weight: 800;
+    display: inline-block;
+    width: 69px;
+    flex-shrink: 0;
+  }
+  .see-full-list {
+    border-radius: 16.67px;
+    background-color: var(--color-plum);
+    width: 69px;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-4xs) var(--padding-2xs);
+    box-sizing: border-box;
+  }
+  .vector-icon1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+  }
+  .vector-wrapper {
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    position: relative;
+    width: 30px;
+    height: 30px;
+  }
+  .header,
+  .navbar,
+  .r {
+    display: flex;
+    align-items: center;
+  }
+  .r {
+    width: 216.67px;
+    height: 30px;
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--gap-smi);
+    text-align: center;
+    font-size: var(--font-size-3xs);
+  }
+  .header,
+  .navbar {
+    margin: 0;
+  }
+  .header {
+    align-self: stretch;
+    background-color: var(--color-gray-100);
+    box-shadow: 0 2.6666667461395264px 26.67px rgba(0, 0, 0, 0.25);
+    flex-direction: row;
+    justify-content: space-between;
+    padding: var(--padding-10xl) 38.33332824707031px var(--padding-10xl)
+      var(--padding-26xl);
+    text-align: left;
+    font-size: var(--font-size-xl);
+    color: var(--color-white);
+    font-family: var(--font-sf-pro-display);
+  }
+  .navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1280px;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .main {
+    position: relative;
+    background-color: var(--color-gray-200);
+    width: 100%;
+    height: 720px;
+    overflow: hidden;
+  }
+  .vector-icon2 {
+    position: relative;
+    width: 80.67px;
+    height: 80.67px;
+  }
+  .dummy,
+  .reset-directory1 {
+    position: relative;
+    font-weight: 800;
+  }
+  .reset-directory1 {
+    font-size: var(--font-size-3xs);
+    font-family: var(--font-sf-pro-display);
+    color: var(--color-white);
+    text-align: center;
+  }
+  .logout2,
+  .reset1 {
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    border-radius: 16.67px;
+    width: 115.33px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+  }
+  .reset1 {
+    background-color: var(--color-plum);
+    flex-direction: column;
+    align-items: center;
+  }
+  .logout2 {
+    background-color: var(--color-indianred);
+  }
+  .logout2,
+  .popup,
+  .vector-parent {
+    flex-direction: column;
+    align-items: center;
+  }
+  .vector-parent {
+    border-radius: 16.67px;
+    background-color: #4f404b;
+    width: 330px;
+    height: 245px;
+    display: flex;
+    justify-content: center;
+    gap: var(--gap-3xs);
+  }
+  .popup {
+    position: relative;
+    width: 349px;
+    height: 331px;
+    overflow: hidden;
+    display: none;
+    justify-content: flex-end;
+    padding: 10.5px 0;
+    box-sizing: border-box;
+    max-width: 90%;
+    max-height: 90%;
+    text-align: center;
+    font-size: var(--font-size-xl);
+    color: var(--color-white);
+    font-family: var(--font-sf-pro-display);
+  }
+  
