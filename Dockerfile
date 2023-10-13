@@ -19,6 +19,9 @@ RUN addgroup --system django \
 COPY ./requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
 
+# Install Pillow
+RUN pip install Pillow
+
 # Copy project code
 COPY . .
 
