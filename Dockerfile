@@ -29,4 +29,4 @@ RUN chown -R django:django /app
 USER django
 
 # Run application
-# CMD gunicorn kpop_albums.wsgi:application
+## CMD gunicorn kpop_albums.wsgi:application
